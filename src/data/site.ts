@@ -1,7 +1,7 @@
 // Единый источник фактов о клубе. Меняете что-то здесь — меняется на всём сайте и в разметке для поисковиков.
 
 export const site = {
-  url: 'https://partygame-nhatrang.com', // поменять на купленный домен
+  url: 'https://partygame-nhatrang.com',
   name: 'Party Game Нячанг',
   alternateName: ['PARTY GAME community', 'Party Game Nha Trang'],
   tagline: 'Клуб мафии и социальных игр',
