@@ -24,7 +24,7 @@ faq:
 
 **Где:** клуб [Party Game](/), CCCP Coffee, 112 Đ. Hồng Bàng\
 **Когда:** Чт и Вс — [Авалон](/avalon/), Пт — [мафия](/mafiya-nyachang/), Сб — [Тайный Гитлер](/taynyy-gitler/); 19:00–23:00\
-**Сколько:** 150 000 ₫ за вечер
+**Сколько:** от 150 000 ₫ за вечер (мафия — 200 000 ₫)
 
 <figure><img src="/blog/party-game-avalon.webp" alt="Участники клуба Party Game на вечере Авалона в Нячанге" loading="lazy" decoding="async"><figcaption>Вечер Авалона в CCCP Coffee. Фото: клуб Party Game</figcaption></figure>
 

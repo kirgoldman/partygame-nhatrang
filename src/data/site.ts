@@ -6,7 +6,7 @@ export const site = {
   alternateName: ['PARTY GAME community', 'Party Game Nha Trang'],
   tagline: 'Клуб мафии и социальных игр',
   description:
-    'Party Game — клуб мафии, Авалона и Тайного Гитлера в центре Нячанга. Играем четыре вечера в неделю в CCCP Coffee, 19:00–23:00, 150 000 донгов за вечер. Новичкам объясняем правила.',
+    'Party Game — клуб мафии, Авалона и Тайного Гитлера в центре Нячанга. Играем четыре вечера в неделю в CCCP Coffee, 19:00–23:00, от 150 000 донгов за вечер. Новичкам объясняем правила.',
   foundingDate: '', // год основания клуба — вписать, когда будет известен
   telegramDM: 'https://t.me/juliana_flame',
   telegramDMHandle: '@juliana_flame',
@@ -15,6 +15,8 @@ export const site = {
   instagram: '', // ссылка на Instagram Юлианы — вписать
   price: 150000,
   priceText: '150 000 ₫',
+  priceFromText: 'от 150 000 ₫',
+  priceRange: '150 000–200 000 ₫',
   currency: 'VND',
   hours: '19:00–23:00',
   venue: {
@@ -47,6 +49,9 @@ export type Game = {
   dayShort: string;
   schemaDay: string;
   seats?: number;
+  players?: string;
+  price?: number;
+  priceText?: string;
   rounds: string;
   role: string;
   href: string;
@@ -74,6 +79,10 @@ export const week: Game[] = [
     day: 'Пятница',
     dayShort: 'Пт',
     schemaDay: 'https://schema.org/Friday',
+    seats: 18,
+    players: '12–18 игроков',
+    price: 200000,
+    priceText: '200 000 ₫',
     rounds: '3–4 партии',
     role: 'Дон',
     href: '/mafiya-nyachang/',

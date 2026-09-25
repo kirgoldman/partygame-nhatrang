@@ -39,7 +39,7 @@ export const club = {
   url: abs('/'),
   logo: abs('/favicon.svg'),
   image: abs('/og.png'),
-  priceRange: site.priceText,
+  priceRange: site.priceRange,
   currenciesAccepted: 'VND',
   paymentAccepted: 'Наличные',
   knowsLanguage: 'ru',
@@ -102,7 +102,7 @@ export function gameEvent(slug: string, pageName: string, description: string, i
     },
     offers: {
       '@type': 'Offer',
-      price: site.price,
+      price: g.price ?? site.price,
       priceCurrency: 'VND',
       url: site.telegramGroup,
       availability: 'https://schema.org/LimitedAvailability',

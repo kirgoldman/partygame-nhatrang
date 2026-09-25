@@ -31,7 +31,7 @@ const { showLila = true } = Astro.props;
             </td>
             <td class="chip" data-label="Время">{site.hours}</td>
             <td class="chip" data-label="Мест">{g.seats ?? 'по записи'}</td>
-            <td class="chip price" data-label="Вечер">{site.priceText}</td>
+            <td class="chip price" data-label="Вечер">{g.priceText ?? site.priceText}</td>
           </tr>
         ))
       }

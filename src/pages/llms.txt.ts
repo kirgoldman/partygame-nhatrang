@@ -5,7 +5,7 @@ import { site, week, lila } from '../data/site';
 export const GET: APIRoute = async () => {
   const u = (p: string) => new URL(p, site.url).toString();
   const posts = await getCollection('blog');
-  const schedule = week.map((g) => `- ${g.day}: ${g.name}, ${site.hours}${g.seats ? `, ${g.seats} мест` : ''}, ${g.rounds}`).join('\n');
+  const schedule = week.map((g) => `- ${g.day}: ${g.name}, ${site.hours}${g.seats ? `, ${g.seats} мест` : ''}, ${g.rounds}, ${g.priceText ?? site.priceText}`).join('\n');
   const text = `# ${site.name}
 
 > ${site.description}
@@ -15,7 +15,7 @@ export const GET: APIRoute = async () => {
 - Город: Нячанг (Nha Trang), Вьетнам
 - Место: ${site.venue.name}, ${site.venue.street}, ${site.venue.cityLatin}, ${site.venue.region} ${site.venue.postalCode}
 - Язык игр: русский
-- Цена игрового вечера: ${site.priceText} (${site.price} VND) за весь вечер, оплата ведущему в начале
+- Цена игрового вечера: Авалон и Тайный Гитлер — ${site.priceText}, городская мафия — 200 000 ₫; цена за весь вечер, оплата ведущему в начале
 - Новичкам объясняют правила, можно приходить одному
 - Запись на игры: в Telegram-группе клуба (${site.telegramGroup}), вопросы и Лила: ${site.telegramDMHandle}
 - Сообщество: Telegram-группа, ${site.groupSize} участников (${site.telegramGroup})
