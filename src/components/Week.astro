@@ -1,0 +1,175 @@
+---
+import { week, site, lila } from '../data/site';
+interface Props {
+  showLila?: boolean;
+}
+const { showLila = true } = Astro.props;
+---
+
+<div class="table-scroll">
+  <table class="week">
+    <caption class="sr-only">Расписание игр Party Game в Нячанге</caption>
+    <thead>
+      <tr>
+        <th scope="col">День</th>
+        <th scope="col">Игра</th>
+        <th scope="col">Время</th>
+        <th scope="col">Мест</th>
+        <th scope="col">Цена за вечер</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        week.map((g) => (
+          <tr style={`--c:${g.color}`}>
+            <th scope="row" class="day">
+              <span>{g.day}</span>
+            </th>
+            <td>
+              <a href={g.href} class="game">{g.name}</a>
+              <span class="sub">{g.rounds}</span>
+            </td>
+            <td class="chip" data-label="Время">{site.hours}</td>
+            <td class="chip" data-label="Мест">{g.seats ?? 'по записи'}</td>
+            <td class="chip price" data-label="Вечер">{site.priceText}</td>
+          </tr>
+        ))
+      }
+      {
+        showLila && (
+          <tr style="--c:var(--lila)" class="later">
+            <th scope="row" class="day">
+              <span>Пн и Ср</span>
+            </th>
+            <td>
+              <a href="/lila/" class="game">Лила с Юлианой</a>
+              <span class="sub">{lila.start}, днём</span>
+            </td>
+            <td class="chip" data-label="Время">12:00–17:00</td>
+            <td class="chip" data-label="Человек">1–4</td>
+            <td class="chip price" data-label="Цена">от 70 $</td>
+          </tr>
+        )
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .week {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 38rem;
+  }
+  thead th {
+    text-align: left;
+    font-weight: 500;
+    font-size: var(--step--1);
+    color: var(--muted);
+    padding: 0 1rem 0.8rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  tbody tr {
+    border-bottom: 1px solid var(--line);
+  }
+  td,
+  tbody th {
+    padding: 1.15rem 1rem 1.15rem 0;
+    text-align: left;
+    vertical-align: middle;
+  }
+  .day span {
+    display: inline-block;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: var(--step-1);
+    padding-left: 0.9rem;
+    border-left: 5px solid var(--c);
+    line-height: 1.1;
+  }
+  .game {
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: var(--c);
+  }
+  .game:hover {
+    text-decoration: underline;
+  }
+  .sub {
+    display: block;
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+  .later {
+    opacity: 0.85;
+  }
+
+  /* Телефон: каждая строка — отдельная карточка, всё видно без прокрутки вбок */
+  @media (max-width: 640px) {
+    .table-scroll {
+      overflow: visible;
+    }
+    .week,
+    .week tbody {
+      display: block;
+      min-width: 0;
+      width: 100%;
+    }
+    .week thead {
+      display: none;
+    }
+    .week tbody {
+      display: grid;
+      gap: 0.75rem;
+    }
+    .week tbody tr {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 1rem 1rem 1.1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--c);
+      border-radius: var(--radius-card);
+      background: var(--night);
+    }
+    .week tbody th,
+    .week td {
+      padding: 0;
+    }
+    .day,
+    .week td:not(.chip) {
+      flex: 0 0 100%;
+    }
+    .day span {
+      border: 0;
+      padding: 0;
+      font-size: 1.35rem;
+    }
+    .game {
+      font-size: 1.15rem;
+    }
+    .chip {
+      font-size: 0.9rem;
+      font-weight: 650;
+      background: var(--felt-2);
+      border-radius: 999px;
+      padding: 0.3rem 0.7rem !important;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .chip::before {
+      content: attr(data-label) ' ';
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .chip.price {
+      background: var(--c);
+      color: var(--ink);
+    }
+    .chip.price::before {
+      color: inherit;
+      opacity: 0.7;
+    }
+  }
+</style>

@@ -1,0 +1,187 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Base from './Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Faq from '../components/Faq.astro';
+import JoinBand from '../components/JoinBand.astro';
+import Icon from '../components/Icon.astro';
+import ClubVideo from '../components/ClubVideo.astro';
+import { site } from '../data/site';
+import { breadcrumbs, faqSchema } from '../data/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  lede: string;
+  crumb: string;
+  href: string;
+  color: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  facts: { k: string; v: string }[];
+  faq: { q: string; a: string }[];
+  schema?: object[];
+  cta?: string;
+  ctaHref?: string;
+  join?: { title?: string; text?: string; button?: string; href?: string };
+  ogImage?: string;
+  video?: { src: string; poster: string; title: string; text: string; label: string };
+}
+
+const p = Astro.props;
+const schema = [breadcrumbs([{ name: p.crumb, href: p.href }]), faqSchema(p.faq), ...(p.schema ?? [])];
+---
+
+<Base
+  title={p.title}
+  description={p.description}
+  schema={schema}
+  ogImage={p.ogImage}
+  dockText={p.cta ?? 'Записаться на игру'}
+  dockHref={p.ctaHref ?? site.telegramGroup}
+>
+  <div style={`--c:${p.color}`}>
+    <Crumbs items={[{ name: p.crumb, href: p.href }]} />
+    <header class="page-hero wrap gp-hero">
+      <div class="gp-text">
+        <h1>{p.h1}</h1>
+        <p class="lede">{p.lede}</p>
+        <div class="btn-row">
+          <a class="btn gp-btn" href={p.ctaHref ?? site.telegramGroup} rel="noopener"><Icon name="telegram" /> {p.cta ?? 'Записаться на игру'}</a>
+          <a class="btn btn-ghost" href="/raspisanie-i-ceny/">Всё расписание</a>
+        </div>
+      </div>
+      <figure class="gp-photo">
+        <Image src={p.image} alt={p.imageAlt} widths={[480, 900, 1200]} sizes="(max-width: 760px) 100vw, 45vw" loading="eager" fetchpriority="high" />
+      </figure>
+    </header>
+    <div class="wrap">
+      <dl class="facts">
+        {
+          p.facts.map((f) => (
+            <div>
+              <dt>{f.k}</dt>
+              <dd>{f.v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    {
+      p.video && (
+        <section class="wrap gp-video" aria-label={p.video.title}>
+          <div class="gp-video-media">
+            <ClubVideo src={p.video.src} poster={p.video.poster} label={p.video.label} sound />
+          </div>
+          <div class="gp-video-text">
+            <h2>{p.video.title}</h2>
+            <p>{p.video.text}</p>
+            <a class="btn gp-btn" href={site.telegramGroup} rel="noopener"><Icon name="telegram" /> Хочу так же</a>
+          </div>
+        </section>
+      )
+    }
+
+    <article class="section narrow prose gp-prose">
+      <slot />
+    </article>
+
+    <div class="narrow gp-faq">
+      <Faq items={p.faq} />
+    </div>
+    <slot name="after" />
+  </div>
+  <JoinBand {...(p.join ?? {})} />
+</Base>
+
+<style>
+  .gp-hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: center;
+  }
+  .gp-hero h1 {
+    font-size: var(--step-5);
+  }
+  .gp-hero h1::after {
+    content: '';
+    display: block;
+    width: 4.5rem;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--c);
+    margin-top: 1.4rem;
+  }
+  .gp-hero .lede {
+    margin-bottom: 1.8rem;
+  }
+  .gp-btn {
+    background: var(--c);
+    color: var(--ink);
+  }
+  .gp-btn:hover {
+    filter: brightness(1.08);
+  }
+  .gp-photo {
+    margin: 0;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    aspect-ratio: 4 / 3.4;
+    box-shadow: 0 0 0 1px var(--line), 0 26px 50px rgba(8, 2, 18, 0.5);
+    transform: rotate(1.5deg);
+  }
+  .gp-photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+  }
+  .gp-prose :global(h2) {
+    scroll-margin-top: 6rem;
+  }
+  .gp-prose :global(li::marker) {
+    color: var(--c);
+  }
+  .gp-prose :global(a) {
+    color: var(--c);
+  }
+  .gp-video {
+    display: grid;
+    grid-template-columns: minmax(13rem, 17rem) 1fr;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    align-items: center;
+    padding-top: clamp(3rem, 7vw, 5rem);
+  }
+  .gp-video h2 {
+    font-size: var(--step-3);
+  }
+  .gp-video-text p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 44ch;
+    margin-bottom: 1.5rem;
+  }
+  @media (max-width: 700px) {
+    .gp-video {
+      grid-template-columns: 1fr;
+    }
+    .gp-video-media {
+      max-width: 17rem;
+    }
+  }
+  .gp-faq {
+    padding-bottom: clamp(3rem, 7vw, 5rem);
+  }
+  @media (max-width: 760px) {
+    .gp-hero {
+      grid-template-columns: 1fr;
+    }
+    .gp-photo {
+      transform: none;
+    }
+  }
+</style>

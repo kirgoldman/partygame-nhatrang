@@ -1,0 +1,101 @@
+---
+// Бегущая строка под шапкой. Первый пункт обновляется скриптом: «Сегодня в 19:00 — Авалон».
+import { site } from '../data/site';
+const items = [
+  'Чт — Авалон',
+  'Пт — Городская мафия',
+  'Сб — Тайный Гитлер',
+  'Вс — Авалон',
+  '19:00–23:00',
+  `${site.priceText} за вечер`,
+  'Правила за 5 минут',
+  'Можно прийти одному',
+  'Запись в Telegram-группе',
+];
+---
+
+<div class="ticker" aria-label="Коротко о клубе">
+  <div class="track">
+    {
+      [0, 1].map((copy) => (
+        <ul aria-hidden={copy === 1 ? 'true' : undefined}>
+          <li class="now">
+            <a href={site.telegramGroup} rel="noopener" data-next>
+              Ближайшая игра — в расписании
+            </a>
+          </li>
+          {items.map((t) => (
+            <li>{t}</li>
+          ))}
+        </ul>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  import { nextGame } from '../scripts/schedule';
+  const n = nextGame();
+  const label = n.live ? `Сейчас идёт: ${n.slot.name}` : `${n.when[0].toUpperCase() + n.when.slice(1)} — ${n.slot.name}`;
+  document.querySelectorAll<HTMLAnchorElement>('.ticker [data-next]').forEach((a) => (a.textContent = label));
+</script>
+
+<style>
+  .ticker {
+    background: var(--avalon);
+    color: var(--ink);
+    overflow: hidden;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  }
+  .track {
+    display: flex;
+    width: max-content;
+    animation: run 38s linear infinite;
+  }
+  .ticker:hover .track {
+    animation-play-state: paused;
+  }
+  ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    white-space: nowrap;
+    padding: 0.6rem 0;
+    display: flex;
+    align-items: center;
+  }
+  li::after {
+    content: '';
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--ink);
+    margin: 0 1.4rem;
+    opacity: 0.55;
+  }
+  .now a {
+    background: var(--ink);
+    color: var(--avalon);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  @keyframes run {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .track {
+      animation: none;
+    }
+    .ticker {
+      overflow-x: auto;
+    }
+  }
+</style>

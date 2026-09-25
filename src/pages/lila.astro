@@ -1,0 +1,255 @@
+---
+import GamePage from '../layouts/GamePage.astro';
+import { site, lila } from '../data/site';
+import { person, lilaService } from '../data/schema';
+import hero from '../assets/photos/lila-1.jpg';
+
+const videos = [
+  { src: '/video/lila-1.mp4', poster: '/video/lila-1.webp', duration: 'PT55S', alt: 'Видеоотзыв участницы об игре Лила с Юлианой' },
+  { src: '/video/lila-2.mp4', poster: '/video/lila-2.webp', duration: 'PT29S', alt: 'Видеоотзыв участника об игре Лила с Юлианой' },
+  { src: '/video/lila-3.mp4', poster: '/video/lila-3.webp', duration: 'PT41S', alt: 'Видеоотзыв участницы после игры Лила в Нячанге' },
+];
+const abs = (p: string) => new URL(p, site.url).toString();
+const videoSchema = videos.map((v, i) => ({
+  '@type': 'VideoObject',
+  name: `Отзыв об игре Лила в Нячанге — ${i + 1}`,
+  description: v.alt,
+  thumbnailUrl: abs(v.poster),
+  contentUrl: abs(v.src),
+  uploadDate: '2026-09-23',
+  duration: v.duration,
+  inLanguage: 'ru',
+}));
+
+const faq = [
+  {
+    q: 'Что такое игра Лила?',
+    a: 'Лила — древняя индийская игра самопознания. На поле 72 клетки, каждая означает определённое состояние или качество. Игрок приходит с личным запросом, бросает кубик и проходит путь по полю, а ведущая помогает увидеть, что каждый ход говорит о его ситуации.',
+  },
+  {
+    q: 'Сколько стоит Лила в Нячанге?',
+    a: 'Индивидуальная игра стоит 130 $, в паре — 90 $ с человека, в мини-группе из 3–4 человек — 70 $ с человека.',
+  },
+  {
+    q: 'Сколько длится игра?',
+    a: 'Сессия длится до пяти часов. Это глубокое погружение, а не часовой разговор: время нужно, чтобы пройти путь по полю и спокойно разобрать каждый ход.',
+  },
+  {
+    q: 'С каким запросом можно прийти?',
+    a: 'Чаще всего приходят с вопросами про отношения, деньги, самоценность, предназначение или важное решение, которое нужно принять. Запрос формулируем вместе в начале игры.',
+  },
+  {
+    q: 'Лила — это психотерапия?',
+    a: 'Нет. Лила — коучинговая практика самопознания через игру и символы. Она помогает взглянуть на ситуацию по-новому и найти опору, но не заменяет помощь психолога или врача, если она вам нужна.',
+  },
+  {
+    q: 'Где проходит игра?',
+    a: 'В кафе в центре Нячанга или дома, место обсуждаем при записи. Игры проходят днём по понедельникам и средам, ориентировочно с 12:00 до 17:00, начиная с середины октября 2026 года.',
+  },
+];
+---
+
+<GamePage
+  title="Игра Лила в Нячанге с ведущей Юлианой | Party Game"
+  description="Игра Лила с коучем Юлианой в Нячанге: индивидуально, в паре или мини-группой, до 5 часов, от 70 $. Запрос про отношения, деньги, предназначение."
+  h1="Игра Лила в Нячанге"
+  lede="Есть важный запрос — про отношения, деньги, самоценность или предназначение? На Лиле ты найдёшь ответы, которые давно искала, через игру, символы и глубокое погружение в себя. Ведёт игру Юлиана, коуч с опытом больше 10 лет."
+  crumb="Игра Лила"
+  href="/lila/"
+  color="var(--lila)"
+  image={hero}
+  imageAlt="Ведущая Юлиана и участница за полем игры Лила в кафе в Нячанге"
+  facts={[
+    { k: 'Формат', v: 'Индивидуально, в паре, группа 3–4' },
+    { k: 'Длительность', v: 'До 5 часов' },
+    { k: 'Когда', v: 'Пн и Ср, днём' },
+    { k: 'Где', v: 'Кафе в центре или дома' },
+    { k: 'Цена', v: 'от 70 $' },
+  ]}
+  faq={faq}
+  cta="Хочу на Лилу"
+  ctaHref={site.telegramDM}
+  ogImage="/og/lila.png"
+  join={{
+    title: 'Записаться на Лилу',
+    text: 'Напиши Юлиане в Telegram «Хочу на Лилу». Вместе выберете формат, день и место. Игры проходят с середины октября по понедельникам и средам днём.',
+    button: 'Написать Юлиане',
+    href: site.telegramDM,
+  }}
+  schema={[person, lilaService, ...videoSchema]}
+>
+  <h2>Что такое Лила</h2>
+  <p>
+    Лила — это древняя индийская игра самопознания, которую называют «игрой, открывающей ответы». Поле состоит из 72 клеток:
+    каждая означает состояние, качество или этап пути, от «Гнева» и «Иллюзии» до «Ясности сознания». Змеи опускают игрока вниз,
+    стрелы поднимают вверх. Ты приходишь со своим запросом, бросаешь кубик и проходишь путь по полю, а ведущая помогает увидеть,
+    как каждый ход связан с твоей жизнью.
+  </p>
+
+  <h2>Что даёт игра</h2>
+  <ul>
+    <li>Чётко увидишь, что мешает и куда двигаться, чтобы самым простым путём реализовать свои истинные желания.</li>
+    <li>Получишь инсайты, которые меняют взгляд на жизнь и новые возможности.</li>
+    <li>Почувствуешь опору внутри и вдохновение действовать.</li>
+  </ul>
+  <h2>Отзывы участников</h2>
+  <p>Многие говорят, что одна игра дала им больше ясности, чем месяцы самокопания. Вот что рассказывают участники после Лилы.</p>
+  <div class="lila-videos">
+    {
+      videos.map((v) => (
+        <figure class="vid">
+          <video src={v.src} poster={v.poster} autoplay muted loop playsinline preload="metadata" aria-label={v.alt} />
+          <button type="button" class="sound" aria-pressed="false">
+            <svg class="i-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" /><path d="m17 9 4 6m0-6-4 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+            <svg class="i-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" /><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+            <span>Включить звук</span>
+          </button>
+        </figure>
+      ))
+    }
+  </div>
+
+  <h2>Кто ведёт игру</h2>
+  <p>
+    Меня зовут Юлиана. Я коуч и практик с опытом больше 10 лет, а ещё основательница клуба Party Game в Нячанге. На Лиле я создаю
+    пространство, где безопасно быть собой, идти в глубину и находить настоящие ответы — не из ума, а из души.
+  </p>
+
+  <h2>Как проходит игра</h2>
+  <ol>
+    <li>Пишешь в Telegram «Хочу на Лилу» и выбираешь формат: одна, вдвоём или небольшой группой.</li>
+    <li>Договариваемся о дне и месте: уютное кафе в центре Нячанга или дома.</li>
+    <li>В начале игры вместе формулируем твой запрос.</li>
+    <li>Проходим путь по полю. Игра длится до пяти часов, в своём темпе и без спешки.</li>
+    <li>В конце собираем выводы и конкретные шаги, с которыми ты уходишь.</li>
+  </ol>
+
+  <h2>Стоимость</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Формат</th><th>Цена</th></tr>
+      </thead>
+      <tbody>
+        {
+          lila.prices.map((p) => (
+            <tr>
+              <td>{p.label}</td>
+              <td><strong>{p.price} {p.unit}</strong></td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Игры проходят {lila.start} по понедельникам и средам, ориентировочно с 12:00 до 17:00. Если откликается, напиши в личку
+    <a href={site.telegramDM} rel="noopener">{site.telegramDMHandle}</a> «Хочу на Лилу».
+  </p>
+
+</GamePage>
+
+<script>
+  const figs = Array.from(document.querySelectorAll<HTMLElement>('.lila-videos .vid'));
+  const setSound = (fig: HTMLElement, on: boolean) => {
+    const v = fig.querySelector('video')!;
+    const b = fig.querySelector<HTMLButtonElement>('.sound')!;
+    v.muted = !on;
+    b.setAttribute('aria-pressed', String(on));
+    b.querySelector('span')!.textContent = on ? 'Выключить звук' : 'Включить звук';
+  };
+  figs.forEach((fig) => {
+    const v = fig.querySelector('video')!;
+    fig.querySelector('.sound')!.addEventListener('click', () => {
+      const turnOn = v.muted;
+      figs.forEach((f) => f !== fig && setSound(f, false));
+      setSound(fig, turnOn);
+      if (turnOn) v.play().catch(() => {});
+    });
+  });
+  // Видео играют, только когда видны на экране — экономим трафик и батарею
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        const v = e.target as HTMLVideoElement;
+        if (e.isIntersecting) v.play().catch(() => {});
+        else v.pause();
+      }),
+      { threshold: 0.35 },
+    );
+    figs.forEach((f) => io.observe(f.querySelector('video')!));
+  }
+</script>
+
+<style>
+  .lila-videos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .vid {
+    position: relative;
+    margin: 0;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background: var(--felt);
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .vid video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .sound {
+    position: absolute;
+    left: 0.6rem;
+    bottom: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.9rem 0.55rem 0.7rem;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(30, 18, 48, 0.78);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    font: 600 0.82rem/1 var(--body);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .sound:hover {
+    background: var(--lila);
+  }
+  .sound[aria-pressed='true'] {
+    background: var(--lila);
+  }
+  .sound svg {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+  .sound .i-on,
+  .sound[aria-pressed='true'] .i-off {
+    display: none;
+  }
+  .sound[aria-pressed='true'] .i-on {
+    display: block;
+  }
+  @media (max-width: 760px) {
+    .lila-videos {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 0.75rem;
+      margin-inline: calc(-1 * var(--gutter));
+      padding-inline: var(--gutter);
+      scroll-padding-inline: var(--gutter);
+    }
+    .vid {
+      flex: 0 0 78%;
+      scroll-snap-align: center;
+    }
+  }
+</style>

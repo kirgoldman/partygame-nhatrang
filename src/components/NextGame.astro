@@ -1,0 +1,95 @@
+---
+// «Ближайшая игра» с отсчётом до начала. Без JS показывает общее расписание.
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+---
+
+<div class="next" data-next-game>
+  <div class="info">
+    <p class="label">Ближайшая игра</p>
+    <p class="game"><a href="/raspisanie-i-ceny/" data-ng-link><span data-ng-name>Чт–Вс</span></a>, <span data-ng-when>с 19:00 до 23:00</span></p>
+  </div>
+  <div class="timer" aria-live="off">
+    <span class="t-label" data-ng-tlabel>До начала</span>
+    <span class="t-val" data-ng-timer>—</span>
+  </div>
+  <a class="btn btn-primary" href={site.telegramGroup} rel="noopener"><Icon name="telegram" /> Записаться</a>
+</div>
+
+<script>
+  import { nextGame, countdown } from '../scripts/schedule';
+  const root = document.querySelector<HTMLElement>('[data-next-game]');
+  if (root) {
+    const $ = (s: string) => root.querySelector<HTMLElement>(s)!;
+    const tick = () => {
+      const n = nextGame();
+      $('[data-ng-name]').textContent = n.slot.name;
+      ($('[data-ng-link]') as HTMLAnchorElement).href = n.slot.href;
+      $('[data-ng-when]').textContent = n.when;
+      $('[data-ng-tlabel]').textContent = n.live ? 'До конца вечера' : 'До начала';
+      $('[data-ng-timer]').textContent = countdown((n.live ? n.end : n.start) - Date.now());
+      root.classList.toggle('is-live', n.live);
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+</script>
+
+<style>
+  .next {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 1rem 2rem;
+    align-items: center;
+    background: var(--night);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 2.5rem;
+  }
+  .label {
+    margin: 0;
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+  .game {
+    margin: 0.1rem 0 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  .game a {
+    color: var(--avalon);
+    text-decoration: none;
+  }
+  .timer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .t-label {
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+  .t-val {
+    font-family: var(--display);
+    font-size: 1.7rem;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+    color: var(--hitler);
+  }
+  .is-live .t-val {
+    color: var(--mafia);
+  }
+  @media (max-width: 640px) {
+    .next {
+      grid-template-columns: 1fr auto;
+    }
+    .next .btn {
+      grid-column: 1 / -1;
+      justify-content: center;
+    }
+    .t-val {
+      font-size: 1.35rem;
+    }
+  }
+</style>

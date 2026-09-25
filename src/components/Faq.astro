@@ -1,0 +1,72 @@
+---
+interface Props {
+  items: { q: string; a: string }[];
+  title?: string;
+  id?: string;
+}
+const { items, title = 'Частые вопросы', id = 'voprosy' } = Astro.props;
+---
+
+<section class="faq" id={id} aria-labelledby={`${id}-h`}>
+  <h2 id={`${id}-h`}>{title}</h2>
+  <div class="list">
+    {
+      items.map((it, i) => (
+        <details open={i < 2}>
+          <summary>
+            <h3>{it.q}</h3>
+          </summary>
+          <p>{it.a}</p>
+        </details>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .faq h2 {
+    font-size: var(--step-3);
+  }
+  .list {
+    border-top: 1px solid var(--line);
+  }
+  details {
+    border-bottom: 1px solid var(--line);
+  }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 0;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::after {
+    content: '';
+    flex: none;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-right: 2px solid var(--avalon);
+    border-bottom: 2px solid var(--avalon);
+    transform: rotate(45deg) translateY(-3px);
+    transition: transform 0.2s ease;
+  }
+  details[open] summary::after {
+    transform: rotate(-135deg) translateY(-3px);
+  }
+  summary h3 {
+    font-family: var(--body);
+    font-weight: 650;
+    font-size: 1.12rem;
+    margin: 0;
+    line-height: 1.35;
+  }
+  details p {
+    margin: 0 0 1.3rem;
+    color: var(--muted);
+  }
+</style>

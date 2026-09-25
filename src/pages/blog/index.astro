@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import JoinBand from '../../components/JoinBand.astro';
+import { breadcrumbs } from '../../data/schema';
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const crumb = [{ name: 'Блог', href: '/blog/' }];
+const groups = ['Досуг в Нячанге', 'Правила игр'] as const;
+---
+
+<Base
+  title="Блог клуба Party Game — досуг в Нячанге и правила игр"
+  description="Статьи о том, чем заняться вечером в Нячанге, как найти компанию, и правила мафии, Авалона и Тайного Гитлера простым языком."
+  schema={[breadcrumbs(crumb)]}
+>
+  <Crumbs items={crumb} />
+  <header class="page-hero wrap">
+    <h1>Блог</h1>
+    <p class="lede">Чем заняться в Нячанге, где найти своих людей и как играть в мафию, Авалон и Тайного Гитлера.</p>
+  </header>
+  <div class="wrap blog-cols">
+    {
+      groups.map((g) => (
+        <section>
+          <h2>{g}</h2>
+          <ul>
+            {posts
+              .filter((p) => p.data.tag === g)
+              .map((p) => (
+                <li>
+                  <a href={`/blog/${p.id}/`}>
+                    <span class="t">{p.data.h1 ?? p.data.title}</span>
+                    <span class="d muted">{p.data.description}</span>
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+  <div class="section"></div>
+  <JoinBand />
+</Base>
+
+<style>
+  .blog-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  h2 {
+    font-size: var(--step-3);
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+  li {
+    border-bottom: 1px solid var(--line);
+  }
+  a {
+    display: block;
+    padding: 1.2rem 0;
+    text-decoration: none;
+  }
+  .t {
+    display: block;
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 1.3;
+    margin-bottom: 0.3rem;
+  }
+  a:hover .t {
+    color: var(--avalon);
+  }
+  .d {
+    font-size: 0.95rem;
+  }
+  @media (max-width: 760px) {
+    .blog-cols {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

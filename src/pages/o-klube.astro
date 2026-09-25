@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import JoinBand from '../components/JoinBand.astro';
+import { site } from '../data/site';
+import { breadcrumbs, person } from '../data/schema';
+import group from '../assets/photos/avalon-gruppa.jpg';
+
+const crumb = [{ name: 'О клубе', href: '/o-klube/' }];
+---
+
+<Base
+  title="О клубе Party Game — русскоязычное сообщество игр в Нячанге"
+  description="Party Game — клуб мафии, Авалона, Тайного Гитлера и игры Лила в Нячанге. Основательница и ведущая — Юлиана. Больше 400 человек в Telegram-сообществе."
+  schema={[breadcrumbs(crumb), person]}
+>
+  <Crumbs items={crumb} />
+  <header class="page-hero wrap">
+    <h1>О клубе Party Game</h1>
+    <p class="lede">
+      Party Game — русскоязычное сообщество любителей социальных игр в Нячанге. Мы собираемся четыре вечера в неделю, чтобы
+      поиграть в мафию, Авалон и Тайного Гитлера, а заодно познакомиться и провести вечер в хорошей компании.
+    </p>
+  </header>
+
+  <figure class="wrap photo">
+    <Image src={group} alt="Участники клуба Party Game на вечере Авалона в Нячанге" widths={[600, 843]} sizes="(max-width: 900px) 100vw, 843px" />
+    <figcaption class="muted">Вечер Авалона в CCCP Coffee</figcaption>
+  </figure>
+
+  <section class="section narrow prose">
+    <h2>Кто мы</h2>
+    <p>
+      Клуб основала Юлиана — коуч и практик с опытом больше 10 лет. Сначала это были игры для друзей, а теперь в
+      <a href={site.telegramGroup} rel="noopener">Telegram-группе клуба</a> больше 400 человек: туристы, зимовщики и те, кто
+      переехал в Нячанг надолго. Вечера проводят Юлиана и её помощник.
+    </p>
+
+    <h2>Во что мы играем</h2>
+    <ul>
+      <li><a href="/mafiya-nyachang/">Городская мафия</a> — каждую пятницу.</li>
+      <li><a href="/avalon/">Авалон</a> — по четвергам и воскресеньям.</li>
+      <li><a href="/taynyy-gitler/">Тайный Гитлер</a> — по субботам.</li>
+      <li><a href="/lila/">Лила</a> — игра самопознания с Юлианой, днём по понедельникам и средам.</li>
+    </ul>
+
+    <h2>Как у нас принято</h2>
+    <ul>
+      <li><strong>Новичкам рады всегда.</strong> Правила объясняем с нуля, никто не ждёт от вас опыта.</li>
+      <li><strong>Играем ради удовольствия.</strong> Блефуем и спорим по игре, но не переходим на личности.</li>
+      <li><strong>Все общаются со всеми.</strong> Даже если пришли одни, к концу вечера вы знакомы со всей компанией.</li>
+    </ul>
+
+    <h2>Ведущие</h2>
+    <p>
+      <strong>Юлиана</strong> — основательница клуба, ведущая игровых вечеров и игры Лила. Коуч с опытом больше 10 лет, умеет
+      сделать так, чтобы за столом было комфортно и новичку, и опытному игроку. Вместе с ней вечера проводит помощник.
+    </p>
+  </section>
+  <JoinBand />
+</Base>
+
+<style>
+  .photo {
+    margin-block: 0;
+  }
+  .photo :global(img) {
+    border-radius: var(--radius-card);
+    width: 100%;
+    max-height: 32rem;
+    object-fit: cover;
+  }
+  figcaption {
+    font-size: var(--step--1);
+    margin-top: 0.6rem;
+  }
+</style>

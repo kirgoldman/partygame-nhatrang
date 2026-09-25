@@ -1,0 +1,113 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import Faq from '../../components/Faq.astro';
+import JoinBand from '../../components/JoinBand.astro';
+import { article, breadcrumbs, faqSchema } from '../../data/schema';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+const href = `/blog/${post.id}/`;
+const crumb = [
+  { name: 'Блог', href: '/blog/' },
+  { name: d.h1 ?? d.title, href },
+];
+const fmt = (x: Date) => x.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+const schema = [
+  breadcrumbs(crumb),
+  article({ title: d.h1 ?? d.title, description: d.description, href, date: d.date, updated: d.updated }),
+  ...(d.faq ? [faqSchema(d.faq)] : []),
+];
+
+const all = await getCollection('blog');
+const related = all.filter((p) => p.id !== post.id).slice(0, 3);
+---
+
+<Base title={`${d.title} | Party Game Нячанг`} description={d.description} schema={schema} ogType="article">
+  <Crumbs items={crumb} />
+  <article>
+    <header class="page-hero narrow post-head">
+      <p class="tag">{d.tag}</p>
+      <h1>{d.h1 ?? d.title}</h1>
+      <p class="byline muted">
+        Автор: <a href="/o-klube/">Юлиана, ведущая клуба Party Game</a><br />
+        <time datetime={d.date.toISOString()}>{fmt(d.date)}</time>{d.updated && d.updated.valueOf() !== d.date.valueOf() && (
+          <>, обновлено <time datetime={d.updated.toISOString()}>{fmt(d.updated)}</time></>
+        )}
+      </p>
+    </header>
+    <div class="narrow prose">
+      <Content />
+    </div>
+    {
+      d.faq && (
+        <div class="narrow post-faq">
+          <Faq items={d.faq} />
+        </div>
+      )
+    }
+  </article>
+
+  <aside class="section narrow related" aria-labelledby="rel-h">
+    <h2 id="rel-h">Читайте также</h2>
+    <ul>
+      {
+        related.map((p) => (
+          <li>
+            <a href={`/blog/${p.id}/`}>{p.data.h1 ?? p.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </aside>
+  <JoinBand />
+</Base>
+
+<style>
+  .post-head h1 {
+    font-size: var(--step-4);
+    max-width: none;
+  }
+  .tag {
+    color: var(--avalon);
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .byline {
+    font-size: var(--step--1);
+  }
+  .byline a {
+    color: var(--text);
+  }
+  .post-faq {
+    padding-top: 3rem;
+  }
+  .related h2 {
+    font-size: var(--step-3);
+  }
+  .related ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+  .related li {
+    border-bottom: 1px solid var(--line);
+  }
+  .related a {
+    display: block;
+    padding: 1rem 0;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .related a:hover {
+    color: var(--avalon);
+  }
+</style>

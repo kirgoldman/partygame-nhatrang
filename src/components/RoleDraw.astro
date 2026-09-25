@@ -1,0 +1,188 @@
+---
+// Мини-игра «Вытяни роль»: карта переворачивается и показывает случайную роль из трёх игр клуба.
+import { site } from '../data/site';
+---
+
+<section class="section draw" aria-labelledby="draw-h">
+  <div class="wrap draw-in">
+    <div class="draw-text">
+      <h2 id="draw-h">Кто ты сегодня за столом?</h2>
+      <p class="muted">
+        Вытяни карту и узнай свою роль. А потом проверь, сможешь ли ты её отыграть, — вживую, на одном из наших вечеров.
+      </p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" data-draw>Вытянуть роль</button>
+        <a class="btn btn-ghost" href={site.telegramGroup} rel="noopener" data-draw-cta hidden>Сыграть вживую</a>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="card" data-card>
+        <div class="face back" aria-hidden="true">
+          <span>?</span>
+        </div>
+        <div class="face front" aria-live="polite">
+          <span class="game" data-r-game></span>
+          <span class="role" data-r-role></span>
+          <span class="desc" data-r-desc></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const roles = [
+    { role: 'Босс мафии', game: 'Мафия, пятница', c: 'var(--mafia)', href: '/mafiya-nyachang/', desc: 'Ты лидер мафии. Если свои не могут договориться ночью, последнее слово за тобой.' },
+    { role: 'Комиссар', game: 'Мафия, пятница', c: 'var(--mafia)', href: '/mafiya-nyachang/', desc: 'Каждую ночь проверяешь одного игрока: палец вверх — мирный, вниз — мафия. Главное — дожить до утра.' },
+    { role: 'Маньяк', game: 'Мафия, пятница', c: 'var(--mafia)', href: '/mafiya-nyachang/', desc: 'Играешь сам за себя. Убивай и мафию, и мирных — но так, чтобы никто не понял, что это ты.' },
+    { role: 'Каратель', game: 'Мафия, пятница', c: 'var(--mafia)', href: '/mafiya-nyachang/', desc: 'Ночью спишь спокойно. Но если тебя убьют, заберёшь с собой любого — лучше мафию.' },
+    { role: 'Доктор', game: 'Мафия, пятница', c: 'var(--mafia)', href: '/mafiya-nyachang/', desc: 'Лечишь одного за ночь, но не одного и того же два раза подряд. Угадаешь, кого выберет мафия?' },
+    { role: 'Мирный житель', game: 'Мафия, пятница', c: 'var(--mafia)', href: '/mafiya-nyachang/', desc: 'Ты честен, но тебе никто не верит. Классика жанра.' },
+    { role: 'Мерлин', game: 'Авалон, чт и вс', c: 'var(--avalon)', href: '/avalon/', desc: 'Знаешь всех шпионов, но сказать прямо нельзя. Намекай тонко, Ассасин следит.' },
+    { role: 'Персиваль', game: 'Авалон, чт и вс', c: 'var(--avalon)', href: '/avalon/', desc: 'Видишь двух Мерлинов, и один из них — Моргана. Выбери, кому верить.' },
+    { role: 'Моргана', game: 'Авалон, чт и вс', c: 'var(--avalon)', href: '/avalon/', desc: 'Притворяйся Мерлином. Персиваль уже начинает сомневаться.' },
+    { role: 'Ассасин', game: 'Авалон, чт и вс', c: 'var(--avalon)', href: '/avalon/', desc: 'Даже если рыцари победят, у тебя последний выстрел. Вычисли Мерлина.' },
+    { role: 'Либерал', game: 'Тайный Гитлер, суббота', c: 'var(--hitler)', href: '/taynyy-gitler/', desc: 'Вас большинство, но вы не знаете друг друга. Не пусти фашистов к власти.' },
+    { role: 'Фашист', game: 'Тайный Гитлер, суббота', c: 'var(--hitler)', href: '/taynyy-gitler/', desc: 'Ты знаешь своих. Проталкивай законы и прикрывай главного.' },
+    { role: 'Гитлер', game: 'Тайный Гитлер, суббота', c: 'var(--hitler)', href: '/taynyy-gitler/', desc: 'Ты не знаешь своих фашистов. Стань самым «чистым» либералом — и после трёх фашистских законов тебя сделают канцлером.' },
+  ];
+  const card = document.querySelector<HTMLElement>('[data-card]');
+  const btn = document.querySelector<HTMLButtonElement>('[data-draw]');
+  const cta = document.querySelector<HTMLAnchorElement>('[data-draw-cta]');
+  let last = -1;
+  const set = (sel: string, v: string) => (card!.querySelector(sel)!.textContent = v);
+  btn?.addEventListener('click', () => {
+    if (!card) return;
+    let i = Math.floor(Math.random() * roles.length);
+    if (i === last) i = (i + 1) % roles.length;
+    last = i;
+    const r = roles[i];
+    const reveal = () => {
+      set('[data-r-role]', r.role);
+      set('[data-r-game]', r.game);
+      set('[data-r-desc]', r.desc);
+      card.style.setProperty('--rc', r.c);
+      card.classList.add('open');
+      btn.textContent = 'Вытянуть ещё';
+      if (cta) {
+        cta.hidden = false;
+        cta.href = r.href;
+        cta.textContent = `Сыграть: ${r.game.split(',')[0]}`;
+      }
+    };
+    if (card.classList.contains('open')) {
+      card.classList.remove('open');
+      setTimeout(reveal, 420);
+    } else reveal();
+  });
+</script>
+
+<style>
+  .draw {
+    background: var(--felt);
+    border-block: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .draw-in {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+  .draw h2 {
+    font-size: var(--step-3);
+  }
+  .draw-text p {
+    font-size: 1.1rem; /* подзаголовок */
+    max-width: 40ch;
+    margin-bottom: 1.6rem;
+  }
+  .stage {
+    perspective: 1200px;
+    display: flex;
+    justify-content: center;
+  }
+  .card {
+    --rc: var(--avalon);
+    position: relative;
+    width: min(17rem, 70vw);
+    aspect-ratio: 5 / 7;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.3, 0.9, 0.3, 1);
+    transform: rotate(-3deg);
+  }
+  .card.open {
+    transform: rotate(2deg) rotateY(180deg);
+  }
+  .face {
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    box-shadow: 0 26px 50px rgba(8, 2, 18, 0.55);
+  }
+  .back {
+    display: grid;
+    place-items: center;
+    background-color: var(--felt-2);
+    background-image:
+      repeating-linear-gradient(45deg, transparent 0 11px, rgba(245, 184, 46, 0.25) 11px 12px),
+      repeating-linear-gradient(-45deg, transparent 0 11px, rgba(255, 59, 92, 0.25) 11px 12px);
+    border: 8px solid var(--paper);
+  }
+  .back span {
+    font-family: var(--display);
+    font-size: 5rem;
+    color: var(--paper);
+    width: 7.5rem;
+    height: 7.5rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--night);
+    border: 3px solid var(--avalon);
+  }
+  .front {
+    transform: rotateY(180deg);
+    background: var(--paper);
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.8rem;
+    padding: 1.6rem 1.4rem;
+    border-top: 14px solid var(--rc);
+    border-bottom: 14px solid var(--rc);
+  }
+  .game {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: color-mix(in srgb, var(--ink) 65%, transparent);
+  }
+  .role {
+    font-family: var(--display);
+    font-size: 2.3rem;
+    line-height: 1;
+  }
+  .desc {
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+  @media (max-width: 760px) {
+    .draw-in {
+      grid-template-columns: 1fr;
+    }
+    .stage {
+      order: -1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card {
+      transition: none;
+    }
+  }
+</style>

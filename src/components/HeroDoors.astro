@@ -1,0 +1,258 @@
+---
+// Три «двери» в игры: атмосферная картинка без текста, всё важное пишет сайт крупно поверх.
+// Картинки временные — заменить на сгенерированные/новые фото 4:5 в src/assets/doors/.
+import { Image } from 'astro:assets';
+import avalon from '../assets/posters/afisha-avalon.jpg';
+import mafiya from '../assets/posters/afisha-mafiya.jpg';
+import gitler from '../assets/posters/afisha-taynyy-gitler.jpg';
+
+// Чтобы на плитке играло видео, положите mp4 в public/video/ и впишите путь в поле video, например '/video/igra-mafiya.mp4'
+type Door = { img: any; pos: string; href: string; name: string; days: string; hook: string; color: string; alt: string; video?: string; poster?: string };
+const doors: Door[] = [
+  {
+    img: avalon,
+    pos: '50% 0%',
+    href: '/avalon/',
+    name: 'Авалон',
+    days: 'Чт и Вс',
+    hook: 'Средневековая мафия, где никто не выбывает',
+    color: 'var(--avalon)',
+    alt: 'Афиша клуба: играем в Авалон в центре Нячанга',
+  },
+  {
+    img: mafiya,
+    pos: '50% 12%',
+    href: '/mafiya-nyachang/',
+    name: 'Мафия',
+    days: 'Пятница',
+    hook: 'Классика: блеф, ночь, ведущий и 3–4 партии',
+    color: 'var(--mafia)',
+    alt: 'Афиша клуба: играем в городскую мафию в Нячанге',
+  },
+  {
+    img: gitler,
+    pos: '50% 0%',
+    href: '/taynyy-gitler/',
+    name: 'Тайный Гитлер',
+    days: 'Суббота',
+    hook: 'Короткие драйвовые партии на логику и блеф',
+    color: 'var(--hitler)',
+    alt: 'Афиша клуба: играем в Тайного Гитлера в центре Нячанга',
+  },
+];
+---
+
+<div class="doors-wrap">
+<ul class="doors" aria-label="Игры клуба на неделе">
+  {
+    doors.map((d, i) => (
+      <li class="door" style={`--c:${d.color};--i:${i}`}>
+        <a href={d.href} aria-label={`${d.name}: ${d.days}, 19:00–23:00. ${d.hook}`}>
+          <Image
+            src={d.img}
+            alt={d.alt}
+            widths={[400, 700, 1000]}
+            sizes="(max-width: 760px) 82vw, 24rem"
+            loading="eager"
+            style={`object-position:${d.pos}`}
+          />
+          {d.video && <video src={d.video} poster={d.poster} autoplay muted loop playsinline preload="auto" aria-hidden="true" />}
+          <span class="tape" aria-hidden="true" />
+          <span class="sticker">
+            <b>{d.days}</b>
+            <span>19:00–23:00</span>
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+<div class="swipe-hint" aria-hidden="true">
+  <svg viewBox="0 0 24 24"><path d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74l-3.43-.72c-.08-.01-.15-.03-.24-.03-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z" /></svg>
+  <span>листай</span>
+</div>
+</div>
+
+<script>
+  // Подсказка «листай» на телефоне: карточки слегка сдвигаются сами, подсказка исчезает после первого свайпа
+  const wrap = document.querySelector<HTMLElement>('.doors-wrap');
+  const list = wrap?.querySelector<HTMLElement>('.doors');
+  if (wrap && list && matchMedia('(max-width: 760px)').matches) {
+    const hide = () => wrap.classList.add('swiped');
+    list.addEventListener('scroll', () => list.scrollLeft > 20 && hide(), { passive: true });
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          setTimeout(() => {
+            list.scrollTo({ left: 70, behavior: 'smooth' });
+            setTimeout(() => list.scrollTo({ left: 0, behavior: 'smooth' }), 650);
+          }, 900);
+        },
+        { threshold: 0.6 },
+      );
+      io.observe(list);
+    }
+  }
+</script>
+
+<style>
+  .doors {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.75rem, 1.6vw, 1.25rem);
+  }
+  .door {
+    animation: rise 0.7s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+    animation-delay: calc(0.15s + var(--i) * 0.12s);
+  }
+  .door {
+    --r: calc((var(--i) - 1) * 2.5deg);
+    padding: 0.8rem 0.4rem 1.6rem;
+  }
+  .door a {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 8px;
+    transform: rotate(var(--r));
+    box-shadow: 0 24px 46px rgba(8, 2, 18, 0.6);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .door a:hover,
+  .door a:focus-visible {
+    transform: rotate(0deg) translateY(-8px) scale(1.02);
+    box-shadow:
+      0 0 0 3px var(--c),
+      0 30px 60px color-mix(in srgb, var(--c) 35%, transparent);
+  }
+  .door :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .tape {
+    position: absolute;
+    top: -0.8rem;
+    left: 50%;
+    width: 38%;
+    height: 1.6rem;
+    transform: translateX(-50%) rotate(-3deg);
+    background: rgba(246, 238, 226, 0.6);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  .door:nth-child(2) .tape {
+    transform: translateX(-50%) rotate(4deg);
+  }
+  .sticker {
+    position: absolute;
+    left: 50%;
+    bottom: -1.2rem;
+    transform: translateX(-50%) rotate(-3deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.55rem 1.1rem 0.6rem;
+    background: var(--c);
+    color: var(--ink);
+    border-radius: 10px;
+    white-space: nowrap;
+    box-shadow: 0 10px 22px rgba(8, 2, 18, 0.5);
+  }
+  .sticker b {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+    line-height: 1.1;
+  }
+  .sticker span {
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  @keyframes swipe {
+    0%,
+    100% {
+      transform: translateX(6px) rotate(0deg);
+    }
+    50% {
+      transform: translateX(-10px) rotate(-12deg);
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .door,
+    .swipe-hint svg {
+      animation: none;
+    }
+  }
+  .doors-wrap {
+    position: relative;
+  }
+  .swipe-hint {
+    display: none;
+  }
+  @media (max-width: 760px) {
+    .swipe-hint {
+      position: absolute;
+      right: 2rem;
+      top: 36%;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.55rem 0.9rem 0.55rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(20, 10, 34, 0.78);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 10px 24px rgba(8, 2, 18, 0.45);
+    }
+    .swipe-hint svg {
+      width: 2.1rem;
+      height: 2.1rem;
+      fill: #fff;
+      animation: swipe 1.6s ease-in-out infinite;
+    }
+    .swiped .swipe-hint {
+      opacity: 0;
+    }
+    .doors {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      margin-inline: calc(-1 * var(--gutter));
+      padding: 0 var(--gutter) 0.5rem;
+      scroll-padding-inline: var(--gutter);
+    }
+    .door {
+      flex: 0 0 80%;
+      scroll-snap-align: start;
+    }
+
+  }
+</style>

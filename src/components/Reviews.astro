@@ -1,0 +1,351 @@
+---
+// Отзывы в дизайне Telegram: окно чата группы, настоящие сообщения с аватарками,
+// реакциями (их можно нажимать) и ссылкой на оригинал.
+import { reviews, gameLabel, type Review } from '../data/reviews';
+import { site } from '../data/site';
+interface Props {
+  game?: Review['game'];
+  title?: string;
+}
+const { game, title = 'Что говорят после игры' } = Astro.props;
+const list = game ? reviews.filter((r) => r.game === game) : reviews;
+---
+
+{
+  list.length > 0 && (
+    <section class="section reviews" aria-labelledby="reviews-h">
+      <div class="wrap rv-in">
+        <div class="rv-text">
+          <h2 id="reviews-h">{title}</h2>
+          <p class="muted">
+            Настоящие сообщения участников из Telegram-группы клуба, без правок. Ставьте реакции, как в Telegram, или откройте
+            сообщение в группе.
+          </p>
+          <a class="btn btn-ghost" href={site.telegramGroup} rel="noopener">
+            Больше отзывов в группе
+          </a>
+        </div>
+
+        <div class="tg" role="group" aria-label="Отзывы из Telegram">
+          <div class="tg-head" aria-hidden="true">
+            <img class="tg-ava" src="/avatars/gruppa.webp" alt="" width="40" height="40" />
+            <span class="tg-title">
+              <b>PARTY GAME community ❤️</b>
+              <small>{site.groupSize} участников</small>
+            </span>
+          </div>
+          <div class="tg-body">
+            {list.map((r) => (
+              <article class="row" data-id={r.id}>
+                {r.avatar ? (
+                  <img class="ava" src={r.avatar} alt="" width="40" height="40" loading="lazy" decoding="async" />
+                ) : (
+                  <span class="ava ava-txt" style={`background:${r.color}`} aria-hidden="true">
+                    {r.name[0]}
+                  </span>
+                )}
+                <div class="bubble">
+                  <header class="author">
+                    <b style={`color:${r.color}`}>{r.name}</b>
+                    {r.game && (
+                      <span class="tag" style={`--c:${gameLabel[r.game].color}`}>
+                        {gameLabel[r.game].name}
+                      </span>
+                    )}
+                  </header>
+                  {r.reply && (
+                    <div class="reply" style={`--rc:${r.reply.color}`}>
+                      <b>{r.reply.name}</b>
+                      <span>{r.reply.text}</span>
+                    </div>
+                  )}
+                  <div class="txt">
+                    {r.text.split('\n\n').map((p) => (
+                      <p>{p}</p>
+                    ))}
+                  </div>
+                  <footer class="foot">
+                    {r.reactions && (
+                      <div class="reacts" role="group" aria-label="Реакции">
+                        {r.reactions.map((x) => (
+                          <button type="button" class="rc" data-e={x.e} data-n={x.n} aria-pressed="false">
+                            <span class="e">{x.e}</span>
+                            <span class="n">{x.n}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                    <span class="meta">
+                      {r.edited && 'изменено '}
+                      {r.date && `${r.date}, `}
+                      {r.time}
+                    </span>
+                  </footer>
+                  {r.link && (
+                    <a class="open" href={r.link} rel="noopener" target="_blank">
+                      Открыть в Telegram →
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<script>
+  // Реакции как в Telegram: нажал — счётчик +1 и подсветка, нажал ещё раз — убрал.
+  // Выбор запоминается только в этом браузере.
+  const KEY = 'pg-reactions';
+  let saved: Record<string, boolean> = {};
+  try {
+    saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+  } catch {
+    saved = {};
+  }
+  const store = () => {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(saved));
+    } catch {
+      /* хранилище недоступно — просто не запоминаем */
+    }
+  };
+  document.querySelectorAll<HTMLElement>('.reviews .row').forEach((row) => {
+    const id = row.dataset.id;
+    row.querySelectorAll<HTMLButtonElement>('.rc').forEach((b) => {
+      const k = `${id}:${b.dataset.e}`;
+      const base = Number(b.dataset.n);
+      const paint = (on: boolean) => {
+        b.setAttribute('aria-pressed', String(on));
+        b.querySelector('.n')!.textContent = String(base + (on ? 1 : 0));
+      };
+      paint(!!saved[k]);
+      b.addEventListener('click', () => {
+        const on = !saved[k];
+        saved[k] = on;
+        if (!on) delete saved[k];
+        store();
+        paint(on);
+        b.classList.remove('pop');
+        void b.offsetWidth;
+        if (on) b.classList.add('pop');
+      });
+    });
+  });
+</script>
+
+<style>
+  .rv-in {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .rv-text p {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Окно Telegram */
+  .tg {
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(8, 2, 18, 0.5);
+    font-family: -apple-system, 'SF Pro Text', 'Segoe UI', Roboto, system-ui, sans-serif;
+  }
+  .tg-head {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.7rem 1rem;
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6;
+  }
+  .tg-ava {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    object-fit: cover;
+  }
+  .tg-title {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+    color: #000;
+  }
+  .tg-title b {
+    font-size: 0.98rem;
+  }
+  .tg-title small {
+    color: #8a8a8a;
+    font-size: 0.8rem;
+  }
+  .tg-body {
+    display: grid;
+    gap: 0.8rem;
+    align-content: start;
+    max-height: 36rem;
+    overflow-y: auto;
+    overscroll-behavior-y: auto;
+    padding: 1.2rem 1rem 1.4rem;
+    background: linear-gradient(150deg, #f2b8d4 0%, #e7b4e3 45%, #f4bfa8 100%);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+  }
+  .row {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+    max-width: 30rem;
+  }
+  .ava {
+    flex: none;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .ava-txt {
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-weight: 700;
+  }
+  .bubble {
+    position: relative;
+    min-width: 0;
+    background: #fff;
+    color: #000;
+    border-radius: 16px 16px 16px 4px;
+    padding: 0.5rem 0.75rem 0.45rem;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  }
+  .bubble::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    bottom: 0;
+    width: 12px;
+    height: 14px;
+    background: #fff;
+    clip-path: path('M12 0 V14 H0 C6 12 10 8 12 0 Z');
+  }
+  .author {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    font-size: 0.93rem;
+  }
+  .tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.05rem 0.45rem;
+    border-radius: 999px;
+    background: var(--c);
+    color: var(--ink);
+  }
+  .reply {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.35rem;
+    padding: 0.3rem 0.6rem;
+    border-left: 3px solid var(--rc);
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--rc) 12%, #fff);
+    font-size: 0.88rem;
+    line-height: 1.3;
+  }
+  .reply b {
+    color: var(--rc);
+  }
+  .txt {
+    margin-top: 0.3rem;
+  }
+  .txt p {
+    white-space: pre-line;
+    margin: 0 0 0.55em;
+    font-size: 0.98rem;
+    line-height: 1.4;
+  }
+  .txt p:last-child {
+    margin-bottom: 0;
+  }
+  .foot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.45rem;
+  }
+  .reacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+  .rc {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.55rem 0.2rem 0.45rem;
+    border: 0;
+    border-radius: 999px;
+    background: #fbe3ee;
+    color: #c2336d;
+    font: 600 0.82rem/1.2 inherit;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .rc .e {
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .rc:hover {
+    background: #f7d0e1;
+  }
+  .rc[aria-pressed='true'] {
+    background: #d9467f;
+    color: #fff;
+  }
+  .rc.pop .e {
+    animation: pop 0.45s ease;
+  }
+  @keyframes pop {
+    30% {
+      transform: scale(1.6) rotate(-8deg);
+    }
+    60% {
+      transform: scale(0.9);
+    }
+  }
+  .meta {
+    margin-left: auto;
+    font-size: 0.74rem;
+    color: #9aa3ab;
+    white-space: nowrap;
+  }
+  .open {
+    display: inline-block;
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #3a8ad6;
+    text-decoration: none;
+  }
+  .open:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 860px) {
+    .rv-in {
+      grid-template-columns: 1fr;
+    }
+    .tg-body {
+      max-height: 32rem;
+    }
+  }
+</style>
