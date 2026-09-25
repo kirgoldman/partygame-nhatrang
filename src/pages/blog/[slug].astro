@@ -30,7 +30,7 @@ const all = await getCollection('blog');
 const related = all.filter((p) => p.id !== post.id).slice(0, 3);
 ---
 
-<Base title={`${d.title} | Party Game Нячанг`} description={d.description} schema={schema} ogType="article">
+<Base title={d.title.length > 52 ? d.title : `${d.title} | Party Game`} description={d.description} schema={schema} ogType="article">
   <Crumbs items={crumb} />
   <article>
     <header class="page-hero narrow post-head">
