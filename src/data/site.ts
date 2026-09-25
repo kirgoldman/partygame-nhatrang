@@ -13,7 +13,7 @@ export const site = {
   telegramGroup: 'https://t.me/+OMJQ4EA3FZAyYTRh',
   groupSize: '400+',
   instagram: '',
-  metrikaId: 0, // номер счётчика Яндекс Метрики // ссылка на Instagram Юлианы — вписать
+  metrikaId: 113063029, // номер счётчика Яндекс Метрики // ссылка на Instagram Юлианы — вписать
   price: 150000,
   priceText: '150 000 ₫',
   priceFromText: 'от 150 000 ₫',
