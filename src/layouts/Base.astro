@@ -24,6 +24,7 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
 const ogUrl = new URL(ogImage, site.url).toString();
 const path = Astro.url.pathname;
 const ld = graph(club, website, ...schema);
+import Metrika from '../components/Metrika.astro';
 ---
 
 <!doctype html>
@@ -53,6 +54,7 @@ const ld = graph(club, website, ...schema);
     <meta name="twitter:card" content="summary_large_image" />
 
     <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+    <Metrika />
   </head>
   <body style={accent ? `--accent:${accent}` : undefined}>
     <a class="skip" href="#main">К содержанию</a>

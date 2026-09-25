@@ -1,0 +1,39 @@
+---
+// Яндекс Метрика. Номер счётчика — site.metrikaId в src/data/site.ts.
+// Цели (создать в Метрике как «JavaScript-событие» с этими идентификаторами):
+//   tg_group — клик по ссылке на Telegram-группу (запись на игру)
+//   tg_dm    — клик по личке Юлианы (Лила и вопросы)
+//   map      — клик по ссылке на карту
+import { site } from '../data/site';
+const id = site.metrikaId;
+---
+
+{
+  id && (
+    <>
+      <script
+        is:inline
+        define:vars={{ id, group: site.telegramGroup, dm: site.telegramDM, map: site.venue.mapUrl }}
+      >
+        (function (m, e, t, r, i, k, a) {
+          m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+          m[i].l = 1 * new Date();
+          for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) return; }
+          k = e.createElement(t); a = e.getElementsByTagName(t)[0]; k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
+        })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+        ym(id, 'init', { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
+        document.addEventListener('click', function (e) {
+          var a = e.target.closest && e.target.closest('a[href]');
+          if (!a) return;
+          var h = a.href;
+          if (h.indexOf(group) === 0) ym(id, 'reachGoal', 'tg_group');
+          else if (h.indexOf(dm) === 0) ym(id, 'reachGoal', 'tg_dm');
+          else if (h.indexOf(map) === 0 || h.indexOf('google.com/maps') > -1) ym(id, 'reachGoal', 'map');
+        }, true);
+      </script>
+      <noscript>
+        <div><img src={`https://mc.yandex.ru/watch/${id}`} style="position:absolute; left:-9999px;" alt="" /></div>
+      </noscript>
+    </>
+  )
+}
