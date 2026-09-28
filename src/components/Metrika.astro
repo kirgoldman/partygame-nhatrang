@@ -1,8 +1,7 @@
 ---
 // Яндекс Метрика. Номер счётчика — site.metrikaId в src/data/site.ts.
 // Цели (создать в Метрике как «JavaScript-событие» с этими идентификаторами):
-//   tg_group — клик по ссылке на Telegram-группу (запись на игру)
-//   tg_dm    — клик по личке Юлианы (Лила и вопросы)
+//   tg_group — клик по ссылке на Telegram-группу (запись на игру, вопросы, Лила)
 //   map      — клик по ссылке на карту
 import { site } from '../data/site';
 const id = site.metrikaId;
@@ -13,7 +12,7 @@ const id = site.metrikaId;
     <>
       <script
         is:inline
-        define:vars={{ id, group: site.telegramGroup, dm: site.telegramDM, map: site.venue.mapUrl }}
+        define:vars={{ id, group: site.telegramGroup, map: site.venue.mapUrl }}
       >
         (function (m, e, t, r, i, k, a) {
           m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
@@ -27,7 +26,6 @@ const id = site.metrikaId;
           if (!a) return;
           var h = a.href;
           if (h.indexOf(group) === 0) ym(id, 'reachGoal', 'tg_group');
-          else if (h.indexOf(dm) === 0) ym(id, 'reachGoal', 'tg_dm');
           else if (h.indexOf(map) === 0 || h.indexOf('google.com/maps') > -1) ym(id, 'reachGoal', 'map');
         }, true);
       </script>

@@ -8,12 +8,10 @@ export const site = {
   description:
     'Party Game — клуб мафии, Авалона и Тайного Гитлера в центре Нячанга. Играем четыре вечера в неделю в CCCP Coffee, 19:00–23:00, от 150 000 донгов за вечер. Новичкам объясняем правила.',
   foundingDate: '', // год основания клуба — вписать, когда будет известен
-  telegramDM: 'https://t.me/juliana_flame',
-  telegramDMHandle: '@juliana_flame',
   telegramGroup: 'https://t.me/+OMJQ4EA3FZAyYTRh',
   groupSize: '400+',
   instagram: '',
-  metrikaId: 113063029, // номер счётчика Яндекс Метрики // ссылка на Instagram Юлианы — вписать
+  metrikaId: 113063029, // номер счётчика Яндекс Метрики // ссылка на Instagram клуба — вписать
   price: 150000,
   priceText: '150 000 ₫',
   priceFromText: 'от 150 000 ₫',
@@ -35,7 +33,7 @@ export const site = {
       'https://www.google.com/maps?q=CCCP+Coffee,+112+H%E1%BB%93ng+B%C3%A0ng,+Nha+Trang&output=embed',
   },
   host: {
-    name: 'Юлиана',
+    name: 'Ведущая клуба',
     role: 'основательница клуба и ведущая, коуч и практик игры Лила',
     experience: 'более 10 лет практики в коучинге',
   },

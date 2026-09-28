@@ -4,7 +4,7 @@ const abs = (path: string) => new URL(path, site.url).toString();
 
 export const orgId = abs('/#club');
 export const placeId = abs('/gde-my-igraem/#place');
-export const personId = abs('/lila/#yuliana');
+export const personId = abs('/lila/#vedushaya');
 
 export const place = {
   '@type': 'CafeOrCoffeeShop',
@@ -24,7 +24,7 @@ export const place = {
 export const person = {
   '@type': 'Person',
   '@id': personId,
-  name: 'Юлиана',
+  name: site.host.name,
   jobTitle: 'Коуч, ведущая игры Лила и социальных игр',
   worksFor: { '@id': orgId },
   ...(site.instagram ? { sameAs: [site.instagram] } : {}),
@@ -57,7 +57,7 @@ export const club = {
       closes: '23:00',
     },
   ],
-  sameAs: [site.telegramGroup, site.telegramDM, ...(site.instagram ? [site.instagram] : [])],
+  sameAs: [site.telegramGroup, ...(site.instagram ? [site.instagram] : [])],
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'Запись на игры',
@@ -124,7 +124,7 @@ export const lilaService = {
     name: p.label,
     price: p.price,
     priceCurrency: 'USD',
-    url: site.telegramDM,
+    url: site.telegramGroup,
   })),
 };
 
@@ -169,7 +169,7 @@ export function article(a: {
     dateModified: (a.updated ?? a.date).toISOString(),
     inLanguage: 'ru',
     image: abs(a.image ?? '/og.png'),
-    author: { '@id': personId, '@type': 'Person', name: 'Юлиана' },
+    author: { '@id': personId, '@type': 'Person', name: site.host.name },
     publisher: { '@id': orgId },
   };
 }

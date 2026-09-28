@@ -37,7 +37,7 @@ const related = all.filter((p) => p.id !== post.id).slice(0, 3);
       <p class="tag">{d.tag}</p>
       <h1>{d.h1 ?? d.title}</h1>
       <p class="byline muted">
-        Автор: <a href="/o-klube/">Юлиана, ведущая клуба Party Game</a><br />
+        Автор: <a href="/o-klube/">Ведущая клуба Party Game</a><br />
         <time datetime={d.date.toISOString()}>{fmt(d.date)}</time>{d.updated && d.updated.valueOf() !== d.date.valueOf() && (
           <>, обновлено <time datetime={d.updated.toISOString()}>{fmt(d.updated)}</time></>
         )}
