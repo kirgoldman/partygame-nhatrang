@@ -56,7 +56,7 @@ const doors: Door[] = [
             loading="eager"
             style={`object-position:${d.pos}`}
           />
-          {d.video && <video src={d.video} poster={d.poster} autoplay muted loop playsinline preload="auto" aria-hidden="true" />}
+          {d.video && <video data-src={d.video} poster={d.poster} muted loop playsinline preload="none" aria-hidden="true" />}
           <span class="tape" aria-hidden="true" />
           <span class="sticker">
             <b>{d.days}</b>

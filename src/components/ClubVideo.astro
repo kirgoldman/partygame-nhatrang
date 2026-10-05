@@ -11,7 +11,7 @@ const { src, poster, label, sound = false } = Astro.props;
 ---
 
 <figure class="club-video">
-  <video src={src} poster={poster} autoplay muted loop playsinline preload="metadata" aria-label={label}></video>
+  <video data-src={src} poster={poster} muted loop playsinline preload="none" aria-label={label}></video>
   {
     sound && (
       <button type="button" class="cv-sound" aria-pressed="false">

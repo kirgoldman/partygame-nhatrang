@@ -98,7 +98,7 @@ const faq = [
     {
       videos.map((v) => (
         <figure class="vid">
-          <video src={v.src} poster={v.poster} autoplay muted loop playsinline preload="metadata" aria-label={v.alt} />
+          <video data-src={v.src} poster={v.poster} muted loop playsinline preload="none" aria-label={v.alt} />
           <button type="button" class="sound" aria-pressed="false">
             <svg class="i-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" /><path d="m17 9 4 6m0-6-4 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
             <svg class="i-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" /><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
