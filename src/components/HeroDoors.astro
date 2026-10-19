@@ -4,7 +4,7 @@
 import { Image } from 'astro:assets';
 import avalon from '../assets/posters/afisha-avalon.jpg';
 import mafiya from '../assets/posters/afisha-mafiya.jpg';
-import gitler from '../assets/posters/afisha-taynyy-gitler.jpg';
+import krov from '../assets/posters/afisha-krov-na-chasovoy-bashne.jpg';
 
 // Чтобы на плитке играло видео, положите mp4 в public/video/ и впишите путь в поле video, например '/video/igra-mafiya.mp4'
 type Door = { img: any; pos: string; href: string; name: string; days: string; hook: string; color: string; alt: string; video?: string; poster?: string };
@@ -30,14 +30,14 @@ const doors: Door[] = [
     alt: 'Афиша клуба: играем в городскую мафию в Нячанге',
   },
   {
-    img: gitler,
-    pos: '50% 0%',
-    href: '/taynyy-gitler/',
-    name: 'Тайный Гитлер',
-    days: 'Суббота',
-    hook: 'Короткие драйвовые партии на логику и блеф',
-    color: 'var(--hitler)',
-    alt: 'Афиша клуба: играем в Тайного Гитлера в центре Нячанга',
+    img: krov,
+    pos: '50% 10%',
+    href: '/krov-na-chasovoy-bashne/',
+    name: 'Кровь на часовой башне',
+    days: 'Ср и Вс',
+    hook: 'У каждого своя роль и способность — даже после смерти',
+    color: 'var(--krov)',
+    alt: 'Афиша клуба: играем в «Кровь на часовой башне» в центре Нячанга',
   },
 ];
 ---

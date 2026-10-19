@@ -14,19 +14,19 @@ import { site } from '../data/site';
 import { faqMain } from '../data/faq';
 import { faqSchema, gameEvent } from '../data/schema';
 import avalonImg from '../assets/photos/avalon-gruppa.jpg';
-import hitlerImg from '../assets/photos/taynyy-gitler-igra.jpg';
+import krovImg from '../assets/photos/krov-igra.jpg';
 import mafiaImg from '../assets/photos/mafiya-kompaniya.jpg';
 import lilaImg from '../assets/photos/lila-5.jpg';
 
-const title = 'Мафия, Авалон и Тайный Гитлер в Нячанге — клуб Party Game';
+const title = 'Мафия, Авалон и «Кровь на часовой башне» в Нячанге — клуб Party Game';
 const description =
-  'Клуб мафии, Авалона и Тайного Гитлера в центре Нячанга. Чт–Вс, 19:00–23:00, от 150 000 ₫ за вечер, на русском. Новичкам объясняем правила.';
+  'Клуб мафии, Авалона и «Крови на часовой башне» в центре Нячанга. Ср–Вс, 19:00–23:00, от 150 000 ₫ за вечер, на русском. Новичкам объясняем правила.';
 
 const games = [
   {
     href: '/mafiya-nyachang/',
     name: 'Городская мафия',
-    day: 'по пятницам',
+    day: 'по пятницам и субботам',
     color: 'var(--mafia)',
     img: mafiaImg,
     alt: 'Компания игроков за вечером мафии клуба Party Game в Нячанге',
@@ -35,37 +35,37 @@ const games = [
   {
     href: '/avalon/',
     name: 'Авалон',
-    day: 'по четвергам и воскресеньям',
+    day: 'по четвергам',
     color: 'var(--avalon)',
     img: avalonImg,
     alt: 'Игроки клуба Party Game за столом Авалона в CCCP Coffee, Нячанг',
     text: 'Авалон — это средневековая мафия, где рыцари короля Артура выполняют квесты, а шпионы Мордреда тайно их проваливают. Никто не выбывает: вся партия — это обсуждения, голосования и попытки вычислить предателя. Мудрый Мерлин знает злодеев, но не может сказать об этом прямо.',
   },
   {
-    href: '/taynyy-gitler/',
-    name: 'Тайный Гитлер',
-    day: 'по субботам',
-    color: 'var(--hitler)',
-    img: hitlerImg,
-    alt: 'Поле игры Тайный Гитлер с картами законов на столе в Нячанге',
-    text: 'Тайный Гитлер — это игра на социальную дедукцию, где либералы и фашисты принимают законы и выбирают правительство. Можно быть уверенным, что раскусил человека, и вдруг понять, что всё это время играл по его сценарию. Партии короткие и насыщенные, почти без выбываний.',
+    href: '/krov-na-chasovoy-bashne/',
+    name: 'Кровь на часовой башне',
+    day: 'по средам и воскресеньям',
+    color: 'var(--krov)',
+    img: krovImg,
+    alt: 'Вечер «Крови на часовой башне» в клубе Party Game, Нячанг',
+    text: '«Кровь на часовой башне» — игра на социальную дедукцию, где у каждого своя уникальная роль и способность, и у добрых, и у злых. Можно уходить на тайные разговоры один на один, блефовать и притворяться другим персонажем, а после смерти — оставаться частью игры. Ещё больше психологии и неожиданных поворотов, чем в мафии.',
   },
 ];
 
 const schema = [
   faqSchema(faqMain),
-  gameEvent('mafiya', 'Городская мафия', 'Городская мафия на русском каждую пятницу в центре Нячанга'),
-  gameEvent('avalon', 'Авалон', 'Игра Авалон на русском по четвергам и воскресеньям в центре Нячанга'),
-  gameEvent('taynyy-gitler', 'Тайный Гитлер', 'Игра Тайный Гитлер на русском по субботам в центре Нячанга'),
+  gameEvent('mafiya', 'Городская мафия', 'Городская мафия на русском по пятницам и субботам в центре Нячанга'),
+  gameEvent('avalon', 'Авалон', 'Игра Авалон на русском по четвергам в центре Нячанга'),
+  gameEvent('krov-na-chasovoy-bashne', 'Кровь на часовой башне', 'Игра «Кровь на часовой башне» на русском по средам и воскресеньям в центре Нячанга'),
 ];
 ---
 
 <Base title={title} description={description} schema={schema}>
   <section class="hero">
     <div class="wrap hero-in">
-      <h1>Мафия, Авалон и Тайный Гитлер в&nbsp;Нячанге</h1>
+      <h1>Мафия, Авалон и «Кровь на часовой башне» в&nbsp;Нячанге</h1>
       <p class="lede">
-        Party Game — клуб социальных игр на русском. Играем четыре вечера в неделю в {site.venue.name} в центре Нячанга, с 19:00
+        Party Game — клуб социальных игр на русском. Играем пять вечеров в неделю в {site.venue.name} в центре Нячанга, с 19:00
         до 23:00. Вечер стоит от 150&nbsp;000&nbsp;донгов, правила объясняем за 5 минут.
       </p>
       <div class="btn-row hero-cta">
@@ -239,7 +239,7 @@ const schema = [
         <span class="addr-name">{site.venue.name}</span>
         <span>{site.venue.street}</span>
         <span>{site.venue.cityLatin}, {site.venue.region}</span>
-        <span class="addr-time">Чт–Вс, {site.hours}</span>
+        <span class="addr-time">Ср–Вс, {site.hours}</span>
       </address>
     </div>
   </section>
@@ -717,7 +717,7 @@ const schema = [
     font-size: clamp(4.5rem, 12vw, 8.5rem);
     line-height: 0.9;
     margin: 0 0 0.5rem;
-    color: var(--hitler);
+    color: var(--krov);
   }
   .community h2 {
     font-size: var(--step-3);

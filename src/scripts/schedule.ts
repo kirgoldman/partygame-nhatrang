@@ -1,12 +1,13 @@
 // Расписание клуба для «живых» блоков: считает ближайшую игру по времени Нячанга (UTC+7).
 export type Slot = { day: number; name: string; href: string };
 
-// 0 — воскресенье, 4 — четверг
+// 0 — воскресенье, 3 — среда, 4 — четверг
 export const slots: Slot[] = [
+  { day: 3, name: 'Кровь на часовой башне', href: '/krov-na-chasovoy-bashne/' },
   { day: 4, name: 'Авалон', href: '/avalon/' },
   { day: 5, name: 'Городская мафия', href: '/mafiya-nyachang/' },
-  { day: 6, name: 'Тайный Гитлер', href: '/taynyy-gitler/' },
-  { day: 0, name: 'Авалон', href: '/avalon/' },
+  { day: 6, name: 'Городская мафия', href: '/mafiya-nyachang/' },
+  { day: 0, name: 'Кровь на часовой башне', href: '/krov-na-chasovoy-bashne/' },
 ];
 
 const OFFSET = 7 * 3600e3;

@@ -7,7 +7,7 @@ export type Review = {
   name: string;
   color: string;
   avatar?: string;
-  game?: 'mafiya' | 'avalon' | 'taynyy-gitler' | 'lila';
+  game?: 'mafiya' | 'avalon' | 'krov-na-chasovoy-bashne' | 'lila';
   text: string;
   date?: string;
   time?: string;
@@ -149,6 +149,6 @@ export const reviews: Review[] = [
 export const gameLabel: Record<NonNullable<Review['game']>, { name: string; color: string }> = {
   mafiya: { name: 'Мафия', color: 'var(--mafia)' },
   avalon: { name: 'Авалон', color: 'var(--avalon)' },
-  'taynyy-gitler': { name: 'Тайный Гитлер', color: 'var(--hitler)' },
+  'krov-na-chasovoy-bashne': { name: 'Кровь на часовой башне', color: 'var(--krov)' },
   lila: { name: 'Лила', color: 'var(--lila)' },
 };

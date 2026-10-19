@@ -1,7 +1,7 @@
 /* Party Game Нячанг — дизайн-токены
    Основа: ночное сукно игрового стола (слива), бумага игральных карт.
    У каждой игры свой цвет, взятый из её реального реквизита:
-   мафия — неоновый малиновый, Авалон — золото короны, Тайный Гитлер — бирюза поля либералов,
+   мафия — неоновый малиновый, Авалон — золото короны, «Кровь на часовой башне» — тёмный багрянец,
    Лила — фиолетово-пурпурное игровое поле. */
 
 :root {
@@ -17,8 +17,8 @@
 
   --mafia: #ff3b5c;
   --avalon: #f5b82e;
-  --hitler: #3fc9b9;
-  --hitler-2: #ff7a3d;
+  --krov: #a3123a;
+  --krov-2: #ff7a3d;
   --lila: #d25bea;
 
   --display: 'Dela Gothic One', 'Arial Black', system-ui, sans-serif;
@@ -238,6 +238,14 @@ p {
   border-collapse: collapse;
   margin: 1.5em 0;
   font-size: 0.98rem;
+}
+@media (max-width: 480px) {
+  .prose table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
 }
 .prose th,
 .prose td {
