@@ -1,0 +1,214 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import Faq from '../../components/Faq.astro';
+import JoinBand from '../../components/JoinBand.astro';
+import PlaceCta from '../../components/PlaceCta.astro';
+import { places, tagLabels, type Place } from '../../data/places';
+import { breadcrumbs, faqSchema, article } from '../../data/schema';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return places.map((p) => ({ params: { slug: p.slug }, props: { place: p } }));
+}
+
+const { place } = Astro.props as { place: Place };
+const imgs = import.meta.glob<{ default: ImageMetadata }>('../../assets/places/*.jpg', { eager: true });
+const pic = (file: string) => imgs[`../../assets/places/${file}`].default;
+const href = `/kuda-shodit-v-nyachange/${place.slug}/`;
+const crumbs = [
+  { name: 'Куда сходить в Нячанге', href: '/kuda-shodit-v-nyachange/' },
+  { name: place.name, href },
+];
+const others = places.filter((p) => p.slug !== place.slug);
+const abs = (p: string) => new URL(p, site.url).toString();
+const placeNode = {
+  '@type': place.type === 'Resort' ? ['Resort', 'TouristAttraction'] : place.type,
+  name: place.name,
+  description: place.description,
+  url: abs(href),
+  image: undefined,
+  address: { '@type': 'PostalAddress', streetAddress: place.address, addressLocality: 'Nha Trang', addressCountry: 'VN' },
+  ...(place.geo ? { geo: { '@type': 'GeoCoordinates', latitude: place.geo.lat, longitude: place.geo.lng } } : {}),
+  ...(place.phone ? { telephone: place.phone } : {}),
+};
+const schema = [
+  breadcrumbs(crumbs),
+  faqSchema(place.faq),
+  placeNode,
+  article({ title: place.title.replace(' | Party Game', ''), description: place.description, href, date: new Date(place.updated), updated: new Date(place.updated) }),
+];
+const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(place.mapQuery)}&output=embed`;
+---
+
+<Base title={place.title} description={place.description} schema={schema} dockText="Записаться на игру" dockHref={site.telegramGroup}>
+  <Crumbs items={crumbs} />
+  <header class="wrap pl-hero">
+    <div class="pl-text">
+      <p class="pl-badge">{place.tags.map((t) => tagLabels[t]).join(' · ')}</p>
+      <h1>{place.h1}</h1>
+      <p class="lede">{place.lede}</p>
+      <dl class="pl-facts">
+        {place.facts.map((f) => <div><dt>{f.k}</dt><dd>{f.v}</dd></div>)}
+      </dl>
+    </div>
+    <figure class="pl-photo">
+      <Image src={pic(place.images[0].file)} alt={place.images[0].alt} widths={[480, 800]} sizes="(max-width: 760px) 100vw, 40vw" loading="eager" fetchpriority="high" />
+    </figure>
+  </header>
+
+  <article class="section narrow prose pl-prose">
+    {
+      place.sections.map((s) => (
+        <>
+          <h2>{s.h2}</h2>
+          {s.p?.map((t) => <p>{t}</p>)}
+          {s.ul && <ul>{s.ul.map((t) => <li>{t}</li>)}</ul>}
+        </>
+      ))
+    }
+
+    <h2>Фото</h2>
+    <div class="pl-gallery">
+      {place.images.slice(1).map((im) => (
+        <figure><Image src={pic(im.file)} alt={im.alt} widths={[360, 600]} sizes="(max-width: 760px) 50vw, 220px" loading="lazy" /></figure>
+      ))}
+    </div>
+
+    <h2>Где находится</h2>
+    <p>{place.address}{place.phone ? `. Телефон: ${place.phone}` : ''}.</p>
+    <iframe class="pl-map" title={`${place.name} на карте`} src={mapSrc} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p class="pl-note">Данные сверены по Google Картам и справочным источникам на {new Date(place.updated).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}. Часы и цены могут меняться, уточняйте на месте.</p>
+
+    <PlaceCta place={place.name} />
+  </article>
+
+  <div class="narrow pl-faq"><Faq items={place.faq} /></div>
+
+  <section class="wrap pl-more">
+    <h2>Куда ещё сходить в Нячанге</h2>
+    <ul>
+      {others.map((o) => <li><a href={`/kuda-shodit-v-nyachange/${o.slug}/`}>{o.name}</a>: {o.card}</li>)}
+      <li><a href="/blog/chem-zanyatsya-vecherom-v-nyachange/">Чем заняться в Нячанге вечером: 17 идей</a></li>
+      <li><a href="/blog/chem-zanyatsya-v-nyachange-v-dozhd/">Чем заняться в Нячанге в дождь</a></li>
+    </ul>
+  </section>
+  <JoinBand />
+</Base>
+
+<style>
+  .pl-hero {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: center;
+    padding-block: clamp(1rem, 3vw, 2rem) 0;
+  }
+  .pl-hero h1 {
+    font-size: var(--step-4);
+  }
+  .pl-hero h1::after {
+    content: '';
+    display: block;
+    width: 4.5rem;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--krov-2);
+    margin-top: 1.2rem;
+  }
+  .pl-badge {
+    color: var(--krov-2);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: var(--step--1);
+    margin-bottom: 0.6rem;
+  }
+  .pl-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 0.8rem 1.2rem;
+    margin: 1.6rem 0 0;
+  }
+  .pl-facts dt {
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+  .pl-facts dd {
+    margin: 0.1rem 0 0;
+    font-weight: 600;
+  }
+  .pl-photo {
+    margin: 0;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    box-shadow: 0 0 0 1px var(--line), 0 26px 50px rgba(8, 2, 18, 0.5);
+  }
+  .pl-photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pl-prose :global(h2) {
+    scroll-margin-top: 6rem;
+  }
+  .pl-prose :global(li::marker) {
+    color: var(--krov-2);
+  }
+  .pl-prose :global(a) {
+    color: var(--krov-2);
+  }
+  .pl-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+  }
+  .pl-gallery figure {
+    margin: 0;
+    border-radius: var(--radius-soft);
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+  }
+  .pl-gallery :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pl-map {
+    width: 100%;
+    height: 320px;
+    border: 0;
+    border-radius: var(--radius-card);
+    margin: 0.4rem 0 0.6rem;
+  }
+  .pl-note {
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+  .pl-faq {
+    padding-bottom: 1rem;
+  }
+  .pl-more {
+    padding-bottom: clamp(2rem, 5vw, 3.5rem);
+  }
+  .pl-more ul {
+    padding-left: 1.2rem;
+  }
+  .pl-more a {
+    color: var(--krov-2);
+  }
+  @media (max-width: 760px) {
+    .pl-hero {
+      grid-template-columns: 1fr;
+    }
+    .pl-photo {
+      aspect-ratio: 4 / 4.2;
+    }
+    .pl-gallery {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

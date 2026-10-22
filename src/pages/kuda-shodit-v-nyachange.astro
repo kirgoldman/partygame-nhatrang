@@ -1,0 +1,225 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Faq from '../components/Faq.astro';
+import JoinBand from '../components/JoinBand.astro';
+import PlaceCta from '../components/PlaceCta.astro';
+import { places, tagLabels, type Tag } from '../data/places';
+import { breadcrumbs, faqSchema } from '../data/schema';
+import { site } from '../data/site';
+
+const imgs = import.meta.glob<{ default: ImageMetadata }>('../assets/places/*.jpg', { eager: true });
+const pic = (file: string) => imgs[`../assets/places/${file}`].default;
+const crumbs = [{ name: 'Куда сходить в Нячанге', href: '/kuda-shodit-v-nyachange/' }];
+const tags = Object.keys(tagLabels) as Tag[];
+const abs = (p: string) => new URL(p, site.url).toString();
+
+const faq = [
+  {
+    q: 'Куда сходить в Нячанге, кроме пляжа?',
+    a: 'На скалы Hang Heo на рассвете, в кафе с настоящим поездом Railway Cafe, на остров Чампа с бассейнами и спа, а вечером на игры клуба Party Game: мафия, Авалон и «Кровь на часовой башне» на русском.',
+  },
+  {
+    q: 'Куда сходить в Нячанге в дождь?',
+    a: 'Под крышей: в спа и сауну на острове Чампа, в торговые центры с боулингом и кино, в кафе, на вечер настольных игр в центре города. Больше идей в статье про дождливый день.',
+  },
+  {
+    q: 'Что в Нячанге можно посмотреть бесплатно?',
+    a: 'Скалистый берег Hang Heo (вход свободный, платите только за напиток в кафе), набережную Чан Фу, храм По Нагар (вход платный, но недорогой) и закаты на пляже.',
+  },
+  {
+    q: 'Куда сходить в Нячанге вечером?',
+    a: 'На ночной рынок, на закат на набережную, в кафе с поездом до 22:00 и на игровой вечер клуба Party Game в CCCP Coffee: по средам, четвергам, субботам и воскресеньям с 19:00 до 23:00.',
+  },
+];
+const schema = [
+  breadcrumbs(crumbs),
+  faqSchema(faq),
+  {
+    '@type': 'ItemList',
+    name: 'Куда сходить в Нячанге',
+    itemListElement: places.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.name, url: abs(`/kuda-shodit-v-nyachange/${p.slug}/`) })),
+  },
+];
+---
+
+<Base
+  title="Куда сходить в Нячанге: подборка мест с адресами, ценами и советами | Party Game"
+  description="Куда сходить в Нячанге: скалы Hang Heo, кафе с поездом, остров Чампа и вечера настольных игр. Адреса, цены, часы, что бесплатно и куда в дождь."
+  schema={schema}
+  dockText="Записаться на игру"
+  dockHref={site.telegramGroup}
+>
+  <Crumbs items={crumbs} />
+  <header class="wrap kh-head">
+    <h1>Куда сходить в Нячанге</h1>
+    <p class="lede">
+      Подборка мест с адресами, ценами и честными советами: что посмотреть днём, куда пойти в дождь и чем заняться вечером. Данные сверены по
+      Google Картам, а в конце каждой страницы подскажем, какая игра в клубе ближайшая.
+    </p>
+  </header>
+
+  <div class="wrap kh-filters" role="group" aria-label="Фильтр по типу места">
+    <button type="button" class="chip is-on" data-tag="all">Все</button>
+    {tags.map((t) => <button type="button" class="chip" data-tag={t}>{tagLabels[t]}</button>)}
+  </div>
+
+  <section class="wrap kh-grid" aria-label="Места в Нячанге">
+    {
+      places.map((p) => (
+        <article class="card" data-tags={p.tags.join(' ')}>
+          <a href={`/kuda-shodit-v-nyachange/${p.slug}/`} class="card-img">
+            <Image src={pic(p.images[0].file)} alt={p.images[0].alt} widths={[360, 600]} sizes="(max-width: 760px) 100vw, 330px" loading="lazy" />
+          </a>
+          <div class="card-body">
+            <p class="card-tags">{p.tags.map((t) => tagLabels[t]).join(' · ')}</p>
+            <h2><a href={`/kuda-shodit-v-nyachange/${p.slug}/`}>{p.name}</a></h2>
+            <p>{p.card}</p>
+            <a class="more" href={`/kuda-shodit-v-nyachange/${p.slug}/`}>Подробнее</a>
+          </div>
+        </article>
+      ))
+    }
+    <article class="card card-club" data-tags="rain evening">
+      <div class="card-body">
+        <p class="card-tags">Под крышей, в дождь · Вечером</p>
+        <h2><a href="/raspisanie-i-ceny/">Вечер игр в центре города</a></h2>
+        <p>Мафия, Авалон и «Кровь на часовой башне» на русском: по средам, четвергам, субботам и воскресеньям с 19:00 до 23:00. Правила объясняем, можно прийти одному.</p>
+        <a class="more" href="/raspisanie-i-ceny/">Расписание и цены</a>
+      </div>
+    </article>
+  </section>
+
+  <article class="section narrow prose">
+    <h2>Как выбрать, куда пойти</h2>
+    <ul>
+      <li><strong>Утром:</strong> скалы Hang Heo на рассвете или храм По Нагар и остров Чампа.</li>
+      <li><strong>Днём в жару:</strong> бассейны и спа на острове Чампа, кофе с поездом в центре.</li>
+      <li><strong>Вечером:</strong> ночной рынок, набережная и игровой вечер в CCCP Coffee.</li>
+      <li><strong>В дождь:</strong> спа, кино, боулинг и игры, всё под крышей.</li>
+    </ul>
+    <p>
+      Больше идей и цен — в статьях <a href="/blog/chem-zanyatsya-vecherom-v-nyachange/">«Чем заняться в Нячанге вечером»</a> и
+      <a href="/blog/chem-zanyatsya-v-nyachange-v-dozhd/">«Чем заняться в Нячанге в дождь»</a>. Если вы приехали надолго, загляните в
+      <a href="/blog/nyachang-na-zimovku-chem-zanyat-vechera/">гид по вечерам на зимовке</a>.
+    </p>
+    <PlaceCta />
+  </article>
+
+  <div class="narrow kh-faq"><Faq items={faq} /></div>
+  <JoinBand />
+</Base>
+
+<script>
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('.chip')];
+  const cards = [...document.querySelectorAll<HTMLElement>('.kh-grid .card')];
+  chips.forEach((c) =>
+    c.addEventListener('click', () => {
+      const tag = c.dataset.tag!;
+      chips.forEach((x) => x.classList.toggle('is-on', x === c));
+      cards.forEach((card) => {
+        card.hidden = tag !== 'all' && !(card.dataset.tags ?? '').split(' ').includes(tag);
+      });
+    }),
+  );
+</script>
+
+<style>
+  .kh-head h1 {
+    font-size: var(--step-4);
+  }
+  .kh-head h1::after {
+    content: '';
+    display: block;
+    width: 4.5rem;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--krov-2);
+    margin-top: 1.2rem;
+  }
+  .kh-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-block: 1.5rem 0.5rem;
+  }
+  .chip {
+    font: inherit;
+    cursor: pointer;
+    color: var(--text);
+    background: var(--felt);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.4rem 0.95rem;
+  }
+  .chip.is-on {
+    background: var(--krov-2);
+    border-color: var(--krov-2);
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .kh-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1.4rem;
+    padding-block: 1rem 2rem;
+  }
+  .card[hidden] {
+    display: none;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: var(--felt);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+  .card-img {
+    display: block;
+    aspect-ratio: 4 / 3.2;
+  }
+  .card-img :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .card-body {
+    padding: 1rem 1.1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+  }
+  .card-body h2 {
+    font-size: var(--step-1);
+    margin: 0;
+  }
+  .card-body h2 a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .card-body p {
+    margin: 0;
+    color: var(--muted);
+  }
+  .card-tags {
+    font-size: var(--step--1);
+    color: var(--krov-2) !important;
+    font-weight: 700;
+  }
+  .more {
+    margin-top: auto;
+    color: var(--krov-2);
+    font-weight: 700;
+  }
+  .card-club {
+    background: linear-gradient(135deg, var(--felt-2), var(--felt));
+    justify-content: center;
+  }
+  .kh-faq {
+    padding-bottom: clamp(3rem, 7vw, 5rem);
+  }
+</style>

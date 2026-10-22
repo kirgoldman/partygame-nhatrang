@@ -137,5 +137,6 @@ export const nav = [
   { href: '/krov-na-chasovoy-bashne/', label: 'Кровь на часовой башне' },
   { href: '/lila/', label: 'Лила' },
   { href: '/raspisanie-i-ceny/', label: 'Расписание' },
+  { href: '/kuda-shodit-v-nyachange/', label: 'Куда сходить' },
   { href: '/blog/', label: 'Блог' },
 ];

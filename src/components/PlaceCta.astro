@@ -1,0 +1,95 @@
+---
+// Живой блок в конце страницы места: если в Нячанге дождь, предлагает переждать на игре; иначе называет ближайшую игру.
+// Без JS и без ответа погодного сервиса остаётся статичный текст, который читают поисковики.
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+interface Props {
+  place?: string;
+}
+const { place } = Astro.props;
+---
+
+<aside class="pc" data-place-cta aria-label="Игровые вечера клуба">
+  <p class="pc-eyebrow" data-pc-eyebrow>{place ? `Вечер после ${place}` : 'Вечер в Нячанге'}</p>
+  <h2 class="pc-title" data-pc-title>Приходите на игровой вечер в центре Нячанга</h2>
+  <p class="pc-text" data-pc-text>
+    Играем в мафию, Авалон и «Кровь на часовой башне» на русском по средам, четвергам, субботам и воскресеньям с 19:00 до 23:00
+    в {site.venue.name}. Правила объясним, можно прийти одному.
+  </p>
+  <div class="btn-row">
+    <a class="btn btn-primary" data-pc-link href="/raspisanie-i-ceny/">Посмотреть расписание</a>
+    <a class="btn btn-ghost" href={site.telegramGroup} rel="noopener"><Icon name="telegram" /> Записаться</a>
+  </div>
+</aside>
+
+<script>
+  import { nextGame } from '../scripts/schedule';
+  const root = document.querySelector<HTMLElement>('[data-place-cta]');
+  if (root) {
+    const $ = (s: string) => root.querySelector<HTMLElement>(s)!;
+    const n = nextGame();
+    const game = `«${n.slot.name}»`;
+    const apply = (rain: boolean) => {
+      const link = $('[data-pc-link]') as HTMLAnchorElement;
+      link.href = n.slot.href;
+      link.textContent = `Про игру: ${n.slot.name}`;
+      if (rain) {
+        $('[data-pc-eyebrow]').textContent = 'Сейчас в Нячанге дождь';
+        $('[data-pc-title]').textContent = `Переждите дождь за игрой: ${game}, ${n.when}`;
+        $('[data-pc-text]').textContent =
+          'Все вечера клуба проходят под крышей в кафе CCCP Coffee, с 19:00 до 23:00. Правила объясняем с нуля, большинство гостей приходят одни и к концу вечера знакомы со всем столом.';
+      } else {
+        $('[data-pc-eyebrow]').textContent = 'Ближайшая игра клуба';
+        $('[data-pc-title]').textContent = `${game}: ${n.when}`;
+        $('[data-pc-text]').textContent =
+          'После прогулки самое время заглянуть в CCCP Coffee в центре Нячанга. Правила объясним, приходить можно одному, запись в Telegram-группе клуба.';
+      }
+    };
+    apply(false);
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 4000);
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=12.2388&longitude=109.1967&current=precipitation,weather_code&timezone=Asia%2FBangkok', { signal: ctrl.signal })
+      .then((r) => r.json())
+      .then((d) => {
+        const c = d.current ?? {};
+        const code = Number(c.weather_code);
+        apply(Number(c.precipitation) > 0 || (code >= 51 && code <= 82) || code >= 95);
+      })
+      .catch(() => {})
+      .finally(() => clearTimeout(timer));
+  }
+</script>
+
+<style>
+  .pc {
+    margin: 3rem 0 2rem;
+    padding: clamp(1.3rem, 3vw, 2rem);
+    border-radius: var(--radius-card);
+    background: linear-gradient(135deg, var(--felt-2), var(--felt));
+    border: 1px solid var(--line);
+  }
+  .pc-eyebrow {
+    margin: 0 0 0.4rem;
+    color: var(--krov-2);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: var(--step--1);
+  }
+  .pc-title {
+    margin: 0 0 0.6rem;
+    font-size: var(--step-2);
+    line-height: 1.2;
+  }
+  .pc :global(a.btn-primary) {
+    color: var(--ink) !important;
+  }
+  .pc :global(a.btn-ghost) {
+    color: var(--text) !important;
+  }
+  .pc-text {
+    margin: 0 0 1.2rem;
+    color: var(--muted);
+    max-width: 52ch;
+  }
+</style>
