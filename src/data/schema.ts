@@ -57,7 +57,7 @@ export const club = {
       closes: '23:00',
     },
   ],
-  sameAs: [site.telegramGroup, ...(site.instagram ? [site.instagram] : [])],
+  sameAs: [site.telegramGroup, site.venue.mapUrl, ...(site.instagram ? [site.instagram] : [])],
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'Запись на игры',

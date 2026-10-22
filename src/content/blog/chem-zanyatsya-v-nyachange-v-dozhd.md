@@ -25,7 +25,7 @@ faq:
 ### 1. Вечер мафии и настольных игр на русском
 
 **Где:** [клуб Party Game](/), CCCP Coffee, 112 Đ. Hồng Bàng\
-**Когда:** Чт–Вс, 19:00–23:00\
+**Когда:** Ср–Вс, 19:00–23:00\
 **Сколько:** от 150 000 ₫ за вечер (мафия — 200 000 ₫)
 
 <figure><img src="/blog/party-game-avalon.webp" alt="Участники клуба Party Game за игровым столом в CCCP Coffee, Нячанг" loading="lazy" decoding="async"><figcaption>Игровой вечер клуба Party Game в CCCP Coffee. Фото: клуб Party Game</figcaption></figure>
