@@ -1,0 +1,183 @@
+---
+import BotcShell from '../../components/BotcShell.astro';
+import RoleIcon from '../../components/RoleIcon.astro';
+import { roles, teams, rolesByTeam, firstNight, otherNights, setup, type Team } from '../../data/botc';
+import { article } from '../../data/schema';
+
+const base = '/krov-na-chasovoy-bashne/trouble-brewing/';
+const bySlug = (ru: string) => roles.find((r) => r.ru === ru)!;
+const order: Team[] = ['townsfolk', 'outsider', 'minion', 'demon'];
+
+const faq = [
+  {
+    q: 'Что такое Trouble Brewing в «Крови на часовой башне»?',
+    a: 'Trouble Brewing — самый простой стартовый сценарий «Крови на часовой башне». В нём 22 роли: 13 горожан, 4 изгоя, 4 приспешника и один Демон (Черт). Он рассчитан на новичков и на ведущих, которые только осваивают игру.',
+  },
+  {
+    q: 'Сколько игроков нужно для Trouble Brewing?',
+    a: 'От 5 до 15 игроков плюс ведущий. Состав стола зависит от числа игроков: чем больше людей, тем больше приспешников и изгоев. В клубе Party Game на вечер «Крови на часовой башне» 12 мест.',
+  },
+  {
+    q: 'Как побеждает добро и как побеждает зло?',
+    a: 'Добро побеждает, если казнён Демон. Зло побеждает, если в живых остаётся двое, или если добро казнит Святого. Также добро может победить через Мэра: если живых трое и в этот день никого не казнили.',
+  },
+  {
+    q: 'Какие роли самые сложные для новичка?',
+    a: 'Для новичка проще всего играть информационные роли вроде Прачки, Повара или Эмпата. Сложнее приспешники и Демон: им нужно убедительно блефовать, а ещё Пьяница, который не знает о своей особенности.',
+  },
+  {
+    q: 'Где поиграть в «Кровь на часовой башне» в Нячанге?',
+    a: 'Клуб Party Game играет по средам и воскресеньям с 19:00 до 23:00 в CCCP Coffee, 112 Hồng Bàng. Вечер стоит 200 000 ₫, мест 12, запись в Telegram-группе клуба. Новичкам правила объясняют с нуля.',
+  },
+];
+const linkNames = (names: string[]) => names.map((n) => ({ n, r: roles.find((r) => r.ru === n) }));
+---
+
+<BotcShell
+  title="Trouble Brewing: все роли и правила сценария «Кровь на часовой башне» | Party Game Нячанг"
+  description="Сценарий Trouble Brewing для «Крови на часовой башне»: 22 роли (горожане, изгои, приспешники, Демон), состав стола, ночной порядок и советы новичкам. Играем в Нячанге по средам и воскресеньям."
+  h1="Trouble Brewing: сценарий для новичков"
+  lede="Стартовый сценарий «Крови на часовой башне»: 22 роли, понятная охота на Демона и немного обмана со стороны зла. Все роли с нюансами и советами — на отдельных страницах."
+  crumbs={[
+    { name: 'Кровь на часовой башне', href: '/krov-na-chasovoy-bashne/' },
+    { name: 'Trouble Brewing', href: base },
+  ]}
+  color="var(--krov-2)"
+  badge="Сценарий · для новичков"
+  faq={faq}
+  schema={[article({ title: 'Trouble Brewing: все роли и правила сценария «Кровь на часовой башне»', description: 'Роли, состав стола, ночной порядок и советы по сценарию Trouble Brewing', href: base, date: new Date('2026-10-22') })]}
+>
+  <Fragment slot="icon"><RoleIcon role={bySlug('Черт')} size={168} eager /></Fragment>
+
+  <h2>О чём сценарий</h2>
+  <p>
+    Городок засыпает под тяжёлыми тучами, а ночью среди жителей бродит Демон. Trouble Brewing — это охота на Демона:
+    добрые игроки собирают информацию и вычисляют зло, а злые приспешники путают их ложными заявками и ядом.
+    Сценарий считается лучшим стартом для тех, кто впервые играет в «Кровь на часовой башне».
+  </p>
+  <ul>
+    <li>Часть добрых ролей раскрывает информацию в первые дни: Повар, Сыщик, Прачка, Библиотекарь.</li>
+    <li>Часть прячется от Демона: Гробовщик, Гадалка, Эмпат.</li>
+    <li>Часть сама просит удара: Смотритель воронов и Солдат.</li>
+    <li>Некоторые добывают сведения рискованно: Девственница, Истребитель, Гробовщик.</li>
+    <li>Зло использует Отравителя, Шпиона и Барона. Блудница спасает команду, а Черт умеет убить себя и передать роль.</li>
+  </ul>
+
+  <h2>Как победить</h2>
+  <ul>
+    <li><strong>Добро побеждает</strong>, если казнят Демона. Особые случаи: Мэр при трёх живых без казни.</li>
+    <li><strong>Зло побеждает</strong>, если в живых остаётся двое, или если добро казнит Святого.</li>
+  </ul>
+
+  <h2>Состав стола</h2>
+  <p>Число ролей зависит от количества игроков (без путешественников). Барон сдвигает состав: плюс два изгоя вместо двух горожан.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Игроков</th><th>Горожане</th><th>Изгои</th><th>Приспешники</th><th>Демон</th></tr></thead>
+      <tbody>
+        {setup.map((s) => (<tr><td>{s.players}</td><td>{s.town}</td><td>{s.out}</td><td>{s.min}</td><td>{s.dem}</td></tr>))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Как проходит игра</h2>
+  <ol>
+    <li><strong>Подготовка.</strong> Каждый тайно тянет роль. Ведущий записывает расстановку в гримуар.</li>
+    <li><strong>Ночь.</strong> Все закрывают глаза, ведущий по порядку будит роли и даёт им информацию или принимает решение.</li>
+    <li><strong>День.</strong> Игроки обсуждают услышанное, уходят на тайные разговоры, затем номинируют и голосуют. Одного игрока в день могут казнить.</li>
+    <li><strong>Продолжение.</strong> Ночи и дни чередуются, пока одна из команд не победит.</li>
+  </ol>
+  <p>Погибшие остаются за столом: у каждого мёртвого игрока остаётся один «призрачный» голос на всю игру.</p>
+
+  <h2>Порядок ночных действий</h2>
+  <h3>Первая ночь</h3>
+  <ol>
+    {linkNames(firstNight).map(({ n, r }) => (<li>{r ? <a href={`${base}${r.slug}/`}>{n}</a> : n}</li>))}
+  </ol>
+  <h3>Остальные ночи</h3>
+  <ol>
+    {linkNames(otherNights).map(({ n, r }) => (<li>{r ? <a href={`${base}${r.slug}/`}>{n}</a> : n}</li>))}
+  </ol>
+  <p>Остальные роли ночью не просыпаются: их способности действуют постоянно или днём. Подробности по каждой — на странице роли.</p>
+
+  <h2>Все роли сценария</h2>
+  {order.map((t) => (
+    <section class="team" style={`--tc:${teams[t].color}`}>
+      <h3>{teams[t].ruPlural}</h3>
+      <p class="team-goal">{teams[t].goal}</p>
+      <ul class="grid">
+        {rolesByTeam(t).map((r) => (
+          <li>
+            <a class="card" href={`${base}${r.slug}/`}>
+              <RoleIcon role={r} size={72} />
+              <span class="card-t">
+                <strong>{r.ru}</strong>
+                <small>{r.en}</small>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+
+  <h2>Где сыграть в Нячанге</h2>
+  <p>
+    Клуб Party Game играет в «Кровь на часовой башне» по средам и воскресеньям с 19:00 до 23:00 в CCCP Coffee. Вечер стоит 200 000 ₫,
+    мест 12. Перед игрой всё объясняем. Подробнее — на странице <a href="/krov-na-chasovoy-bashne/">«Кровь на часовой башне» в Нячанге</a>,
+    правила для начала — в <a href="/blog/pravila-krovi-na-chasovoy-bashne/">статье для новичков</a>.
+  </p>
+</BotcShell>
+
+<style>
+  .tbl {
+    overflow-x: auto;
+  }
+  .team {
+    margin: 1.8rem 0 2.2rem;
+  }
+  .team h3 {
+    color: var(--tc);
+    margin-bottom: 0.3rem;
+  }
+  .team-goal {
+    color: var(--muted);
+    font-size: var(--step--1);
+    margin-bottom: 1rem;
+  }
+  .grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 0.8rem;
+  }
+  .grid li::marker {
+    content: none;
+  }
+  .card {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radius-card);
+    background: var(--felt);
+    box-shadow: 0 0 0 1px var(--line);
+    text-decoration: none;
+    color: var(--text) !important;
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+  .card:hover {
+    box-shadow: 0 0 0 2px var(--tc);
+    transform: translateY(-2px);
+  }
+  .card-t {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+  }
+  .card-t small {
+    color: var(--muted);
+  }
+</style>

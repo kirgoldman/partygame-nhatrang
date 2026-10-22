@@ -1,0 +1,65 @@
+---
+import BotcShell from '../../../components/BotcShell.astro';
+import RoleIcon from '../../../components/RoleIcon.astro';
+import { roles, teams, rolesByTeam, type Role } from '../../../data/botc';
+import { article } from '../../../data/schema';
+
+export function getStaticPaths() {
+  return roles.map((role) => ({ params: { role: role.slug }, props: { role } }));
+}
+
+const r: Role = Astro.props.role;
+const t = teams[r.team];
+const evilRole = r.team === 'minion' || r.team === 'demon';
+const goodTitle = r.goodTitle ?? 'Советы игроку';
+const evilTitle = r.evilTitle ?? 'Как блефовать злым';
+const base = '/krov-na-chasovoy-bashne/trouble-brewing/';
+const href = `${base}${r.slug}/`;
+const mates = rolesByTeam(r.team).filter((x) => x.slug !== r.slug);
+const faq = [
+  { q: `Что делает ${r.ru} в «Крови на часовой башне»?`, a: r.ability },
+  { q: `Когда срабатывает способность роли «${r.ru}»?`, a: r.when },
+  {
+    q: evilRole ? `Как играть за роль «${r.ru}»?` : `Как лучше играть за роль «${r.ru}»?`,
+    a: (evilRole ? r.evil : r.good).slice(0, 2).join(' '),
+  },
+];
+const lede = `${t.ru} в сценарии Trouble Brewing: что делает роль, когда срабатывает, какие бывают исключения и как играть за неё и против неё.`;
+---
+
+<BotcShell
+  title={`${r.ru} (${r.en}) в «Крови на часовой башне»: способность и советы | Party Game`}
+  description={`Роль «${r.ru}» (${r.en}) в «Крови на часовой башне»: способность, нюансы правил, советы игроку и блеф для злых. Сценарий Trouble Brewing, клуб Party Game в Нячанге.`}
+  h1={`${r.ru} (${r.en})`}
+  lede={lede}
+  crumbs={[
+    { name: 'Кровь на часовой башне', href: '/krov-na-chasovoy-bashne/' },
+    { name: 'Trouble Brewing', href: base },
+    { name: r.ru, href },
+  ]}
+  color={t.color}
+  badge={`${t.ru} · ${t.short}`}
+  faq={faq}
+  schema={[article({ title: `${r.ru} (${r.en}) в «Крови на часовой башне»`, description: r.ability, href, date: new Date('2026-10-22') })]}
+>
+  <Fragment slot="icon"><RoleIcon role={r} size={168} eager /></Fragment>
+
+  <h2>Способность</h2>
+  <p>{r.ability}</p>
+
+  <h2>Когда срабатывает</h2>
+  <p>{r.when}</p>
+
+  <h2>Нюансы и исключения</h2>
+  <ul>{r.rules.map((x) => <li>{x}</li>)}</ul>
+
+  <h2>{evilRole ? evilTitle : goodTitle}</h2>
+  <ul>{(evilRole ? r.evil : r.good).map((x) => <li>{x}</li>)}</ul>
+
+  <h2>{evilRole ? goodTitle : evilTitle}</h2>
+  <ul>{(evilRole ? r.good : r.evil).map((x) => <li>{x}</li>)}</ul>
+
+  <h2>Другие роли: {t.ruPlural.toLowerCase()}</h2>
+  {mates.length ? <p>{mates.map((m, i) => (<><a href={`${base}${m.slug}/`}>{m.ru}</a>{i < mates.length - 1 ? ', ' : ''}</>))}.</p> : <p>В этом сценарии Демон один — Черт.</p>}
+  <p>Все роли сценария — на странице <a href={base}>Trouble Brewing</a>. Поиграть можно по средам и воскресеньям: <a href="/krov-na-chasovoy-bashne/">как записаться</a>.</p>
+</BotcShell>

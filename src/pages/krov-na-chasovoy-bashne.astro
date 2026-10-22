@@ -2,7 +2,7 @@
 import GamePage from '../layouts/GamePage.astro';
 import { site } from '../data/site';
 import { gameEvent } from '../data/schema';
-import img from '../assets/photos/krov-igra.jpg';
+import img from '../assets/posters/afisha-krov-na-chasovoy-bashne.jpg';
 
 const faq = [
   {
@@ -37,7 +37,8 @@ const faq = [
   href="/krov-na-chasovoy-bashne/"
   color="var(--krov)"
   image={img}
-  imageAlt="Игроки клуба Party Game за столом «Крови на часовой башне» при свечах в CCCP Coffee"
+  imagePosition="center 12%"
+  imageAlt="Афиша клуба: играем в «Кровь на часовой башне» в центре Нячанга, часовая башня на фоне ночного города"
   facts={[
     { k: 'Когда', v: 'Среда и воскресенье' },
     { k: 'Время', v: '19:00–23:00' },
@@ -72,6 +73,17 @@ const faq = [
     <li>Добро побеждает, если демон казнён. Зло — если добрых игроков остаётся слишком мало.</li>
   </ol>
   <p>Подробнее о ролях и механике — в статье <a href="/blog/pravila-krovi-na-chasovoy-bashne/">«Кровь на часовой башне: правила для новичков»</a>.</p>
+
+  <h2>Сценарий, по которому играем</h2>
+  <p>
+    Играем по сценарию <a href="/krov-na-chasovoy-bashne/trouble-brewing/">Trouble Brewing</a> — самому понятному для новичков. В нём 22 роли:
+    13 горожан, 4 изгоя, 4 приспешника и Демон. На отдельных страницах разобраны все роли с нюансами и советами:
+    <a href="/krov-na-chasovoy-bashne/trouble-brewing/prachka/">Прачка</a>,
+    <a href="/krov-na-chasovoy-bashne/trouble-brewing/empat/">Эмпат</a>,
+    <a href="/krov-na-chasovoy-bashne/trouble-brewing/gadalka/">Гадалка</a>,
+    <a href="/krov-na-chasovoy-bashne/trouble-brewing/otravitel/">Отравитель</a>,
+    <a href="/krov-na-chasovoy-bashne/trouble-brewing/chert/">Черт</a> и другие.
+  </p>
 
   <h2>Почему стоит прийти</h2>
   <ul>

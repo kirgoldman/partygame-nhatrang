@@ -1,0 +1,97 @@
+---
+// Каркас страниц раздела «Trouble Brewing»: шапка, хлебные крошки, FAQ, плашка записи.
+import Base from '../layouts/Base.astro';
+import Crumbs from './Crumbs.astro';
+import Faq from './Faq.astro';
+import JoinBand from './JoinBand.astro';
+import { site } from '../data/site';
+import { breadcrumbs, faqSchema } from '../data/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  lede: string;
+  crumbs: { name: string; href: string }[];
+  color: string;
+  faq: { q: string; a: string }[];
+  schema?: object[];
+  badge?: string;
+}
+const p = Astro.props;
+const schema = [breadcrumbs(p.crumbs), faqSchema(p.faq), ...(p.schema ?? [])];
+---
+
+<Base title={p.title} description={p.description} schema={schema} ogImage="/og/krov-na-chasovoy-bashne.png" dockText="Записаться на игру" dockHref={site.telegramGroup}>
+  <div style={`--c:${p.color}`}>
+    <Crumbs items={p.crumbs} />
+    <header class="wrap bs-hero">
+      <div class="bs-icon"><slot name="icon" /></div>
+      <div class="bs-text">
+        {p.badge && <p class="bs-badge">{p.badge}</p>}
+        <h1>{p.h1}</h1>
+        <p class="lede">{p.lede}</p>
+      </div>
+    </header>
+    <article class="section narrow prose bs-prose">
+      <slot />
+    </article>
+    <div class="narrow bs-faq">
+      <Faq items={p.faq} />
+    </div>
+  </div>
+  <JoinBand
+    title="Хочешь сыграть «Кровь на часовой башне»?"
+    text="Играем по средам и воскресеньям в CCCP Coffee, 19:00–23:00. Новичкам всё объясним с нуля. Записывайся в Telegram-группе клуба: мест всего 12."
+  />
+</Base>
+
+<style>
+  .bs-hero {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.2rem, 4vw, 3rem);
+    padding-block: clamp(1rem, 3vw, 2rem) 0;
+  }
+  .bs-hero h1 {
+    font-size: var(--step-4);
+  }
+  .bs-hero h1::after {
+    content: '';
+    display: block;
+    width: 4.5rem;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--c);
+    margin-top: 1.2rem;
+  }
+  .bs-badge {
+    color: var(--c);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: var(--step--1);
+    margin-bottom: 0.6rem;
+  }
+  .bs-icon {
+    flex: none;
+  }
+  .bs-prose :global(h2) {
+    scroll-margin-top: 6rem;
+  }
+  .bs-prose :global(li::marker) {
+    color: var(--c);
+  }
+  .bs-prose :global(a) {
+    color: var(--c);
+  }
+  .bs-faq {
+    padding-bottom: clamp(3rem, 7vw, 5rem);
+  }
+  @media (max-width: 640px) {
+    .bs-hero {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,54 @@
+---
+// Картинка персонажа из src/assets/botc/<img>.(png|jpg|webp). Если файла нет — цветной значок с буквой.
+import { Image } from 'astro:assets';
+import { teams, type Role } from '../data/botc';
+
+interface Props {
+  role: Role;
+  size?: number;
+  eager?: boolean;
+}
+const { role, size = 160, eager = false } = Astro.props;
+const files = import.meta.glob<{ default: ImageMetadata }>('../assets/botc/*.{png,jpg,jpeg,webp,PNG,JPG}', { eager: true });
+const hit = Object.entries(files).find(([p]) => {
+  const name = p.split('/').pop()!.replace(/\.[^.]+$/, '').toLowerCase().replace(/[^a-z]/g, '');
+  return name === role.img;
+});
+const img = hit?.[1].default;
+const color = teams[role.team].color;
+---
+
+<span class="ri" style={`--tc:${color};--s:${size}px`}>
+  {
+    img ? (
+      <Image src={img} alt={`${role.ru} (${role.en}) — персонаж «Крови на часовой башне»`} width={size * 2} height={size * 2} loading={eager ? 'eager' : 'lazy'} />
+    ) : (
+      <span class="fallback" aria-hidden="true">{role.ru[0]}</span>
+    )
+  }
+</span>
+
+<style>
+  .ri {
+    display: inline-grid;
+    place-items: center;
+    width: var(--s);
+    height: var(--s);
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--tc) 28%, var(--felt-2)), var(--felt));
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--tc) 70%, transparent), 0 10px 24px rgba(8, 2, 18, 0.45);
+    overflow: hidden;
+    flex: none;
+  }
+  .ri :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .fallback {
+    font-family: var(--display);
+    font-size: calc(var(--s) * 0.46);
+    color: var(--tc);
+    line-height: 1;
+  }
+</style>

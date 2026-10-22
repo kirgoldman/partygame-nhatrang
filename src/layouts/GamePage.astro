@@ -20,6 +20,7 @@ interface Props {
   color: string;
   image: ImageMetadata;
   imageAlt: string;
+  imagePosition?: string;
   facts: { k: string; v: string }[];
   faq: { q: string; a: string }[];
   schema?: object[];
@@ -53,7 +54,7 @@ const schema = [breadcrumbs([{ name: p.crumb, href: p.href }]), faqSchema(p.faq)
           <a class="btn btn-ghost" href="/raspisanie-i-ceny/">Всё расписание</a>
         </div>
       </div>
-      <figure class="gp-photo">
+      <figure class="gp-photo" style={p.imagePosition ? `--pos:${p.imagePosition}` : undefined}>
         <Image src={p.image} alt={p.imageAlt} widths={[480, 900, 1200]} sizes="(max-width: 760px) 100vw, 45vw" loading="eager" fetchpriority="high" />
       </figure>
     </header>
@@ -138,7 +139,7 @@ const schema = [breadcrumbs([{ name: p.crumb, href: p.href }]), faqSchema(p.faq)
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 35%;
+    object-position: var(--pos, center 35%);
   }
   .gp-prose :global(h2) {
     scroll-margin-top: 6rem;
