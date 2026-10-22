@@ -114,7 +114,7 @@ export const week: Game[] = [
     price: 200000,
     priceText: '200 000 ₫',
     rounds: '3–4 партии',
-    role: 'Житель городка',
+    role: 'Горожанин',
     href: '/krov-na-chasovoy-bashne/',
   },
   {
@@ -129,7 +129,7 @@ export const week: Game[] = [
     price: 200000,
     priceText: '200 000 ₫',
     rounds: '3–4 партии',
-    role: 'Житель городка',
+    role: 'Горожанин',
     href: '/krov-na-chasovoy-bashne/',
   },
 ];
