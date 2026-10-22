@@ -5,7 +5,6 @@ export type Slot = { day: number; name: string; href: string };
 export const slots: Slot[] = [
   { day: 3, name: 'Кровь на часовой башне', href: '/krov-na-chasovoy-bashne/' },
   { day: 4, name: 'Авалон', href: '/avalon/' },
-  { day: 5, name: 'Городская мафия', href: '/mafiya-nyachang/' },
   { day: 6, name: 'Городская мафия', href: '/mafiya-nyachang/' },
   { day: 0, name: 'Кровь на часовой башне', href: '/krov-na-chasovoy-bashne/' },
 ];

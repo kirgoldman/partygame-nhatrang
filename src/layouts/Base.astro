@@ -99,13 +99,13 @@ import Metrika from '../components/Metrika.astro';
         <div class="foot-about">
           <p class="foot-brand">Party Game Нячанг</p>
           <p class="muted">
-            {site.tagline}. Мафия, Авалон и «Кровь на часовой башне» по-русски, пять вечеров в неделю в центре Нячанга.
+            {site.tagline}. Мафия, Авалон и «Кровь на часовой башне» по-русски, четыре вечера в неделю в центре Нячанга.
           </p>
         </div>
         <address class="foot-nap">
           <strong>{site.venue.name}</strong><br />
           {site.venue.street}, {site.venue.cityLatin}, {site.venue.region} {site.venue.postalCode}, {site.venue.countryRu}<br />
-          Ср–Вс, {site.hours}<br />
+          Ср, Чт, Сб, Вс, {site.hours}<br />
           <a href={site.venue.mapUrl} rel="noopener">Открыть в Google Maps</a>
         </address>
         <nav class="foot-nav" aria-label="Все разделы">

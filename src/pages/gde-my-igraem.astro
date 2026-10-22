@@ -19,7 +19,7 @@ const v = site.venue;
   <header class="page-hero wrap">
     <h1>Где мы играем</h1>
     <p class="lede">
-      Все игровые вечера проходят в кафе {v.name} в центре Нячанга: {v.street}. Со среды по воскресенье, с 19:00 до 23:00.
+      Все игровые вечера проходят в кафе {v.name} в центре Нячанга: {v.street}. По средам, четвергам, субботам и воскресеньям, с 19:00 до 23:00.
     </p>
   </header>
 
@@ -29,7 +29,7 @@ const v = site.venue;
       <span>{v.street}</span>
       <span>{v.cityLatin}, {v.region} {v.postalCode}</span>
       <span>{v.countryRu}</span>
-      <span class="time">Игры: Ср–Вс, {site.hours}</span>
+      <span class="time">Игры: Ср, Чт, Сб, Вс, {site.hours}</span>
       <a class="btn btn-primary" href={v.mapUrl} rel="noopener"><Icon name="pin" /> Открыть в Google Maps</a>
     </address>
     <div class="map">

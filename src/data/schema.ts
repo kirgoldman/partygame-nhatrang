@@ -52,7 +52,7 @@ export const club = {
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Thursday', 'Friday', 'Saturday', 'Sunday'],
+      dayOfWeek: ['Wednesday', 'Thursday', 'Saturday', 'Sunday'],
       opens: '19:00',
       closes: '23:00',
     },

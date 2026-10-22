@@ -20,13 +20,13 @@ import lilaImg from '../assets/photos/lila-5.jpg';
 
 const title = 'Мафия, Авалон и «Кровь на часовой башне» в Нячанге — клуб Party Game';
 const description =
-  'Клуб мафии, Авалона и «Крови на часовой башне» в центре Нячанга. Ср–Вс, 19:00–23:00, от 150 000 ₫ за вечер, на русском. Новичкам объясняем правила.';
+  'Клуб мафии, Авалона и «Крови на часовой башне» в центре Нячанга. Ср, Чт, Сб, Вс, 19:00–23:00, от 150 000 ₫ за вечер, на русском. Новичкам объясняем правила.';
 
 const games = [
   {
     href: '/mafiya-nyachang/',
     name: 'Городская мафия',
-    day: 'по пятницам и субботам',
+    day: 'по субботам',
     color: 'var(--mafia)',
     img: mafiaImg,
     alt: 'Компания игроков за вечером мафии клуба Party Game в Нячанге',
@@ -54,7 +54,7 @@ const games = [
 
 const schema = [
   faqSchema(faqMain),
-  gameEvent('mafiya', 'Городская мафия', 'Городская мафия на русском по пятницам и субботам в центре Нячанга'),
+  gameEvent('mafiya', 'Городская мафия', 'Городская мафия на русском по субботам в центре Нячанга'),
   gameEvent('avalon', 'Авалон', 'Игра Авалон на русском по четвергам в центре Нячанга'),
   gameEvent('krov-na-chasovoy-bashne', 'Кровь на часовой башне', 'Игра «Кровь на часовой башне» на русском по средам и воскресеньям в центре Нячанга'),
 ];
@@ -65,7 +65,7 @@ const schema = [
     <div class="wrap hero-in">
       <h1>Мафия, Авалон и «Кровь на часовой башне» в&nbsp;Нячанге</h1>
       <p class="lede">
-        Party Game — клуб социальных игр на русском. Играем пять вечеров в неделю в {site.venue.name} в центре Нячанга, с 19:00
+        Party Game — клуб социальных игр на русском. Играем четыре вечера в неделю в {site.venue.name} в центре Нячанга, с 19:00
         до 23:00. Вечер стоит от 150&nbsp;000&nbsp;донгов, правила объясняем за 5 минут.
       </p>
       <div class="btn-row hero-cta">
@@ -239,7 +239,7 @@ const schema = [
         <span class="addr-name">{site.venue.name}</span>
         <span>{site.venue.street}</span>
         <span>{site.venue.cityLatin}, {site.venue.region}</span>
-        <span class="addr-time">Ср–Вс, {site.hours}</span>
+        <span class="addr-time">Ср, Чт, Сб, Вс, {site.hours}</span>
       </address>
     </div>
   </section>
