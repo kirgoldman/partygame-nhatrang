@@ -43,7 +43,7 @@ const schema = [
 const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(place.mapQuery)}&output=embed`;
 ---
 
-<Base title={place.title} description={place.description} schema={schema} dockText="Записаться на игру" dockHref={site.telegramGroup}>
+<Base title={place.title} description={place.description} schema={schema} ogImage="/og/kuda-shodit.png" dockText="Записаться на игру" dockHref={site.telegramGroup}>
   <Crumbs items={crumbs} />
   <header class="wrap pl-hero">
     <div class="pl-text">

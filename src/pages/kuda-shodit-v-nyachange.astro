@@ -9,6 +9,7 @@ import PlaceCta from '../components/PlaceCta.astro';
 import { places, tagLabels, type Tag } from '../data/places';
 import { breadcrumbs, faqSchema } from '../data/schema';
 import { site } from '../data/site';
+import clubPhoto from '../assets/photos/mafiya-kompaniya.jpg';
 
 const imgs = import.meta.glob<{ default: ImageMetadata }>('../assets/places/*.jpg', { eager: true });
 const pic = (file: string) => imgs[`../assets/places/${file}`].default;
@@ -47,7 +48,8 @@ const schema = [
 
 <Base
   title="Куда сходить в Нячанге: подборка мест с адресами, ценами и советами | Party Game"
-  description="Куда сходить в Нячанге: скалы Hang Heo, кафе с поездом, остров Чампа и вечера настольных игр. Адреса, цены, часы, что бесплатно и куда в дождь."
+  description="Куда сходить в Нячанге: башни По Нагар, пагода Лонг Шон, скалы Hang Heo, остров Чампа, кафе с поездом и капибарами, вечера настольных игр. Адреса, цены, что бесплатно и куда в дождь."
+  ogImage="/og/kuda-shodit.png"
   schema={schema}
   dockText="Записаться на игру"
   dockHref={site.telegramGroup}
@@ -83,6 +85,9 @@ const schema = [
       ))
     }
     <article class="card card-club" data-tags="rain evening">
+      <a href="/raspisanie-i-ceny/" class="card-img">
+        <Image src={clubPhoto} alt="Компания играет в мафию в клубе Party Game, на стене неоновая надпись boss, Нячанг" widths={[360, 600]} sizes="(max-width: 760px) 100vw, 330px" loading="lazy" />
+      </a>
       <div class="card-body">
         <p class="card-tags">Под крышей, в дождь · Вечером</p>
         <h2><a href="/raspisanie-i-ceny/">Вечер игр в центре города</a></h2>
@@ -217,7 +222,6 @@ const schema = [
   }
   .card-club {
     background: linear-gradient(135deg, var(--felt-2), var(--felt));
-    justify-content: center;
   }
   .kh-faq {
     padding-bottom: clamp(3rem, 7vw, 5rem);
