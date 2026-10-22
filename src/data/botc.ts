@@ -635,7 +635,7 @@ export const roleBySlug = (s: string) => roles.find((r) => r.slug === s);
 export const firstNight = ['Отравитель', 'Шпион', 'Прачка', 'Библиотекарь', 'Сыщик', 'Повар', 'Эмпат', 'Гадалка', 'Дворецкий'];
 export const otherNights = ['Отравитель', 'Монах', 'Шпион', 'Блудница', 'Черт', 'Смотритель воронов', 'Эмпат', 'Гадалка', 'Гробовщик', 'Дворецкий'];
 
-// Состав стола по числу игроков (без путешественников)
+// Состав стола по числу игроков
 export const setup: { players: string; town: number; out: number; min: number; dem: number }[] = [
   { players: '5', town: 3, out: 0, min: 1, dem: 1 },
   { players: '6', town: 3, out: 1, min: 1, dem: 1 },
