@@ -1,6 +1,8 @@
 ---
 import BotcShell from '../../components/BotcShell.astro';
 import RoleIcon from '../../components/RoleIcon.astro';
+import { Image } from 'astro:assets';
+import logo from '../../assets/botc/Trouble_brewing.png';
 import { roles, teams, rolesByTeam, firstNight, otherNights, setup, type Team } from '../../data/botc';
 import { article } from '../../data/schema';
 
@@ -47,7 +49,7 @@ const linkNames = (names: string[]) => names.map((n) => ({ n, r: roles.find((r) 
   faq={faq}
   schema={[article({ title: 'Trouble Brewing: все роли и правила сценария «Кровь на часовой башне»', description: 'Роли, состав стола, ночной порядок и советы по сценарию Trouble Brewing', href: base, date: new Date('2026-10-22') })]}
 >
-  <Fragment slot="icon"><RoleIcon role={bySlug('Черт')} size={168} eager /></Fragment>
+  <Fragment slot="icon"><Image src={logo} alt="Логотип сценария Trouble Brewing («Кровь на часовой башне»)" width={200} height={200} loading="eager" style="border-radius:50%;box-shadow:0 0 0 1px var(--line),0 18px 40px rgba(8,2,18,.5)" /></Fragment>
 
   <h2>О чём сценарий</h2>
   <p>
