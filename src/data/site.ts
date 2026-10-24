@@ -10,6 +10,7 @@ export const site = {
   foundingDate: '', // год основания клуба — вписать, когда будет известен
   telegramGroup: 'https://t.me/+OMJQ4EA3FZAyYTRh',
   groupSize: '400+',
+  clubMapUrl: 'https://maps.app.goo.gl/17XXVHEYw8aeNa1M8', // собственная точка клуба на Google Maps (не карточка кафе)
   instagram: '',
   metrikaId: 113063029, // номер счётчика Яндекс Метрики // ссылка на Instagram клуба — вписать
   price: 150000,
