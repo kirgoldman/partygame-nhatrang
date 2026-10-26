@@ -80,7 +80,7 @@ const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(place.mapQuer
     <h2>Где находится</h2>
     <p>{place.address}{place.phone ? `. Телефон: ${place.phone}` : ''}.</p>
     <iframe class="pl-map" title={`${place.name} на карте`} src={mapSrc} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <p class="pl-note">Данные сверены по Google Картам и справочным источникам на {new Date(place.updated).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}. Часы и цены могут меняться, уточняйте на месте.</p>
+    <p class="pl-note">Материал обновлён {new Date(place.updated).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}. Источники сведений — карты и справочные публикации; доступные ссылки приведены ниже. Часы и цены могут меняться, уточняйте перед визитом.</p>
 
     {place.sources && <><h2>Источники</h2><ul>{place.sources.map((source) => <li><a href={source.url} rel="noopener">{source.label}</a></li>)}</ul></>}
 

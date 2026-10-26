@@ -99,13 +99,13 @@ faq:
 
 <figure><img src="/blog/foto/banh-xeo.webp" alt="Бань сео с кальмаром, Нячанг" loading="lazy" decoding="async"><figcaption>Фото: ASM, <a href="https://commons.wikimedia.org/wiki/File:Bánh_xèo_nhân_Mực,_Nha_Trang.jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="noopener">CC BY-SA 3.0</a></figcaption></figure>
 
-Вечером местные не «идут на ужин», а собирают его из кусочков: суп, потом что-то жареное, потом десерт. Ниже — адресные ориентиры из прежней версии подборки. Действующие часы и меню этих пяти точек независимо подтвердить не удалось; перед поездкой проверьте карточку конкретного заведения. Цены ниже — прежние ориентиры, а не текущий прайс:
+Удобный план — выбрать одно основное блюдо и десерт неподалёку. Адреса ниже сверены с сайтом заведения или указанным справочным источником; неподтверждённые старые цены убраны.
 
-- **Bún chả cá** (суп с рыбными котлетами) — Bún Cá Nguyên Loan, 123 Ngô Gia Tự, до 22:00, 45 000–60 000 ₫.
-- **Nem nướng** (жареные рулетики из свинины) — Nem Nướng Đặng Văn Quyên, 16A Lãn Ông, до 21:00, 55 000–120 000 ₫.
-- **Bánh xèo с кальмаром** — Bánh Xèo Hải Phương, 46/27 Hùng Vương, до 23:00, 100 000–120 000 ₫.
-- **Xôi cá cơm** (клейкий рис с анчоусами) — 11A Ngô Sĩ Liên, только 17:30–20:30, от 10 000 ₫.
-- **Флан с кокосовыми сливками** — Kem Flan Cô Giới, 17 Tháp Bà, 16:00–22:30, 15 000–45 000 ₫.
+- **Bún chả cá** (суп с рыбными котлетами) — Bún Cá Nguyên Loan, 123 Ngô Gia Tự. Адрес подтверждает [VnExpress](https://vnexpress.net/hang-bun-hut-khach-o-nha-trang-vi-mon-cha-ca-nha-lam-4640104.html); источники расходятся в часах закрытия, поэтому поздний визит лучше уточнить у кафе.
+- **Nem nướng** (свинина на гриле с рисовой бумагой и зеленью) — Nem Đặng Văn Quyên, 16A Lãn Ông. На [сайте заведения](https://nemdangvanquyen.vn/menu/nem/nem-nuong-nha-trang/) блюдо указано за 50 000 ₫. Часы конкретного филиала уточняйте по телефону +84 258 3826 737.
+- **Bánh xèo с кальмаром** — Hai Phượng – Yến Bánh Căn, Bánh Xèo, 46/27 Hùng Vương. [Справочник Hey Nha Trang](https://heynhatrang.com/places/hai-phuong-banh-can/) приводит часы 11:00–23:00 со ссылкой на карточку Google Maps, проверенную в октябре 2026 года. Стоимость зависит от заказа.
+- **Xôi cá cơm** (клейкий рис с анчоусами) — 11A Ngô Sĩ Liên. Этот адрес есть в [гастрономическом гиде InterContinental Nha Trang](https://nhatrang.intercontinental.com/travel-guide/nha-trang-street-food/). Текущие часы и цену уточняйте на месте.
+- **Флан** — Kem Flan Cô Giỏi, 17 Tháp Bà. [Местный справочник](https://vivunhatrang.vn/quan-via-he-nha-trang/) подтверждает адрес; точный действующий прайс не найден.
 
 ### 7. Ужин из морепродуктов
 
@@ -130,22 +130,22 @@ faq:
 
 ### 9. Ночные клубы в центре
 
-**Коротко:** громкая музыка, танцы до 3 часов ночи\
-**Где:** Havana Club, Nha Club, Paradise Club, DOM Club — названия из прежней версии подборки. Актуальный статус и часы каждого заведения нужно проверить перед визитом\
+**Коротко:** диджеи и танцы; время программы зависит от заведения\
+**Где:** [DOM Nha Trang](https://www.facebook.com/domnhatrang/) и [Paradise Club](https://paradiseclub.vn/goc-chia-se/paradise-club-nha-trang.php) имеют страницы заведений. Havana Club встречается в [актуальных справочниках под названием HK Club Nha Trang](https://wanderlog.com/place/details/4241129/hk-club-nha-trang-havana-club-c%C5%A9). Точные часы и программу уточняйте перед визитом\
 **Сколько:** вход, депозит и напитки — по условиям конкретного вечера; бесплатный вход не подтверждён
 
 <figure><img src="/blog/foto/plyazh-noch.webp" alt="Набережная Нячанга ночью" loading="lazy" decoding="async"><figcaption>Фото: startracker, <a href="https://commons.wikimedia.org/wiki/File:Nhatrang_Beach_at_night.jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="noopener">CC BY-SA 2.0</a></figcaption></figure>
 
-Havana Club — подземный клуб, где из-за музыки почти невозможно разговаривать. В Nha Club собирается много европейцев и русскоязычных. Paradise и DOM — классические вьетнамские клубы. Чем ближе к туристическим улицам, тем дороже и шумнее.
+Часы клубов в справочниках расходятся, поэтому не планируйте поездку только по времени закрытия из старого обзора. Наличие страницы само по себе не подтверждает программу конкретного вечера. Для Nha Club надёжного актуального подтверждения найти не удалось — перед поездкой уточните, какое заведение имеется в виду.
 
 ### 10. Пляжные клубы и бары
 
 **Коротко:** коктейль с ногами в песке, диджеи, живая музыка\
-**Где:** Louisiane Brewhouse, Z Beach Club и [Sailing Club](https://sailingclubnhatrang.com/) (72–74 Trần Phú, по официальному сайту 07:00–02:00). Часы первых двух заведений и время выступлений уточняйте отдельно
+**Где:** [Louisiane Brewhouse](https://louisianebrewhouse.com.vn/craft-beer-nha-trang/), [Z Beach](https://www.facebook.com/zbeachnhatrang/) (96 Trần Phú; страница заведения указывает 08:00–23:00) и [Sailing Club](https://sailingclubnhatrang.com/) (72–74 Trần Phú; по официальному сайту 07:00–02:00). Часы Louisiane и время выступлений уточняйте отдельно
 
 <figure><img src="/blog/foto/louisiane.webp" alt="Louisiane Brewhouse на пляже Нячанга" loading="lazy" decoding="async"><figcaption>Фото: calflier001, <a href="https://commons.wikimedia.org/wiki/File:LOUISIANE_BREW_HOUSE_NHA_TRANG_VIETNAM_JAN_2012_(6820624772).jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="noopener">CC BY-SA 2.0</a></figcaption></figure>
 
-Sailing Club — самый известный и самый дорогой из пляжных клубов, по вечерам вход бывает платным, обычно с напитком. У Sailing Club и Louisiane истекли сроки аренды земли на пляже, власти провинции решают их судьбу, поэтому перед походом проверьте, что они работают.
+У Louisiane несколько площадок: при бронировании уточните, идёт ли речь о пляжном заведении в Нячанге или о филиале в Vinpearl Harbour. Платный вход, депозит и включённые напитки зависят от программы вечера — уточняйте условия у выбранного клуба.
 
 ## Отдых и релакс
 
