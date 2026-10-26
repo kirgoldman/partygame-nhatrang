@@ -30,7 +30,7 @@ faq:
 
 <figure><img src="/blog/party-game-avalon.webp" alt="Участники клуба Party Game за игровым столом в CCCP Coffee, Нячанг" loading="lazy" decoding="async"><figcaption>Игровой вечер клуба Party Game в CCCP Coffee. Фото: клуб Party Game</figcaption></figure>
 
-Лучшее, что можно сделать в дождливый вечер: четыре часа в тёплой компании, споры, блеф и смех, а дождь за окном только добавляет атмосферы. Играем в [Авалон](/avalon/), [мафию](/mafiya-nyachang/) и [«Кровь на часовой башне»](/krov-na-chasovoy-bashne/), правила объясняем за пять минут. Запись — в [Telegram-группе клуба](https://t.me/+OMJQ4EA3FZAyYTRh).
+Лучшее, что можно сделать в дождливый вечер: четыре часа в тёплой компании, споры, блеф и смех, а дождь за окном только добавляет атмосферы. Играем в [Авалон](/avalon/), [мафию](/mafiya-nyachang/) и [«Кровь на часовой башне»](/krov-na-chasovoy-bashne/), правила объясняем за пять минут. Запись — в [Telegram-группе клуба](https://t.me/+w4Ur68V2FNhlNTYx).
 
 ### 2. Боулинг и игровые автоматы
 
