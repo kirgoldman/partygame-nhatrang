@@ -6,17 +6,18 @@
 
 Сайт подключён к GitHub и настроен на автодеплой:
 
-- Репозиторий: github.com/kirgoldman/partygame-nhatrang (приватный)
+- Репозиторий: github.com/kirgoldman/partygame-nhatrang (публичный)
 - Подключён к Cloudflare Pages (проект "partygame-nhatrang") напрямую через Git-интеграцию
 - Сборка: Astro, команда `npm run build`, папка `dist`, Node 22 (файл `.nvmrc`)
 - Ветка main = продакшн. Любой коммит в main автоматически собирается и публикуется на partygame-nhatrang.com примерно за 1–2 минуты
 - Тестовый адрес Cloudflare: partygame-nhatrang.pages.dev (канонические ссылки ведут на основной домен)
 - Zip-архивы и ручная загрузка через Cloudflare Dashboard больше не нужны
 
-Как Claude должен вносить правки:
-1. Предпочтительный способ — fine-grained GitHub-токен с доступом Contents: Read and write только к этому репозиторию. Токен пользователь даёт в чате, в репозиторий его не записывать. Claude правит код, проверяет `npm run build` и пушит в main.
-   Важно: облачная песочница Claude пушит только в репозитории, добавленные в источники сессии. Если репозитория там нет, пушить через привязанный компьютер (Claude desktop): перенести коммиты git bundle-ом и сделать `git push` оттуда.
-2. Резервный способ — веб-редактор GitHub в браузере пользователя (claude-in-chrome): github.com/kirgoldman/partygame-nhatrang/edit/main/<путь-к-файлу>, с коммитом прямо там. Подходит для текстовых правок в одном-двух файлах.
+Как вносить правки:
+1. Подтянуть актуальную основную ветку и прочитать `src/data/site.ts` — источник расписания, цен, адреса и ссылок.
+2. Использовать официальное подключение GitHub или авторизованный Git. Не передавать токены и пароли в чат и не сохранять их в репозитории.
+3. Проверить изменения командами `npm ci` и `npm run build`. По умолчанию использовать отдельную ветку и Pull Request; запись прямо в main — только по явному указанию Кира.
+4. После публикации проверить изменённые страницы на основном домене.
 
 ## Где что лежит
 
@@ -24,7 +25,7 @@
 - `src/data/schema.ts` — разметка Schema.org для поисковиков и нейросетей.
 - `src/data/faq.ts` — частые вопросы на главной.
 - `src/data/reviews.ts` — отзывы из Telegram (текст, реакции, ссылка на сообщение). Аватарки — `public/avatars/`.
-- `src/pages/` — страницы: главная, `mafiya-nyachang`, `avalon`, `taynyy-gitler`, `lila`, `raspisanie-i-ceny`, `gde-my-igraem`, `o-klube`, `voprosy`, `blog`.
+- `src/pages/` — страницы: главная, `mafiya-nyachang`, `avalon`, `krov-na-chasovoy-bashne`, `lila`, `raspisanie-i-ceny`, `gde-my-igraem`, `o-klube`, `voprosy`, `kuda-shodit-v-nyachange`, `blog`, `404.astro`.
 - `src/content/blog/` — статьи блога, обычные `.md`-файлы. Имя файла = адрес страницы.
 - `src/components/` — блоки: афиши первого экрана (`HeroDoors`), расписание (`Week`), лента фото и видео (`PhotoStrip`), отзывы (`Reviews`), бегущая строка (`Ticker`) и т. д.
 - `src/assets/` — фото и афиши, которые Astro сам сжимает. `public/` — файлы как есть: видео (`public/video`), фото статей (`public/blog/foto`), картинки для соцсетей (`public/og`), favicon.
@@ -34,7 +35,7 @@
 
 ## Локально
 ```
-npm install
+npm ci
 npm run dev      # http://localhost:4321
 npm run build    # готовый сайт в папке dist/
 ```
