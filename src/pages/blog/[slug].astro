@@ -29,6 +29,7 @@ const schema = [
 const all = await getCollection('blog');
 // Подбираем статьи по теме; новые материалы получают подборку из своей рубрики.
 const relatedIds: Record<string, string[]> = {
+  'pervyy-vecher-mafii-v-nyachange': ['pravila-mafii-dlya-novichkov', 'mafiya-avalon-ili-krov-na-chasovoy-bashne', 'kak-najti-druzej-v-nyachange'],
   'chem-zanyatsya-v-nyachange-odnomu': ['kak-najti-druzej-v-nyachange', 'mafiya-avalon-ili-krov-na-chasovoy-bashne', 'chem-zanyatsya-vecherom-v-nyachange'],
   'chem-zanyatsya-v-nyachange-v-dozhd': ['chem-zanyatsya-vecherom-v-nyachange', 'kuda-poyti-v-nyachange-s-kompaniey', 'chem-zanyatsya-v-nyachange-odnomu'],
   'chem-zanyatsya-vecherom-v-nyachange': ['chem-zanyatsya-v-nyachange-v-dozhd', 'kuda-poyti-v-nyachange-s-kompaniey', 'nyachang-na-zimovku-chem-zanyat-vechera'],
@@ -36,7 +37,7 @@ const relatedIds: Record<string, string[]> = {
   'kuda-poyti-v-nyachange-s-kompaniey': ['mafiya-avalon-ili-krov-na-chasovoy-bashne', 'chem-zanyatsya-vecherom-v-nyachange', 'chem-zanyatsya-v-nyachange-v-dozhd'],
   'nyachang-na-zimovku-chem-zanyat-vechera': ['kak-najti-druzej-v-nyachange', 'chem-zanyatsya-vecherom-v-nyachange', 'chem-zanyatsya-v-nyachange-v-dozhd'],
   'mafiya-avalon-ili-krov-na-chasovoy-bashne': ['pravila-mafii-dlya-novichkov', 'pravila-avalona', 'pravila-krovi-na-chasovoy-bashne'],
-  'pravila-mafii-dlya-novichkov': ['mafiya-avalon-ili-krov-na-chasovoy-bashne', 'pravila-avalona', 'pravila-krovi-na-chasovoy-bashne'],
+  'pravila-mafii-dlya-novichkov': ['pervyy-vecher-mafii-v-nyachange', 'mafiya-avalon-ili-krov-na-chasovoy-bashne', 'pravila-avalona'],
   'pravila-avalona': ['mafiya-avalon-ili-krov-na-chasovoy-bashne', 'pravila-mafii-dlya-novichkov', 'pravila-krovi-na-chasovoy-bashne'],
   'pravila-krovi-na-chasovoy-bashne': ['mafiya-avalon-ili-krov-na-chasovoy-bashne', 'pravila-mafii-dlya-novichkov', 'pravila-avalona'],
 };
