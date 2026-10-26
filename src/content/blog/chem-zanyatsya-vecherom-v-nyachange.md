@@ -3,7 +3,7 @@ title: 'Чем заняться вечером в Нячанге: 17 идей с
 h1: 'Чем заняться вечером в Нячанге: 17 идей с адресами и ценами'
 description: 'Куда пойти вечером в Нячанге: мафия и настольные игры на русском, руфтопы, ночной рынок, уличная еда, караоке, круизы. Адреса и цены.'
 date: 2026-09-23
-updated: 2026-09-23
+updated: 2026-10-27
 tag: 'Досуг в Нячанге'
 faq:
   - q: 'Чем заняться вечером в Нячанге, если не хочется в бар?'
@@ -13,7 +13,7 @@ faq:
   - q: 'До скольки работает ночной рынок в Нячанге?'
     a: 'Ночной рынок между улицами Чан Фу и Хунг Выонг работает примерно с 17:00 до 23:00. Приходите к началу вечера, пока не собралась основная толпа.'
   - q: 'Сколько стоит вход на Skylight в Нячанге?'
-    a: 'Вход на площадку Skylight на 43-м этаже отеля Premier Havana (38 Trần Phú) платный и включает один приветственный напиток. По данным местных гидов на 2026 год — около 150 000 донгов; точную цену проверяйте на сайте skylightnhatrang.com.'
+    a: 'Вход на площадку Skylight на 43-м этаже отеля Premier Havana (38 Trần Phú) платный и включает один приветственный напиток. Текущую цену уточняйте на кассе или по телефону +84 258 352 8988: официальный FAQ не фиксирует единый тариф.'
   - q: 'Можно ли купаться ночью в Нячанге?'
     a: 'Можно, но осторожно: ночью нет спасателей, хуже видно волны и течение, а вещи на берегу остаются без присмотра. Не заплывайте далеко, не купайтесь в одиночку и в ветреную погоду.'
 ---
@@ -49,7 +49,7 @@ faq:
 **Коротко:** поют всей компанией в своей комнате, по-русски тоже можно\
 **Где:** например, Music Box — ТЦ Gold Coast, 6-й этаж, 01 Trần Hưng Đạo\
 **Когда:** 9:00–22:00\
-**Сколько:** около 100 000 ₫ в час
+**Сколько:** актуальный тариф и способ расчёта уточняйте у Music Box; цена 100 000 ₫ в час не подтверждена действующим прайсом
 
 <figure><img src="/blog/foto/karaoke.webp" alt="Караоке-зал в Нячанге" loading="lazy" decoding="async"><figcaption>Фото: Christophe95, <a href="https://commons.wikimedia.org/wiki/File:Karaoke_in_Nha_Trang.jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a></figcaption></figure>
 
@@ -62,7 +62,7 @@ faq:
 **Коротко:** смотровая площадка 360° на 43-м этаже, стеклянный мост и бар с диджеем\
 **Где:** Premier Havana Nha Trang Hotel, 38 Trần Phú\
 **Когда:** смотровая 17:00–23:30, бар Rooftop Beach Club — до 00:45\
-**Сколько:** вход платный, в билет входит один напиток; по данным местных гидов — около 150 000 ₫
+**Сколько:** вход платный, билет включает приветственный напиток. [Официальный FAQ Skylight](https://skylightnhatrang.com/faq/) рекомендует уточнять текущую цену на кассе или по телефону +84 258 352 8988
 
 <figure><img src="/blog/foto/noch-nyachang.webp" alt="Ночной Нячанг сверху" loading="lazy" decoding="async"><figcaption>Фото: cloud.shepherd, <a href="https://commons.wikimedia.org/wiki/File:Nha_Trang,_Vietnam_at_night_(24267026625).jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by/2.0/" rel="noopener">CC BY 2.0</a></figcaption></figure>
 
@@ -72,12 +72,12 @@ faq:
 
 **Коротко:** спокойный бар с панорамой залива, без громкой музыки\
 **Где:** 28-й этаж отеля Sheraton, 26–28 Trần Phú\
-**Когда:** 15:00–23:55, счастливые часы 15:00–18:00\
-**Сколько:** коктейли примерно от 180 000 ₫
+**Когда:** ежедневно 17:00–00:00 по [официальной странице Marriott](https://www.marriott.com/en-us/dining/restaurant-bar/nhasi-sheraton-nha-trang-hotel-and-spa/6470843-altitude-rooftop-bar-lounge.mi)\
+**Сколько:** по текущему меню; цену коктейлей и условия happy hour уточняйте у бара
 
 <figure><img src="/blog/foto/rooftop.webp" alt="Панорама Нячанга с крыши" loading="lazy" decoding="async"><figcaption>Фото: Meteparozzi, <a href="https://commons.wikimedia.org/wiki/File:Nha_Trang_Rooftop_Panorama.jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="noopener">CC BY-SA 3.0</a></figcaption></figure>
 
-Вариант для свидания или разговора: тише и камернее, чем на Skylight, толпы нет. Поднимайтесь через лобби отеля. Если прийти к счастливым часам, можно застать закат и сэкономить на первом коктейле.
+Вариант для свидания или разговора: тише и камернее, чем на Skylight, толпы нет. Поднимайтесь через лобби отеля. Приходите к открытию, если хотите застать закат. Наличие скидок проверяйте перед визитом.
 
 ## Еда и прогулки
 
@@ -99,7 +99,7 @@ faq:
 
 <figure><img src="/blog/foto/banh-xeo.webp" alt="Бань сео с кальмаром, Нячанг" loading="lazy" decoding="async"><figcaption>Фото: ASM, <a href="https://commons.wikimedia.org/wiki/File:Bánh_xèo_nhân_Mực,_Nha_Trang.jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="noopener">CC BY-SA 3.0</a></figcaption></figure>
 
-Вечером местные не «идут на ужин», а собирают его из кусочков: суп, потом что-то жареное, потом десерт. Несколько проверенных мест:
+Вечером местные не «идут на ужин», а собирают его из кусочков: суп, потом что-то жареное, потом десерт. Ниже — адресные ориентиры из прежней версии подборки. Действующие часы и меню этих пяти точек независимо подтвердить не удалось; перед поездкой проверьте карточку конкретного заведения. Цены ниже — прежние ориентиры, а не текущий прайс:
 
 - **Bún chả cá** (суп с рыбными котлетами) — Bún Cá Nguyên Loan, 123 Ngô Gia Tự, до 22:00, 45 000–60 000 ₫.
 - **Nem nướng** (жареные рулетики из свинины) — Nem Nướng Đặng Văn Quyên, 16A Lãn Ông, до 21:00, 55 000–120 000 ₫.
@@ -131,8 +131,8 @@ faq:
 ### 9. Ночные клубы в центре
 
 **Коротко:** громкая музыка, танцы до 3 часов ночи\
-**Где и когда:** Havana Club (20:00–03:00), Nha Club (18:00–03:00, оживает после полуночи), Paradise Club (20:00–03:00), DOM Club (20:30–02:00)\
-**Сколько:** вход обычно бесплатный, коктейли от ~110 000 ₫
+**Где:** Havana Club, Nha Club, Paradise Club, DOM Club — названия из прежней версии подборки. Актуальный статус и часы каждого заведения нужно проверить перед визитом\
+**Сколько:** вход, депозит и напитки — по условиям конкретного вечера; бесплатный вход не подтверждён
 
 <figure><img src="/blog/foto/plyazh-noch.webp" alt="Набережная Нячанга ночью" loading="lazy" decoding="async"><figcaption>Фото: startracker, <a href="https://commons.wikimedia.org/wiki/File:Nhatrang_Beach_at_night.jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="noopener">CC BY-SA 2.0</a></figcaption></figure>
 
@@ -141,7 +141,7 @@ Havana Club — подземный клуб, где из-за музыки по�
 ### 10. Пляжные клубы и бары
 
 **Коротко:** коктейль с ногами в песке, диджеи, живая музыка\
-**Где:** Louisiane Brewhouse (живая музыка и собственное крафтовое пиво, до 01:00), Z Beach Club (диджей и подушки на песке, до 01:00), Sailing Club (72–74 Trần Phú, файер-шоу и диджей примерно с 21:00)
+**Где:** Louisiane Brewhouse, Z Beach Club и [Sailing Club](https://sailingclubnhatrang.com/) (72–74 Trần Phú, по официальному сайту 07:00–02:00). Часы первых двух заведений и время выступлений уточняйте отдельно
 
 <figure><img src="/blog/foto/louisiane.webp" alt="Louisiane Brewhouse на пляже Нячанга" loading="lazy" decoding="async"><figcaption>Фото: calflier001, <a href="https://commons.wikimedia.org/wiki/File:LOUISIANE_BREW_HOUSE_NHA_TRANG_VIETNAM_JAN_2012_(6820624772).jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="noopener">CC BY-SA 2.0</a></figcaption></figure>
 
@@ -158,12 +158,12 @@ Sailing Club — самый известный и самый дорогой из
 
 Салонов в центре очень много, многие работают до позднего вечера, а в популярные лучше записаться заранее. Выбирайте места с отзывами и семейной атмосферой; салоны с красными фонарями и девушками в мини-юбках у входа — это не про классический массаж.
 
-### 12. Грязевые ванны Тхап Ба
+### 12. Грязевые ванны Тхап Ба — дневной вариант
 
 **Коротко:** минеральная грязь и горячие источники\
-**Где:** Tháp Bà Hot Spring Center, север города\
-**Когда:** до 19:30\
-**Сколько:** общая грязевая ванна от ~120 000 ₫, отдельная ванна на двоих от ~350 000 ₫
+**Где:** Tháp Bà Hot Spring Center, 438 Ngô Đến, Нячанг\
+**Когда:** 07:30–17:00 по [официальному сайту Тхап Ба](https://tambunthapba.vn/)\
+**Сколько:** зависит от процедуры и размера группы; актуальный пакет и стоимость проверяйте в [прайсе Тхап Ба](https://tambunthapba.vn/).
 
 <figure><img src="/blog/foto/gryaz.webp" alt="Грязевые ванны во Вьетнаме" loading="lazy" decoding="async"><figcaption>Фото: MerPerle, <a href="https://commons.wikimedia.org/wiki/File:TOÀN_CẢNH_KHU_TẮM_BÙN.jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a></figcaption></figure>
 
@@ -226,3 +226,7 @@ Sailing Club — самый известный и самый дорогой из
 ## Если вы здесь надолго
 
 Туристу хватит пары вечеров на рынок, руфтоп и морепродукты. Тем, кто живёт в Нячанге или приехал на зимовку, нужен ритм: место, куда хочется возвращаться каждую неделю, и люди, с которыми не скучно. Для этого и существуют игровые вечера. Как найти своих людей в новом городе, мы рассказали в статье [«Как найти друзей и русскоязычную компанию в Нячанге»](/blog/kak-najti-druzej-v-nyachange/).
+
+## Источники и проверка данных
+
+Проверено 27 октября 2026 года: [Skylight — часы и билеты](https://skylightnhatrang.com/faq/), [Altitude — часы Marriott](https://www.marriott.com/en-us/dining/restaurant-bar/nhasi-sheraton-nha-trang-hotel-and-spa/6470843-altitude-rooftop-bar-lounge.mi), [Тхап Ба — адрес, часы и тарифы](https://tambunthapba.vn/), [Galaxy Nha Trang Center — адрес и сеансы](https://www.galaxycine.vn/rap-gia-ve/galaxy-nha-trang-center/), [VinWonders — расписание шоу](https://vinwonders.com/en/wonderpedia/news/vinwonders-nha-trang-show-schedule/). Проверка этих источников не подтверждает тарифы остальных заведений, рыбалки и круизов: их нужно уточнять у выбранного оператора.

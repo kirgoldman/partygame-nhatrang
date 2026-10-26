@@ -3,7 +3,7 @@ title: 'Чем заняться в Нячанге в дождь: 12 идей п�
 h1: 'Чем заняться в Нячанге в сезон дождей и в дождливый день'
 description: 'Куда пойти в Нячанге в дождь: торговые центры с боулингом и кино, караоке, спа, грязевые ванны и вечера мафии на русском. Адреса и цены.'
 date: 2026-09-23
-updated: 2026-09-23
+updated: 2026-10-27
 tag: 'Досуг в Нячанге'
 faq:
   - q: 'Когда в Нячанге сезон дождей?'
@@ -11,7 +11,7 @@ faq:
   - q: 'Что делать в Нячанге вечером, если идёт дождь?'
     a: 'Сходить в кино или на боулинг в торговом центре, в караоке-кабинку, на массаж или прийти на вечер социальных игр клуба Party Game: мафия, Авалон и «Кровь на часовой башне» проходят в кафе CCCP Coffee в центре Нячанга по средам, четвергам, субботам и воскресеньям, 19:00–23:00.'
   - q: 'Где в Нячанге боулинг?'
-    a: 'Боулинг есть в торговых центрах на набережной: SPEEDBOWL в Vincom Plaza на Trần Phú и боулинг в Nha Trang Center (20 Trần Phú).'
+    a: 'Боулинг есть в торговых центрах на набережной: Powerbowl на 3-м этаже Nha Trang Center, 20 Trần Phú.'
 ---
 
 Сезон дождей в Нячанге обычно приходится на октябрь–декабрь. В это время пляж и острова часто отменяются, но в городе остаётся много занятий под крышей: торговые центры с кино и боулингом, караоке, спа, грязевые ванны, кофейни и вечера настольных игр. Дождь в тропиках часто идёт волнами, поэтому день редко пропадает целиком. Главное — иметь план на время ливня.
@@ -34,12 +34,12 @@ faq:
 
 ### 2. Боулинг и игровые автоматы
 
-**Где:** SPEEDBOWL в Vincom Plaza (набережная Trần Phú), боулинг в Nha Trang Center (20 Trần Phú)\
+**Где:** Powerbowl, 3-й этаж Nha Trang Center, 20 Trần Phú\
 **Когда:** примерно 9:30–22:00
 
 <figure><img src="/blog/foto/bouling.webp" alt="Дорожки для боулинга" loading="lazy" decoding="async"><figcaption>Фото: Atomic Taco, <a href="https://commons.wikimedia.org/wiki/File:The_New_HUB_Bowling_Lanes_(7975562295).jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="noopener">CC BY-SA 2.0</a></figcaption></figure>
 
-В SPEEDBOWL кроме дорожек есть аркадные автоматы и детская зона. Хороший вариант для компании и семей с детьми.
+Адрес боулинга указан в [официальном списке центров Powerbowl](https://powerbowl.vn/trung-tam/). Тариф, часы работы и доступность дорожек уточняйте у центра перед визитом.
 
 ### 3. Кино
 
@@ -53,7 +53,7 @@ faq:
 
 **Где:** например, Music Box — ТЦ Gold Coast, 6-й этаж, 01 Trần Hưng Đạo\
 **Когда:** 9:00–22:00\
-**Сколько:** около 100 000 ₫ в час
+**Сколько:** актуальный тариф и способ расчёта уточняйте у Music Box; цена 100 000 ₫ в час не подтверждена действующим прайсом
 
 <figure><img src="/blog/foto/karaoke.webp" alt="Караоке в Нячанге" loading="lazy" decoding="async"><figcaption>Фото: Christophe95, <a href="https://commons.wikimedia.org/wiki/File:Karaoke_in_Nha_Trang.jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a></figcaption></figure>
 
@@ -71,12 +71,12 @@ faq:
 
 ### 6. Грязевые ванны
 
-**Где:** Tháp Bà Hot Spring Center (работает до 19:30), I-Resort (днём)\
-**Сколько:** в Тхап Ба общая грязевая ванна от ~120 000 ₫, в I-Resort пакеты от ~350 000 ₫
+**Где:** Tháp Bà Hot Spring Center, 438 Ngô Đến (07:30–17:00); I-Resort (08:00–17:30)\
+**Сколько:** зависит от процедуры и размера группы; сверяйте пакет с [прайсом Тхап Ба](https://tambunthapba.vn/) и [прайсом I-Resort](https://www.i-resort.vn/-iresort-price-2026). Старые ориентиры 120 000 и 350 000 ₫ не являются подтверждёнными текущими тарифами.
 
 <figure><img src="/blog/foto/gryaz.webp" alt="Грязевые ванны во Вьетнаме" loading="lazy" decoding="async"><figcaption>Фото: MerPerle, <a href="https://commons.wikimedia.org/wiki/File:TOÀN_CẢNH_KHU_TẮM_BÙN.jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a></figcaption></figure>
 
-Тёплая грязь и минеральная вода в дождь — отдельное удовольствие. Приезжайте с утра: народу меньше всего, к полудню собираются очереди.
+Тхап Ба — дневной вариант отдыха: планируйте визит до закрытия в 17:00. Приезжайте с утра: народу меньше всего, к полудню собираются очереди.
 
 ### 7. Кофейни
 
@@ -97,7 +97,7 @@ faq:
 
 ### 9. Детские игровые зоны
 
-Почти в каждом торговом центре есть игровые комнаты, в некоторых ребёнка можно оставить на пару часов. SPEEDBOWL в Vincom совмещает боулинг, автоматы и детскую зону.
+Почти в каждом торговом центре есть игровые комнаты, в некоторых ребёнка можно оставить на пару часов. Возрастные ограничения и условия посещения игровых зон уточняйте у оператора.
 
 <figure><img src="/blog/foto/detskaya.webp" alt="Крытая детская игровая площадка" loading="lazy" decoding="async"><figcaption>Фото: Wpcpey, <a href="https://commons.wikimedia.org/wiki/File:Tung_Tao_Court_Indoor_playground_201407.jpg" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a></figcaption></figure>
 
@@ -131,3 +131,7 @@ faq:
 Ещё идеи на вечер — в статье [«Чем заняться вечером в Нячанге: 17 идей»](/blog/chem-zanyatsya-vecherom-v-nyachange/).
 
 Если приехали без компании, посмотрите, [чем заняться в Нячанге одному](/blog/chem-zanyatsya-v-nyachange-odnomu/).
+
+## Источники и проверка данных
+
+Проверено 27 октября 2026 года: [Powerbowl — адрес центра](https://powerbowl.vn/trung-tam/), [Music Box — страница заведения](https://www.facebook.com/p/Music-Box-Karaoke-61564894273197/), [Galaxy Nha Trang Center](https://www.galaxycine.vn/rap-gia-ve/galaxy-nha-trang-center/), [Galaxy Cine+ Gold Coast](https://www.galaxycine.vn/rap-gia-ve/galaxy-cine-gold-coast-nha-trang/), [Тхап Ба](https://tambunthapba.vn/), [I-Resort](https://www.i-resort.vn/thong-bao-1). Часы торгового центра не гарантируют работу каждого арендатора; сеансы и тарифы проверяйте на дату визита.

@@ -82,6 +82,8 @@ const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(place.mapQuer
     <iframe class="pl-map" title={`${place.name} на карте`} src={mapSrc} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     <p class="pl-note">Данные сверены по Google Картам и справочным источникам на {new Date(place.updated).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}. Часы и цены могут меняться, уточняйте на месте.</p>
 
+    {place.sources && <><h2>Источники</h2><ul>{place.sources.map((source) => <li><a href={source.url} rel="noopener">{source.label}</a></li>)}</ul></>}
+
     <PlaceCta place={place.name} />
   </article>
 
