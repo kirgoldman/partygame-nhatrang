@@ -17,9 +17,11 @@ interface Props {
   dockHref?: string;
   ogType?: 'website' | 'article';
   accent?: string;
+  /** Служебные страницы (404): не индексировать, без canonical */
+  noindex?: boolean;
 }
 
-const { title, description, schema = [], ogImage = '/og.png', ogType = 'website', accent, dockText = 'Записаться на игру', dockHref = site.telegramGroup } = Astro.props;
+const { title, description, schema = [], ogImage = '/og.png', ogType = 'website', accent, noindex = false, dockText = 'Записаться на игру', dockHref = site.telegramGroup } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).toString();
 const ogUrl = new URL(ogImage, site.url).toString();
 const path = Astro.url.pathname;
@@ -34,8 +36,8 @@ import Metrika from '../components/Metrika.astro';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    {!noindex && <link rel="canonical" href={canonical} />}
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
     <meta name="theme-color" content="#1e1230" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />

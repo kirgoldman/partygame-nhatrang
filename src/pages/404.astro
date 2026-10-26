@@ -1,0 +1,33 @@
+---
+// Настоящая страница 404: без неё Cloudflare Pages на любой неизвестный адрес отдаёт главную с кодом 200
+// («мягкая 404»), и поисковики видят десятки дублей главной. С этим файлом неизвестный адрес получает код 404.
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+
+<Base title="Страница не найдена | Party Game" description="Такой страницы на сайте клуба Party Game нет. Расписание игр и запись — на главной." noindex>
+  <header class="page-hero wrap">
+    <h1>Такой страницы нет</h1>
+    <p class="lede">
+      Возможно, ссылка устарела или в адресе опечатка. Игры клуба, расписание и запись в Telegram — по ссылкам ниже.
+    </p>
+    <p>
+      <a class="btn btn-primary" href="/">На главную</a>
+      <a class="btn" href="/raspisanie-i-ceny/">Расписание и цены</a>
+      <a class="btn" href={site.telegramGroup} rel="noopener">Записаться в Telegram</a>
+    </p>
+  </header>
+
+  <section class="section narrow prose">
+    <h2>Что есть на сайте</h2>
+    <ul>
+      <li><a href="/mafiya-nyachang/">Городская мафия в Нячанге</a>: по субботам</li>
+      <li><a href="/avalon/">Авалон</a>: по четвергам</li>
+      <li><a href="/krov-na-chasovoy-bashne/">Кровь на часовой башне</a>: по средам и воскресеньям</li>
+      <li><a href="/lila/">Лила</a>: игра самопознания</li>
+      <li><a href="/gde-my-igraem/">Где играем</a>: адрес и карта</li>
+      <li><a href="/kuda-shodit-v-nyachange/">Куда сходить в Нячанге</a></li>
+      <li><a href="/blog/">Блог</a></li>
+    </ul>
+  </section>
+</Base>
