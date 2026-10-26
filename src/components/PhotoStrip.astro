@@ -50,7 +50,7 @@ const ratio = (p: Item) => (p.video ? `${p.w} / ${p.h}` : `${Math.max(p.src.widt
             aria-label={`Открыть: ${p.alt}`}
           >
             {p.video ? (
-              <video data-src={p.video} poster={p.poster} muted loop playsinline preload="none" />
+              <video data-src={p.video} data-poster={p.poster} muted loop playsinline preload="none" />
             ) : (
               <Image src={p.src} alt={copy === 1 ? '' : p.alt} widths={[360, 720]} sizes="22rem" loading="lazy" />
             )}

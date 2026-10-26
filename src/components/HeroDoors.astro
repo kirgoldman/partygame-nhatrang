@@ -48,15 +48,19 @@ const doors: Door[] = [
     doors.map((d, i) => (
       <li class="door" style={`--c:${d.color};--i:${i}`}>
         <a href={d.href} aria-label={`${d.name}: ${d.days}, 19:00–23:00. ${d.hook}`}>
+          {/* Первая афиша — главный элемент первого экрана (LCP): ей высокий приоритет, остальные грузятся лениво */}
           <Image
             src={d.img}
             alt={d.alt}
-            widths={[400, 700, 1000]}
+            widths={[360, 540, 720]}
             sizes="(max-width: 760px) 82vw, 24rem"
-            loading="eager"
+            quality={65}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : 'auto'}
+            decoding={i === 0 ? 'sync' : 'async'}
             style={`object-position:${d.pos}`}
           />
-          {d.video && <video data-src={d.video} poster={d.poster} muted loop playsinline preload="none" aria-hidden="true" />}
+          {d.video && <video data-src={d.video} data-poster={d.poster} muted loop playsinline preload="none" aria-hidden="true" />}
           <span class="tape" aria-hidden="true" />
           <span class="sticker">
             <b>{d.days}</b>

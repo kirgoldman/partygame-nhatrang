@@ -18,7 +18,11 @@ const id = site.metrikaId;
           m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
           m[i].l = 1 * new Date();
           for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) return; }
-          k = e.createElement(t); a = e.getElementsByTagName(t)[0]; k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
+          // Сам скрипт Метрики подключаем после загрузки страницы, чтобы он не мешал показу первого экрана.
+          // Вызовы ym(...) ниже копятся в очереди и выполнятся, как только скрипт загрузится: хиты и цели не теряются.
+          var inject = function () { k = e.createElement(t); a = e.getElementsByTagName(t)[0]; k.async = 1; k.src = r; a.parentNode.insertBefore(k, a); };
+          if (e.readyState === 'complete') setTimeout(inject, 0);
+          else m.addEventListener('load', function () { setTimeout(inject, 0); });
         })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=' + id, 'ym');
         ym(id, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: 'dataLayer', referrer: document.referrer, url: location.href, accurateTrackBounce: true, trackLinks: true });
         document.addEventListener('click', function (e) {

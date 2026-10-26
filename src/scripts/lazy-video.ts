@@ -4,6 +4,34 @@
 const saveData = !!(navigator as any).connection?.saveData;
 const videos = Array.from(document.querySelectorAll<HTMLVideoElement>('video[data-src]'));
 
+// Постеры видео подставляем заранее, но только когда ролик приближается к экрану (запас 600px, чтобы постер уже был на месте).
+// Так картинки ниже первого экрана не отнимают канал у главного изображения страницы.
+const setPoster = (v: HTMLVideoElement) => {
+  if (v.dataset.poster && !v.getAttribute('poster')) v.setAttribute('poster', v.dataset.poster);
+};
+if ('IntersectionObserver' in window) {
+  const posterIo = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        setPoster(e.target as HTMLVideoElement);
+        posterIo.unobserve(e.target);
+      }),
+    { rootMargin: '600px' },
+  );
+  videos.forEach((v) => posterIo.observe(v));
+} else {
+  videos.forEach(setPoster);
+}
+// Ролики в горизонтальных каруселях лежат за краем контейнера и наблюдателем «не видны» до свайпа.
+// Чтобы при свайпе не было пустых плиток, остальные постеры подгружаем, когда страница уже загрузилась и браузер свободен.
+if (!saveData) {
+  const setAll = () => videos.forEach(setPoster);
+  const afterLoad = () => ('requestIdleCallback' in window ? (window as any).requestIdleCallback(setAll, { timeout: 3000 }) : setTimeout(setAll, 1500));
+  if (document.readyState === 'complete') afterLoad();
+  else window.addEventListener('load', afterLoad, { once: true });
+}
+
 const start = (v: HTMLVideoElement) => {
   if (!v.getAttribute('src')) {
     v.src = v.dataset.src!;
