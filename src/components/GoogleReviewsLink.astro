@@ -1,0 +1,26 @@
+---
+import { site } from '../data/site';
+---
+
+<p class="google-reviews">
+  <a href={site.clubMapUrl} target="_blank" rel="noopener noreferrer">
+    <span class="star" aria-hidden="true">★</span>
+    <strong>{site.googleReviews.rating}</strong> · {site.googleReviews.count} отзыва в Google Картах
+  </a>
+</p>
+
+<style>
+  .google-reviews {
+    margin: 1rem 0 0;
+    font-size: var(--step--1);
+  }
+  .google-reviews a {
+    display: inline-block;
+    padding-block: 0.35rem;
+    color: var(--text);
+    text-decoration-color: var(--muted);
+  }
+  .star {
+    color: var(--avalon);
+  }
+</style>

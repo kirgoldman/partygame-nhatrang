@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import GoogleReviewsLink from '../components/GoogleReviewsLink.astro';
 import Crumbs from '../components/Crumbs.astro';
 import JoinBand from '../components/JoinBand.astro';
 import { site } from '../data/site';
@@ -22,6 +23,7 @@ const crumb = [{ name: 'О клубе', href: '/o-klube/' }];
       Party Game — русскоязычное сообщество любителей социальных игр в Нячанге. Мы собираемся четыре вечера в неделю, чтобы
       поиграть в мафию, Авалон и «Кровь на часовой башне», а заодно познакомиться и провести вечер в хорошей компании.
     </p>
+    <GoogleReviewsLink />
   </header>
 
   <figure class="wrap photo">

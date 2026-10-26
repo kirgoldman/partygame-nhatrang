@@ -10,7 +10,9 @@ export const site = {
   foundingDate: '', // год основания клуба — вписать, когда будет известен
   telegramGroup: 'https://t.me/+OMJQ4EA3FZAyYTRh',
   groupSize: '400+',
-  clubMapUrl: 'https://maps.app.goo.gl/17XXVHEYw8aeNa1M8', // собственная точка клуба на Google Maps (не карточка кафе)
+  clubMapUrl: 'https://maps.app.goo.gl/Ykukd17weVrFaXhw8', // собственная точка клуба на Google Maps (не карточка кафе)
+  // Подтверждено скриншотом пользователя от 26.10.2026; только для отображения, без aggregateRating.
+  googleReviews: { rating: '5,0', count: 3 },
   instagram: '',
   metrikaId: 113063029, // номер счётчика Яндекс Метрики // ссылка на Instagram клуба — вписать
   price: 150000,

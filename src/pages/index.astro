@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import GoogleReviewsLink from '../components/GoogleReviewsLink.astro';
 import HeroDoors from '../components/HeroDoors.astro';
 import Ticker from '../components/Ticker.astro';
 import NextGame from '../components/NextGame.astro';
@@ -72,6 +73,7 @@ const schema = [
         <a class="btn btn-primary" href={site.telegramGroup} rel="noopener"><Icon name="telegram" /> Записаться на игру</a>
         <a class="btn btn-ghost" href="/raspisanie-i-ceny/">Расписание и цены</a>
       </div>
+      <GoogleReviewsLink />
       <div class="hero-deck">
         <HeroDoors />
       </div>
