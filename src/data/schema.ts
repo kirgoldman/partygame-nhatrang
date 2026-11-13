@@ -46,7 +46,7 @@ export const club = {
   areaServed: { '@type': 'City', name: 'Nha Trang' },
   address: place.address,
   location: { '@id': placeId },
-  hasMap: site.venue.mapUrl,
+  hasMap: site.clubMapUrl,
   founder: { '@id': personId },
   ...(site.foundingDate ? { foundingDate: site.foundingDate } : {}),
   openingHoursSpecification: [
