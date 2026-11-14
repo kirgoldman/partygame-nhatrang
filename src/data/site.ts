@@ -9,7 +9,7 @@ export const site = {
     'Party Game — клуб мафии, Авалона и «Крови на часовой башне» в центре Нячанга. Играем четыре вечера в неделю в CCCP Coffee, 19:00–23:00, от 200 000 донгов за вечер. Новичкам объясняем правила.',
   foundingDate: '', // год основания клуба — вписать, когда будет известен
   telegramGroup: 'https://t.me/+w4Ur68V2FNhlNTYx',
-  groupSize: '400+',
+  groupSize: '500+',
   clubMapUrl: 'https://maps.app.goo.gl/Ykukd17weVrFaXhw8', // собственная точка клуба на Google Maps (не карточка кафе)
   // Подтверждено скриншотом пользователя от 26.10.2026; только для отображения, без aggregateRating.
   googleReviews: { rating: '5,0', count: 3 },
