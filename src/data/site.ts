@@ -6,7 +6,7 @@ export const site = {
   alternateName: ['PARTY GAME community', 'Party Game Nha Trang'],
   tagline: 'Клуб мафии и социальных игр',
   description:
-    'Party Game — клуб мафии, Авалона и «Крови на часовой башне» в центре Нячанга. Играем четыре вечера в неделю в CCCP Coffee, 19:00–23:00, от 150 000 донгов за вечер. Новичкам объясняем правила.',
+    'Party Game — клуб мафии, Авалона и «Крови на часовой башне» в центре Нячанга. Играем четыре вечера в неделю в CCCP Coffee, 19:00–23:00, от 200 000 донгов за вечер. Новичкам объясняем правила.',
   foundingDate: '', // год основания клуба — вписать, когда будет известен
   telegramGroup: 'https://t.me/+w4Ur68V2FNhlNTYx',
   groupSize: '400+',
@@ -15,10 +15,10 @@ export const site = {
   googleReviews: { rating: '5,0', count: 3 },
   instagram: '',
   metrikaId: 113063029, // номер счётчика Яндекс Метрики // ссылка на Instagram клуба — вписать
-  price: 150000,
-  priceText: '150 000 ₫',
-  priceFromText: 'от 150 000 ₫',
-  priceRange: '150 000–200 000 ₫',
+  price: 200000,
+  priceText: '200 000 ₫',
+  priceFromText: 'от 200 000 ₫',
+  priceRange: '200 000 ₫',
   currency: 'VND',
   hours: '19:00–23:00',
   venue: {
@@ -68,7 +68,7 @@ export const week: Game[] = [
     day: 'Среда',
     dayShort: 'Ср',
     schemaDay: 'https://schema.org/Wednesday',
-    seats: 13,
+    seats: 15,
     price: 200000,
     priceText: '200 000 ₫',
     rounds: '3–4 партии',
@@ -112,7 +112,7 @@ export const week: Game[] = [
     day: 'Воскресенье',
     dayShort: 'Вс',
     schemaDay: 'https://schema.org/Sunday',
-    seats: 13,
+    seats: 15,
     price: 200000,
     priceText: '200 000 ₫',
     rounds: '3–4 партии',
