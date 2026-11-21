@@ -10,6 +10,8 @@ import Reviews from '../components/Reviews.astro';
 import Week from '../components/Week.astro';
 import Faq from '../components/Faq.astro';
 import JoinBand from '../components/JoinBand.astro';
+import PostCards from '../components/PostCards.astro';
+import { getCollection } from 'astro:content';
 import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 import { faqMain } from '../data/faq';
@@ -59,6 +61,9 @@ const schema = [
   gameEvent('avalon', 'Авалон', 'Игра Авалон на русском по четвергам в центре Нячанга'),
   gameEvent('krov-na-chasovoy-bashne', 'Кровь на часовой башне', 'Игра «Кровь на часовой башне» на русском по средам и воскресеньям в центре Нячанга'),
 ];
+const featuredIds = ['pervyy-vecher-mafii-v-nyachange', 'chem-zanyatsya-vecherom-v-nyachange', 'kak-najti-druzej-v-nyachange'];
+const allPosts = await getCollection('blog');
+const featured = featuredIds.map((id) => allPosts.find((p) => p.id === id)).filter((p): p is NonNullable<typeof p> => Boolean(p));
 ---
 
 <Base title={title} description={description} schema={schema}>
@@ -243,6 +248,14 @@ const schema = [
         <span>{site.venue.cityLatin}, {site.venue.region}</span>
         <span class="addr-time">Ср, Чт, Сб, Вс, {site.hours}</span>
       </address>
+    </div>
+  </section>
+
+  <section class="section blog-sec">
+    <div class="wrap">
+      <h2>Читайте перед первым визитом</h2>
+      <PostCards posts={featured} />
+      <p class="faq-more"><a href="/blog/">Все статьи блога</a></p>
     </div>
   </section>
 

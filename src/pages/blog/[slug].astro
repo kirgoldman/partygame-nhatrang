@@ -5,6 +5,8 @@ import Crumbs from '../../components/Crumbs.astro';
 import Faq from '../../components/Faq.astro';
 import JoinBand from '../../components/JoinBand.astro';
 import { article, breadcrumbs, faqSchema } from '../../data/schema';
+import { coverOf } from '../../data/blog';
+import { existsSync } from 'node:fs';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -19,10 +21,12 @@ const crumb = [
   { name: 'Блог', href: '/blog/' },
   { name: d.h1 ?? d.title, href },
 ];
+const ogFile = `/og/blog/${post.id}.jpg`;
+const ogImage = coverOf(post.body) && existsSync(new URL(`../../../public${ogFile}`, import.meta.url)) ? ogFile : undefined;
 const fmt = (x: Date) => x.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 const schema = [
   breadcrumbs(crumb),
-  article({ title: d.h1 ?? d.title, description: d.description, href, date: d.date, updated: d.updated }),
+  article({ title: d.h1 ?? d.title, description: d.description, href, date: d.date, updated: d.updated, image: ogImage }),
   ...(d.faq ? [faqSchema(d.faq)] : []),
 ];
 
@@ -69,7 +73,7 @@ const related = [
 ].filter((p, index, candidates) => p && p.id !== post.id && candidates.findIndex((candidate) => candidate?.id === p.id) === index).slice(0, 3);
 ---
 
-<Base title={d.title.length > 52 ? d.title : `${d.title} | Party Game`} description={d.description} schema={schema} ogType="article">
+<Base title={d.title.length > 52 ? d.title : `${d.title} | Party Game`} description={d.description} schema={schema} ogType="article" ogImage={ogImage}>
   <Crumbs items={crumb} />
   <article>
     <header class="page-hero narrow post-head">

@@ -1,0 +1,97 @@
+---
+import { coverOf, smallOf } from '../data/blog';
+import { existsSync } from 'node:fs';
+interface Props {
+  posts: { id: string; body?: string; data: { title: string; h1?: string; description: string; date: Date; updated?: Date; tag: string } }[];
+}
+const { posts } = Astro.props;
+const fmt = (x: Date) => x.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+const cards = posts.map((p) => {
+  const full = coverOf(p.body);
+  const small = full && existsSync(new URL(`../../public${smallOf(full)}`, import.meta.url)) ? smallOf(full) : full;
+  return { p, full, small };
+});
+---
+
+<ul class="cards">
+  {
+    cards.map(({ p, small }) => (
+      <li>
+        <a href={`/blog/${p.id}/`}>
+          {small && <img src={small} alt="" width="960" height="600" loading="lazy" decoding="async" />}
+          <span class="body">
+            <time class="meta muted" datetime={(p.data.updated ?? p.data.date).toISOString()}>{fmt(p.data.updated ?? p.data.date)}</time>
+            <span class="t">{p.data.h1 ?? p.data.title}</span>
+            <span class="d muted">{p.data.description}</span>
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .cards {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4rem;
+  }
+  li {
+    display: flex;
+  }
+  a {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--felt);
+  }
+  a:hover .t {
+    color: var(--avalon);
+  }
+  img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    display: block;
+    background: var(--felt-2);
+  }
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1rem 1.1rem 1.2rem;
+  }
+  .meta {
+    font-size: 0.8rem;
+  }
+  .t {
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+  .d {
+    font-size: 0.9rem;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  @media (max-width: 980px) {
+    .cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 620px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
