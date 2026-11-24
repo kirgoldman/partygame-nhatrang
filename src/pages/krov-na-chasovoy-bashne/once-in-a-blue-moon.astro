@@ -1,4 +1,5 @@
 ---
+import { roleSearchHref, nightOrderHref } from '../../data/botc-reference';
 import BotcShell from '../../components/BotcShell.astro';
 import { moonGroups, moonHref } from '../../data/once-in-a-blue-moon';
 const faq = [
@@ -22,6 +23,8 @@ const faq = [
    <a href="#roles">Роли</a>
    <a href="#interactions">Важные взаимодействия</a>
    <a href="#sources">Полная памятка</a>
+   <a href={roleSearchHref}>Поиск персонажей</a>
+   <a href={`${nightOrderHref}#once-in-a-blue-moon`}>Ночной порядок</a>
  </nav>
  <h2 id="rules">Как играть</h2>
  <p>Это отдельный сценарий: набор возможных персонажей для обычной игры в «Кровь на часовой башне». Перед началом все получают один и тот же список ролей. Рассказчик тайно выбирает состав партии и объясняет способности.</p>

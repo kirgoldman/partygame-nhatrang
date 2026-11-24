@@ -1,4 +1,5 @@
 ---
+import BotcRoleQuestion from '../../../components/BotcRoleQuestion.astro';
 import BotcShell from '../../../components/BotcShell.astro';
 import RoleIcon from '../../../components/RoleIcon.astro';
 import { roles, teams, rolesByTeam, type Role } from '../../../data/botc';
@@ -62,6 +63,8 @@ const lede = `${t.ru} в сценарии Trouble Brewing: что делает �
 
   <h2>{evilRole ? goodTitle : evilTitle}</h2>
   <ul>{(evilRole ? r.good : r.evil).map((x) => <li>{x}</li>)}</ul>
+
+  <BotcRoleQuestion id={r.img} scenario="trouble-brewing" />
 
   <h2>Другие роли: {t.ruPlural.toLowerCase()}</h2>
   {mates.length ? <p>{mates.map((m, i) => (<><a href={`${base}${m.slug}/`}>{m.ru}</a>{i < mates.length - 1 ? ', ' : ''}</>))}.</p> : <p>В этом сценарии Демон один — Черт.</p>}
