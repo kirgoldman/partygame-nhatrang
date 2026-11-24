@@ -1,0 +1,88 @@
+---
+import BotcShell from '../../components/BotcShell.astro';
+import { roleGroups, sectsAndViolets } from '../../data/sects-and-violets';
+
+const { title, href, ruWiki, enWiki } = sectsAndViolets;
+const faq = [
+  { q: 'Подходит ли Sects & Violets для первой игры?', a: 'Этот сценарий рассчитан на тех, кто уже знаком с основными правилами. Для первой партии проще начать с Trouble Brewing.' },
+  { q: 'Все ли 25 ролей раздают в одной партии?', a: 'Рассказчик тайно выбирает часть ролей с учётом числа игроков. В списке указаны все возможные роли основного состава.' },
+];
+---
+<BotcShell
+  title="Sects & Violets — роли и правила | Party Game Нячанг"
+  description="Памятка по Sects & Violets для «Крови на часовой башне»: 25 ролей с русскими и английскими названиями, способности, внушение и четыре Демона."
+  h1={title}
+  lede="Памятка по базовому сценарию «Крови на часовой башне», где игроки могут менять роли и стороны, а сведения Горожан зависят от того, какой Демон в игре."
+  crumbs={[{ name: 'Кровь на часовой башне', href: '/krov-na-chasovoy-bashne/' }, { name: title, href }]}
+  color="#c9a4f3"
+  badge="Сценарий · Для опытных игроков"
+  faq={faq}
+>
+  <nav aria-label="Разделы памятки" class="contents">
+    <a href="#rules">Правила</a>
+    {roleGroups.map(({ name, id }) => <a href={`#${id}`}>{name}</a>)}
+    <a href="#sources">Источники</a>
+  </nav>
+
+  <h2 id="rules">Как играть</h2>
+  <p>Действуют <a href="/blog/pravila-krovi-na-chasovoy-bashne/">общие правила «Крови на часовой башне»</a>. Рассказчик тайно выбирает роли, ночью будит игроков для применения способностей, а днём город обсуждает сведения, номинирует и голосует за казнь. Мёртвые продолжают обсуждение и сохраняют один голос до конца игры.</p>
+  <p>В этом сценарии встречается <strong>внушение</strong> (<span lang="en">madness</span>). Игроку может понадобиться убедительно отстаивать нужную версию своей роли. Рассказчик решает, достаточно ли убедительна попытка и последует ли казнь.</p>
+  <p>Сравнивайте сведения с учётом возможного Демона. При Вортоксе все сведения от способностей Горожан ложны, а день без казни приносит победу злу. При Но Даши или Вигормортисе ищите, кто мог быть отравлен. Если в игре Фан Гу, проверьте, могла ли роль Демона перейти к Изгою.</p>
+  <p>Если вы только осваиваете игру, начните с <a href="/krov-na-chasovoy-bashne/trouble-brewing/">Trouble Brewing</a>.</p>
+
+  <h2>Все роли сценария</h2>
+  <p>Нажмите на роль, чтобы прочитать краткое описание её способности. «Со второй ночи» означает, что действие пропускают в первую ночь.</p>
+  {roleGroups.map(({ name, id, color, roles }) => (
+    <section class="role-team" aria-labelledby={id} style={`--role-color:${color}`}>
+      <h3 id={id}>{name} · {roles.length}</h3>
+      {roles.map(([ru, en, icon, ability]) => (
+        <details class="role">
+          <summary>
+            <span class="role-heading">
+              <span class="role-icon">
+                <img src={`/icons/sects-and-violets/${icon}.svg`} alt="" width="32" height="32" loading="lazy" decoding="async" />
+              </span>
+              <span>{ru}<small lang="en">{en}</small></span>
+            </span>
+          </summary>
+          <p>{ability} <a href={`https://wiki.bloodontheclocktower.com/${en.replaceAll(' ', '_')}`} aria-label={`Официальная вики — ${en}`}>Подробнее в вики</a></p>
+        </details>
+      ))}
+    </section>
+  ))}
+
+  <h2 id="sources">Полные памятки и оригинальные жетоны</h2>
+  <ul>
+    <li><a href={ruWiki}>Русская вики с памятками для игроков и Рассказчика</a></li>
+    <li><a href={enWiki}>Официальная вики с правилами ролей и изображениями жетонов</a></li>
+  </ul>
+  <p>Памятка подготовлена клубом Party Game Нячанг. Иллюстрации ролей — <a href="/icons/sects-and-violets/LICENSE.txt">Lucide</a>.</p>
+</BotcShell>
+
+<style>
+  .contents { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 2rem; }
+  .contents a { padding: .5rem .8rem; border: 1px solid var(--line); border-radius: 12px; text-decoration: none; }
+  .role-team { margin-block: 2rem; }
+  .role-team h3 { scroll-margin-top: 6rem; }
+  .role { margin: .6rem 0; padding: .85rem 1rem; border: 1px solid var(--line); border-radius: 12px; background: var(--felt); }
+  .role summary { cursor: pointer; font-weight: 700; }
+  .role summary:focus-visible { outline: 2px solid var(--role-color); outline-offset: 5px; border-radius: 6px; }
+  .role-heading { display: inline-flex; align-items: center; gap: 1rem; vertical-align: middle; max-width: calc(100% - 1.5rem); }
+  .role-heading small { display: block; color: var(--role-color); font-size: .85em; font-weight: 500; }
+  .role-icon {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--role-color) 28%, var(--felt-2)), var(--felt));
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--role-color) 70%, transparent), 0 10px 24px rgba(8, 2, 18, .45);
+  }
+  .role-icon img { display: block; filter: invert(1); }
+  .role p { margin: .8rem 0 .2rem; }
+  @media (max-width: 480px) {
+    .role-icon { width: 60px; height: 60px; }
+    .role-heading { gap: .75rem; }
+  }
+</style>

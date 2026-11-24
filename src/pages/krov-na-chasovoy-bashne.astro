@@ -1,6 +1,7 @@
 ---
 import GamePage from '../layouts/GamePage.astro';
 import { site } from '../data/site';
+import { sectsAndViolets } from '../data/sects-and-violets';
 import { gameEvent } from '../data/schema';
 import img from '../assets/posters/afisha-krov-na-chasovoy-bashne.jpg';
 
@@ -91,6 +92,11 @@ const faq = [
     Подойдёт тем, кто уже освоил базовые правила и хочет подготовиться к более сложной партии.
   </p>
 
+  <a class="scenario-card" href={sectsAndViolets.href}>
+    <strong>{sectsAndViolets.title} — роли и правила</strong>
+    <span>25 ролей, четыре Демона и внушение. Для игроков, знакомых с базовыми правилами.</span>
+  </a>
+
   <h2>Почему стоит прийти</h2>
   <ul>
     <li><strong>Больше ролей — больше вариантов.</strong> Почти у каждого своя уникальная способность, партии не похожи одна на другую.</li>
@@ -108,3 +114,17 @@ const faq = [
   <h2>Что почитать перед вечером</h2>
   <p>Выбираете первую игру? Прочитайте <a href="/blog/mafiya-avalon-ili-krov-na-chasovoy-bashne/">сравнение с мафией и Авалоном</a>. А если хотите найти компанию на вечер — статью <a href="/blog/kak-najti-druzej-v-nyachange/">«Как найти друзей в Нячанге»</a>.</p>
 </GamePage>
+
+<style>
+  .scenario-card {
+    display: block;
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--felt);
+    text-decoration: none;
+  }
+  .scenario-card strong { text-decoration: underline; text-underline-offset: .18em; }
+  .scenario-card span { display: block; margin-top: .3rem; color: var(--text); }
+  .scenario-card:hover, .scenario-card:focus-visible { border-color: currentColor; }
+</style>
