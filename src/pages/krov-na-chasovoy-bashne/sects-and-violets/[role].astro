@@ -1,0 +1,68 @@
+---
+import BotcShell from '../../../components/BotcShell.astro';
+import { roleGroups, sectsAndViolets } from '../../../data/sects-and-violets';
+import { guides } from '../../../data/sects-and-violets-guides';
+
+export function getStaticPaths() {
+  return roleGroups.flatMap(({ name: team, id, color, roles }) =>
+    roles.map(([ru, en, slug, ability]) => ({
+      params: { role: slug },
+      props: { ru, en, slug, ability, team, color, id },
+    })),
+  );
+}
+
+const { ru, en, slug, ability, team, color, id } = Astro.props;
+const { title, href: scenarioHref } = sectsAndViolets;
+const guide = guides[slug];
+const href = `${scenarioHref}${slug}/`;
+const roles = roleGroups.map(({ roles }) => roles).flat();
+const related = guide.related.map((roleId) => roles.find(([, , candidate]) => candidate === roleId)!);
+const faq = [
+  { q: `Когда срабатывает способность роли «${ru}»?`, a: guide.timing },
+  { q: `Как играть за роль «${ru}»?`, a: guide.play[0] },
+];
+---
+<BotcShell
+  title={`${ru} (${en}) — способность и тактика | ${title}`}
+  description={`${ru} (${en}) в «Крови на часовой башне»: как работает способность, пример из партии, советы по игре за персонажа и против него.`}
+  h1={`${ru} (${en})`}
+  lede={ability}
+  crumbs={[
+    { name: 'Кровь на часовой башне', href: '/krov-na-chasovoy-bashne/' },
+    { name: title, href: scenarioHref },
+    { name: ru, href },
+  ]}
+  color={color}
+  badge={`${title} · ${team}`}
+  faq={faq}
+>
+  <img slot="icon" class="role-art" src={`/icons/sects-and-violets/${slug}.png`} width="144" height="144" alt="" decoding="async" />
+
+  <h2>Как работает способность</h2>
+  <p>{guide.timing}</p>
+  <ul>{guide.rules.map((rule) => <li>{rule}</li>)}</ul>
+
+  <h2>Пример из партии</h2>
+  <p>{guide.example}</p>
+
+  <h2>Как играть за персонажа</h2>
+  <ul>{guide.play.map((tip) => <li>{tip}</li>)}</ul>
+
+  <h2>{id === 'minions' || id === 'demons' ? 'Как играть против персонажа' : 'Что учитывать другим игрокам'}</h2>
+  <ul>{guide.counterplay.map((tip) => <li>{tip}</li>)}</ul>
+
+  <h2>Связанные персонажи</h2>
+  <ul>{related.map(([name, , roleId]) => <li><a href={`${scenarioHref}${roleId}/`}>{name}</a></li>)}</ul>
+  <p><a href={`${scenarioHref}#${id}`}>К списку ролей {title}</a></p>
+</BotcShell>
+
+<style>
+  .role-art {
+    display: block;
+    width: clamp(96px, 16vw, 144px);
+    height: auto;
+    border-radius: 50%;
+    background: var(--felt);
+  }
+</style>
