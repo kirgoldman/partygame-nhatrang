@@ -1,0 +1,20 @@
+---
+import { roleQuestion } from '../data/botc-role-questions';
+import type { ScenarioId } from '../data/botc-reference';
+
+interface Props { id: string; scenario: ScenarioId }
+const { id, scenario } = Astro.props;
+const [question, answer] = roleQuestion(id, scenario);
+---
+<h2 id="what-if">Что если…</h2>
+<details>
+  <summary>{question}</summary>
+  <p>{answer}</p>
+</details>
+<style>
+  details { background: var(--felt); border: 1px solid var(--line); border-radius: 12px; padding: .85rem 1rem; }
+  summary { cursor: pointer; font-weight: 700; }
+  summary::marker { color: var(--c); }
+  summary:focus-visible { outline: 2px solid var(--c); outline-offset: 5px; }
+  details p { margin: .75rem 0 0; }
+</style>

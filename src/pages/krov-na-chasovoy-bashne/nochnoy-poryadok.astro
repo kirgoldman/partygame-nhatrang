@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { breadcrumbs } from '../../data/schema';
+import { botcHref, nightOrderHref, scenarios } from '../../data/botc-reference';
+import { nightSheets } from '../../data/botc-night-order';
+
+const crumbs = [
+  { name: 'Кровь на часовой башне', href: botcHref },
+  { name: 'Ночной порядок', href: nightOrderHref },
+];
+const phases = [
+  { id: 'first', title: 'Первая ночь' },
+  { id: 'later', title: 'Последующие ночи' },
+] as const;
+const events: Record<string, string> = { 'minion-info': 'Знакомство Приспешников', 'demon-info': 'Информация Демона', travellers: 'Странники' };
+---
+<Base title="Ночной порядок для Рассказчика | Кровь на часовой башне"
+  description="Первая и последующие ночи в Trouble Brewing, Once in a Blue Moon и Sects & Violets. Кого будить и какие сигналы показывать."
+  schema={[breadcrumbs(crumbs)]}>
+  <Crumbs items={crumbs} />
+  <article class="section narrow prose">
+    <h1>Ночной порядок для Рассказчика</h1>
+    <p>Выберите сценарий и ночь. Пропускайте отсутствующих персонажей и проверяйте условия способности по ходу игры.</p>
+    <nav aria-label="Сценарии" class="night-links">
+      {scenarios.map(({ id, title }) => <a href={`#${id}`}>{title}</a>)}
+    </nav>
+    {scenarios.map(({ id, title, href, roles }) => (
+      <section aria-labelledby={id} class="scenario">
+        <h2 id={id}>{title}</h2>
+        <p><a href={href}>Правила и роли сценария</a></p>
+        <nav aria-label={`Ночи ${title}`} class="night-links">
+          {phases.map((phase) => <a href={`#${id}-${phase.id}`}>{phase.title}</a>)}
+        </nav>
+        {phases.map((phase) => (
+          <section aria-labelledby={`${id}-${phase.id}`}>
+            <h3 id={`${id}-${phase.id}`}>{phase.title}</h3>
+            <p><strong>Закат.</strong> Попросите всех закрыть глаза и проверьте состояние Гримуара.</p>
+            <ol class="steps">
+              {nightSheets[id][phase.id].map(([key, prompt]) => {
+                const role = roles.find((candidate) => candidate.id === key);
+                return (
+                  <li>
+                    <strong>{role ? <a href={`${href}${role.slug}/`}>{role.ru}</a> : events[key]}</strong>
+                    <span>{prompt}</span>
+                  </li>
+                );
+              })}
+            </ol>
+            <p><strong>Рассвет.</strong> Разбудите всех и объявите, кто умер или вернулся к жизни, если это произошло.</p>
+          </section>
+        ))}
+      </section>
+    ))}
+    <p>Порядок сверён с <a href="https://release.botc.app/resources/data/nightsheet.json">официальным списком ночных действий</a> и <a href="https://botc.1nv.is/w/images/b/b2/Once_in_a_blue_moon_night.pdf">памяткой авторов Once in a Blue Moon</a>.</p>
+  </article>
+</Base>
+
+<style>
+  h1 { font-size: clamp(1.8rem, 5vw, var(--step-5)); overflow-wrap: anywhere; }
+  .scenario { margin-block-start: 2.5rem; border-top: 1px solid var(--line); }
+  .scenario h2, .scenario h3 { scroll-margin-top: 6rem; }
+  .night-links { display: flex; flex-wrap: wrap; gap: .6rem; margin-block: .8rem; }
+  .night-links a { padding: .5rem .8rem; border: 1px solid var(--line); border-radius: 12px; }
+  .steps { padding-inline-start: 1.5rem; }
+  .steps li { margin-block: .65rem; }
+  .steps span { display: block; }
+</style>

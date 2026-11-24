@@ -1,4 +1,5 @@
 ---
+import { roleSearchHref, nightOrderHref } from '../../data/botc-reference';
 import BotcShell from '../../components/BotcShell.astro';
 import { roleGroups, sectsAndViolets } from '../../data/sects-and-violets';
 
@@ -23,6 +24,8 @@ const faq = [
     <a href="#rules">Правила</a>
     {roleGroups.map(({ name, id }) => <a href={`#${id}`}>{name}</a>)}
     <a href="#sources">Источники</a>
+    <a href={roleSearchHref}>Поиск персонажей</a>
+    <a href={`${nightOrderHref}#sects-and-violets`}>Ночной порядок</a>
   </nav>
 
   <h2 id="rules">Как играть</h2>

@@ -1,13 +1,13 @@
 ---
+import { roleSearchHref, nightOrderHref } from '../../data/botc-reference';
 import BotcShell from '../../components/BotcShell.astro';
 import RoleIcon from '../../components/RoleIcon.astro';
 import { Image } from 'astro:assets';
 import logo from '../../assets/botc/Trouble_brewing.png';
-import { roles, teams, rolesByTeam, firstNight, otherNights, setup, type Team } from '../../data/botc';
+import { teams, rolesByTeam, setup, type Team } from '../../data/botc';
 import { article } from '../../data/schema';
 
 const base = '/krov-na-chasovoy-bashne/trouble-brewing/';
-const bySlug = (ru: string) => roles.find((r) => r.ru === ru)!;
 const order: Team[] = ['townsfolk', 'outsider', 'minion', 'demon'];
 
 const faq = [
@@ -32,7 +32,6 @@ const faq = [
     a: 'Клуб Party Game играет по средам и воскресеньям с 19:00 до 23:00 в CCCP Coffee, 112 Hồng Bàng. Вечер стоит 200 000 ₫, мест 15, запись в Telegram-группе клуба. Новичкам правила объясняют с нуля.',
   },
 ];
-const linkNames = (names: string[]) => names.map((n) => ({ n, r: roles.find((r) => r.ru === n) }));
 ---
 
 <BotcShell
@@ -92,15 +91,9 @@ const linkNames = (names: string[]) => names.map((n) => ({ n, r: roles.find((r) 
   <p>Погибшие остаются за столом: у каждого мёртвого игрока остаётся один «призрачный» голос на всю игру.</p>
 
   <h2>Порядок ночных действий</h2>
-  <h3>Первая ночь</h3>
-  <ol>
-    {linkNames(firstNight).map(({ n, r }) => (<li>{r ? <a href={`${base}${r.slug}/`}>{n}</a> : n}</li>))}
-  </ol>
-  <h3>Остальные ночи</h3>
-  <ol>
-    {linkNames(otherNights).map(({ n, r }) => (<li>{r ? <a href={`${base}${r.slug}/`}>{n}</a> : n}</li>))}
-  </ol>
-  <p>Остальные роли ночью не просыпаются: их способности действуют постоянно или днём. Подробности по каждой — на странице роли.</p>
+  <p><a href={`${nightOrderHref}#trouble-brewing-first`}>Первая ночь</a> ·
+    <a href={`${nightOrderHref}#trouble-brewing-later`}>Последующие ночи</a></p>
+  <p><a href={roleSearchHref}>Поиск персонажей по всем сценариям</a></p>
 
   <h2>Все роли сценария</h2>
   {order.map((t) => (

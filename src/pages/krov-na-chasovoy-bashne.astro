@@ -1,5 +1,6 @@
 ---
 import GamePage from '../layouts/GamePage.astro';
+import { roleSearchHref, nightOrderHref } from '../data/botc-reference';
 import { site } from '../data/site';
 import { sectsAndViolets } from '../data/sects-and-violets';
 import { gameEvent } from '../data/schema';
@@ -76,6 +77,7 @@ const faq = [
   <p>Подробнее о ролях и механике — в статье <a href="/blog/pravila-krovi-na-chasovoy-bashne/">«Кровь на часовой башне: правила для новичков»</a>.</p>
 
   <h2>Сценарии и правила</h2>
+  <p><a href={roleSearchHref}>Поиск персонажей</a> · <a href={nightOrderHref}>Ночной порядок для Рассказчика</a></p>
   <p>
     Играем по сценарию <a href="/krov-na-chasovoy-bashne/trouble-brewing/">Trouble Brewing</a> — самому понятному для новичков. В нём 22 роли:
     13 горожан, 4 изгоя, 4 приспешника и Демон. На отдельных страницах разобраны все роли с нюансами и советами:

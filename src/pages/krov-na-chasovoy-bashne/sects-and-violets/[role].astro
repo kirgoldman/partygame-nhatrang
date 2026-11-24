@@ -1,4 +1,5 @@
 ---
+import BotcRoleQuestion from '../../../components/BotcRoleQuestion.astro';
 import BotcShell from '../../../components/BotcShell.astro';
 import { roleGroups, sectsAndViolets } from '../../../data/sects-and-violets';
 import { guides } from '../../../data/sects-and-violets-guides';
@@ -51,6 +52,8 @@ const faq = [
 
   <h2>{id === 'minions' || id === 'demons' ? 'Как играть против персонажа' : 'Что учитывать другим игрокам'}</h2>
   <ul>{guide.counterplay.map((tip) => <li>{tip}</li>)}</ul>
+
+  <BotcRoleQuestion id={slug} scenario="sects-and-violets" />
 
   <h2>Связанные персонажи</h2>
   <ul>{related.map(([name, , roleId]) => <li><a href={`${scenarioHref}${roleId}/`}>{name}</a></li>)}</ul>

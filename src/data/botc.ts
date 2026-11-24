@@ -631,10 +631,6 @@ export const roles: Role[] = [
 export const rolesByTeam = (t: Team) => roles.filter((r) => r.team === t);
 export const roleBySlug = (s: string) => roles.find((r) => r.slug === s);
 
-// Ночной порядок сценария
-export const firstNight = ['Отравитель', 'Шпион', 'Прачка', 'Библиотекарь', 'Сыщик', 'Повар', 'Эмпат', 'Гадалка', 'Дворецкий'];
-export const otherNights = ['Отравитель', 'Монах', 'Шпион', 'Блудница', 'Черт', 'Смотритель воронов', 'Эмпат', 'Гадалка', 'Гробовщик', 'Дворецкий'];
-
 // Состав стола по числу игроков
 export const setup: { players: string; town: number; out: number; min: number; dem: number }[] = [
   { players: '5', town: 3, out: 0, min: 1, dem: 1 },

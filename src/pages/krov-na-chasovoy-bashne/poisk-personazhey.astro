@@ -1,0 +1,111 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { breadcrumbs } from '../../data/schema';
+import { botcHref, roleSearchHref, scenarios } from '../../data/botc-reference';
+
+const crumbs = [
+  { name: 'Кровь на часовой башне', href: botcHref },
+  { name: 'Поиск персонажей', href: roleSearchHref },
+];
+const roles = new Map<string, {
+  ru: string;
+  en: string;
+  appearances: { id: string; title: string; href: string; category: string }[];
+}>();
+for (const scenario of scenarios) {
+  for (const role of scenario.roles) {
+    const entry = roles.get(role.id) ?? { ru: role.ru, en: role.en, appearances: [] };
+    entry.appearances.push({
+      id: scenario.id,
+      title: scenario.title,
+      href: `${scenario.href}${role.slug}/`,
+      category: role.category,
+    });
+    roles.set(role.id, entry);
+  }
+}
+const entries = [...roles.values()].sort((a, b) => a.ru.localeCompare(b.ru, 'ru'));
+---
+<Base title="Поиск персонажей «Крови на часовой башне» | Party Game Нячанг"
+  description="Найдите персонажа по русскому или английскому имени и откройте разбор его роли в нужном сценарии."
+  schema={[breadcrumbs(crumbs)]}>
+  <Crumbs items={crumbs} />
+  <article class="section narrow prose">
+    <h1>Поиск персонажей</h1>
+    <p>Найдите роль по русскому или английскому названию и выберите сценарий.</p>
+    <div id="role-filters" class="filters" hidden>
+      <label>Имя персонажа
+        <input id="role-query" type="search" placeholder="Шпион или Spy" autocomplete="off" />
+      </label>
+      <div class="field">
+        <label for="role-scenario">Сценарий</label>
+        <select id="role-scenario">
+          <option value="">Все сценарии</option>
+          {scenarios.map(({ id, title }) => <option value={id}>{title}</option>)}
+        </select>
+      </div>
+    </div>
+    <p id="role-count" role="status" hidden></p>
+    <ul id="role-results" class="results">
+      {entries.map(({ ru, en, appearances }) => (
+        <li data-role-name={`${ru} ${en}`}>
+          <strong>{ru}</strong> <span class="english" lang="en">{en}</span>
+          <ul class="appearances">
+            {appearances.map(({ id, title, href, category }) => (
+              <li data-scenario={id}><a href={href}>{title}</a> <span>· {category}</span></li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </article>
+</Base>
+
+<script>
+  const filters = document.querySelector<HTMLElement>('#role-filters')!;
+  const input = document.querySelector<HTMLInputElement>('#role-query')!;
+  const select = document.querySelector<HTMLSelectElement>('#role-scenario')!;
+  const status = document.querySelector<HTMLElement>('#role-count')!;
+  const normalize = (value: string) => value.toLowerCase().replaceAll('ё', 'е').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+  const rows = [...document.querySelectorAll<HTMLElement>('[data-role-name]')].map((row) => ({
+    row,
+    name: normalize(row.dataset.roleName ?? ''),
+    scenarios: [...row.querySelectorAll<HTMLElement>('[data-scenario]')],
+  }));
+  function update() {
+    const words = normalize(input.value).split(' ');
+    let matches = 0;
+    for (const { row, name, scenarios } of rows) {
+      for (const item of scenarios) item.hidden = Boolean(select.value && item.dataset.scenario !== select.value);
+      row.hidden = !words.every((word) => name.includes(word)) || scenarios.every((item) => item.hidden);
+      if (!row.hidden) matches += 1;
+    }
+    status.textContent = matches ? `Найдено: ${matches}` : 'Персонажи не найдены. Попробуйте другое имя или сценарий.';
+  }
+  input.addEventListener('input', update);
+  select.addEventListener('change', update);
+  filters.hidden = false;
+  status.hidden = false;
+  update();
+</script>
+
+<style>
+  h1 { font-size: clamp(1.8rem, 5vw, var(--step-5)); overflow-wrap: anywhere; }
+  .filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
+  .filters label, .field { display: grid; gap: .35rem; }
+  .filters label { font-weight: 700; }
+  .filters input, .filters select {
+    width: 100%; min-height: 44px; min-width: 0; padding: .55rem .75rem;
+    border: 1px solid var(--line); border-radius: 10px; color: var(--text);
+    background: var(--felt); font: inherit;
+  }
+  .filters input::placeholder { color: var(--text); opacity: .75; }
+  .filters input:focus-visible, .filters select:focus-visible { outline: 2px solid #86baff; outline-offset: 2px; }
+  .results { padding: 0; list-style: none; }
+  .results > li { padding: 1rem; margin-block: .65rem; border: 1px solid var(--line); border-radius: 12px; background: var(--felt); }
+  .english { margin-inline-start: .35rem; color: #c8bcdd; }
+  .appearances { margin: .35rem 0 0; padding-inline-start: 1.25rem; }
+  .appearances span { color: #c8bcdd; }
+  [hidden] { display: none !important; }
+</style>

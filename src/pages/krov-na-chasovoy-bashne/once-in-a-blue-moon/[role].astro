@@ -1,4 +1,5 @@
 ---
+import BotcRoleQuestion from '../../../components/BotcRoleQuestion.astro';
 import BotcShell from '../../../components/BotcShell.astro';
 import { moonGroups, moonHref } from '../../../data/once-in-a-blue-moon';
 import { moonGuide } from '../../../data/once-in-a-blue-moon-guides';
@@ -53,6 +54,8 @@ const faq = [
 
   <h2>Особенности Once in a Blue Moon</h2>
   <p>{guide.context}</p>
+
+  <BotcRoleQuestion id={slug} scenario="once-in-a-blue-moon" />
 
   <h2>Другие роли этой категории</h2>
   <ul>{peers.map(([name, , roleId]) => <li><a href={`${moonHref}${roleId}/`}>{name}</a></li>)}</ul>
