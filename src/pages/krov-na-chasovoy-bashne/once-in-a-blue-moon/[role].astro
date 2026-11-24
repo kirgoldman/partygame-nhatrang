@@ -1,0 +1,70 @@
+---
+import BotcShell from '../../../components/BotcShell.astro';
+import { moonGroups, moonHref } from '../../../data/once-in-a-blue-moon';
+import { moonGuide } from '../../../data/once-in-a-blue-moon-guides';
+
+export function getStaticPaths() {
+  return moonGroups.flatMap(({ name: team, id, color, roles }) =>
+    roles.map(([ru, en, slug, ability]) => ({
+      params: { role: slug },
+      props: { ru, en, slug, ability, team, color, id },
+    })),
+  );
+}
+
+const { ru, en, slug, ability, team, color, id } = Astro.props;
+const guide = moonGuide(slug);
+const scenario = 'Once in a Blue Moon';
+const href = `${moonHref}${slug}/`;
+const peers = moonGroups.find((group) => group.id === id)!.roles.filter(([, , roleId]) => roleId !== slug);
+const faq = [
+  { q: `Когда срабатывает способность роли «${ru}»?`, a: guide.timing },
+  { q: `Как играть за роль «${ru}»?`, a: guide.play[0] },
+];
+---
+<BotcShell
+  title={`${ru} (${en}) — способность и тактика | ${scenario}`}
+  description={`${ru} (${en}) в сценарии Once in a Blue Moon: способность, взаимодействия, пример из партии и советы по игре.`}
+  h1={`${ru} (${en})`}
+  lede={ability}
+  crumbs={[
+    { name: 'Кровь на часовой башне', href: '/krov-na-chasovoy-bashne/' },
+    { name: scenario, href: moonHref },
+    { name: ru, href },
+  ]}
+  color={color}
+  badge={`${scenario} · ${team}`}
+  faq={faq}
+>
+  <img slot="icon" class="role-art" src={`/icons/once-in-a-blue-moon/${slug}.png`} width="144" height="144" alt="" decoding="async" />
+
+  <h2>Как работает способность</h2>
+  <p>{guide.timing}</p>
+  <ul>{guide.rules.map((rule) => <li>{rule}</li>)}</ul>
+
+  <h2>Пример из партии</h2>
+  <p>{guide.example}</p>
+
+  <h2>Как играть за персонажа</h2>
+  <ul>{guide.play.map((tip) => <li>{tip}</li>)}</ul>
+
+  <h2>Что учитывать другим игрокам</h2>
+  <ul>{guide.counterplay.map((tip) => <li>{tip}</li>)}</ul>
+
+  <h2>Особенности Once in a Blue Moon</h2>
+  <p>{guide.context}</p>
+
+  <h2>Другие роли этой категории</h2>
+  <ul>{peers.map(([name, , roleId]) => <li><a href={`${moonHref}${roleId}/`}>{name}</a></li>)}</ul>
+  <p><a href={`${moonHref}#${id}`}>К списку ролей {scenario}</a></p>
+</BotcShell>
+
+<style>
+  .role-art {
+    display: block;
+    width: clamp(96px, 16vw, 144px);
+    height: auto;
+    border-radius: 50%;
+    background: var(--felt);
+  }
+</style>

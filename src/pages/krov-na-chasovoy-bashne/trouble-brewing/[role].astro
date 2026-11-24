@@ -2,6 +2,7 @@
 import BotcShell from '../../../components/BotcShell.astro';
 import RoleIcon from '../../../components/RoleIcon.astro';
 import { roles, teams, rolesByTeam, type Role } from '../../../data/botc';
+import { troubleExamples } from '../../../data/trouble-brewing-examples';
 import { article } from '../../../data/schema';
 
 export function getStaticPaths() {
@@ -52,6 +53,9 @@ const lede = `${t.ru} в сценарии Trouble Brewing: что делает �
 
   <h2>Нюансы и исключения</h2>
   <ul>{r.rules.map((x) => <li>{x}</li>)}</ul>
+
+  <h2>Пример из партии</h2>
+  <p>{troubleExamples[r.slug]}</p>
 
   <h2>{evilRole ? evilTitle : goodTitle}</h2>
   <ul>{(evilRole ? r.evil : r.good).map((x) => <li>{x}</li>)}</ul>
