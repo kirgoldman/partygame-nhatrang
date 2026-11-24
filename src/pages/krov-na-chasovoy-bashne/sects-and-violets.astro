@@ -46,7 +46,7 @@ const faq = [
               <span>{ru}<small lang="en">{en}</small></span>
             </span>
           </summary>
-          <p>{ability} <a href={`https://wiki.bloodontheclocktower.com/${en.replaceAll(' ', '_')}`} aria-label={`Официальная вики — ${en}`}>Подробнее в вики</a></p>
+          <p>{ability} <a href={`${href}${icon}/`} aria-label={`Подробнее о роли «${ru}»`}>Подробнее о роли</a></p>
         </details>
       ))}
     </section>
