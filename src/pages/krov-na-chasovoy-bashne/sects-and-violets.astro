@@ -18,6 +18,7 @@ const faq = [
   badge="Сценарий · Для опытных игроков"
   faq={faq}
 >
+  <img slot="icon" class="edition-icon" src="/icons/sects-and-violets/edition.png" width="144" height="144" alt="" decoding="async" />
   <nav aria-label="Разделы памятки" class="contents">
     <a href="#rules">Правила</a>
     {roleGroups.map(({ name, id }) => <a href={`#${id}`}>{name}</a>)}
@@ -40,7 +41,7 @@ const faq = [
           <summary>
             <span class="role-heading">
               <span class="role-icon">
-                <img src={`/icons/sects-and-violets/${icon}.svg`} alt="" width="32" height="32" loading="lazy" decoding="async" />
+                <img src={`/icons/sects-and-violets/${icon}.png`} alt="" width="72" height="72" loading="lazy" decoding="async" />
               </span>
               <span>{ru}<small lang="en">{en}</small></span>
             </span>
@@ -56,10 +57,13 @@ const faq = [
     <li><a href={ruWiki}>Русская вики с памятками для игроков и Рассказчика</a></li>
     <li><a href={enWiki}>Официальная вики с правилами ролей и изображениями жетонов</a></li>
   </ul>
-  <p>Памятка подготовлена клубом Party Game Нячанг. Иллюстрации ролей — <a href="/icons/sects-and-violets/LICENSE.txt">Lucide</a>.</p>
+  <p>Памятка подготовлена клубом Party Game Нячанг. Оригинальные иллюстрации © The Pandemonium Institute.</p>
+  <img class="community-badge" src="/icons/sects-and-violets/community.png" width="160" height="60" alt="Community Created Content" loading="lazy" decoding="async" />
 </BotcShell>
 
 <style>
+  .edition-icon { display: block; width: clamp(96px, 16vw, 144px); height: auto; }
+  .community-badge { display: block; }
   .contents { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 2rem; }
   .contents a { padding: .5rem .8rem; border: 1px solid var(--line); border-radius: 12px; text-decoration: none; }
   .role-team { margin-block: 2rem; }
@@ -79,7 +83,7 @@ const faq = [
     background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--role-color) 28%, var(--felt-2)), var(--felt));
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--role-color) 70%, transparent), 0 10px 24px rgba(8, 2, 18, .45);
   }
-  .role-icon img { display: block; filter: invert(1); }
+  .role-icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
   .role p { margin: .8rem 0 .2rem; }
   @media (max-width: 480px) {
     .role-icon { width: 60px; height: 60px; }
